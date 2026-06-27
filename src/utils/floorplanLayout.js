@@ -18,9 +18,11 @@ export const PAD = 12
 // Reparto del largo restante (lo que sobra tras baulera + cocina fijas) entre los 3 ambientes
 // centrales. Documentado como constantes nombradas (no medidas físicas, son ratios de reparto).
 // El baño SIEMPRE va entre baulera y dormitorio (orden inmutable, no elegible).
-const RATIO_BANO = 0.22
+// El ratio del baño depende de config.bano.tamano (BANO-03): 'ampliado' agranda la zona baño.
+const RATIO_BANO_ESTANDAR = 0.22
+const RATIO_BANO_AMPLIADO = 0.3 // ≈ UI-SPEC; verificado por test: N3 ampliado deja zonas centrales > 0
 const RATIO_DORMITORIO = 0.45
-const RATIO_ESTAR = 0.33
+// El ratio del estar deja de ser constante fija: el estar absorbe el residuo (suma exacta).
 
 // Mínimo plausible (en metros) para que los 3 ambientes centrales tengan ancho positivo.
 const MINIMO_CENTRAL = 0.4
@@ -63,8 +65,12 @@ export function calcularLayout(config) {
   }
 
   // --- Reparto del largo (en metros) a lo largo de X. ---
+  // El optional chaining es OBLIGATORIO (T-04-02): si bano falta o tamano no es 'ampliado',
+  // cae a estándar (default seguro, tolera estado parcial/adulterado de localStorage).
+  const ratioBano =
+    config?.bano?.tamano === 'ampliado' ? RATIO_BANO_AMPLIADO : RATIO_BANO_ESTANDAR
   const restante = config.largo - GEOMETRIA.zonaBaulera - GEOMETRIA.zonaCocina
-  const largoBano = restante * RATIO_BANO
+  const largoBano = restante * ratioBano
   const largoDormitorio = restante * RATIO_DORMITORIO
   // El estar absorbe el redondeo para que la suma cierre exacta contra config.largo.
   const largoEstar = restante - largoBano - largoDormitorio

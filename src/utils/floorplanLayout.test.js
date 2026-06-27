@@ -131,3 +131,25 @@ test('transición N1↔N4: totalU distintos y ambos válidos', () => {
     n4.zonas.map((z) => z.id),
   )
 })
+
+// --- Baño ampliado: el tamaño de baño afecta el reparto del largo central. ---
+test('BANO-03: bano ampliado da largoBano mayor que estandar (mismo modelo)', () => {
+  const est = calcularLayout({ ...CONFIG_MOCK_N4, bano: { tamano: 'estandar' } })
+  const amp = calcularLayout({ ...CONFIG_MOCK_N4, bano: { tamano: 'ampliado' } })
+  const bEst = est.zonas.find((z) => z.id === 'bano').largoM
+  const bAmp = amp.zonas.find((z) => z.id === 'bano').largoM
+  assert.ok(bAmp > bEst, `ampliado (${bAmp}) > estandar (${bEst})`)
+})
+
+test('BANO-03: con baño ampliado la suma de largoM === config.largo', () => {
+  const { zonas } = calcularLayout({ ...CONFIG_MOCK_N4, bano: { tamano: 'ampliado' } })
+  const suma = zonas.reduce((acc, z) => acc + z.largoM, 0)
+  assert.ok(Math.abs(suma - CONFIG_MOCK_N4.largo) < TOL, `suma=${suma}`)
+})
+
+test('BANO-03: N3 ampliado deja las 3 zonas centrales con largoM positivo', () => {
+  const { zonas } = calcularLayout({ largo: 6.1, bano: { tamano: 'ampliado' }, dormitorio: { camas: [] } })
+  for (const id of ['bano', 'dormitorio', 'estar']) {
+    assert.ok(zonas.find((z) => z.id === id).largoM > 0, `${id} debe ser > 0`)
+  }
+})
