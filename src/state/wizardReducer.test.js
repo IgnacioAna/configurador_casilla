@@ -19,9 +19,11 @@ test('estadoInicial: forma esperada con modeloId N4 y pasoActual 0', () => {
   assert.equal(estadoInicial.ocupantes, null)
   assert.deepEqual(estadoInicial.bano, { tamano: 'estandar' })
   assert.deepEqual(estadoInicial.dormitorio, { camas: [] })
-  assert.deepEqual(estadoInicial.cocina, { horno: false, heladera: null })
-  assert.deepEqual(estadoInicial.estar, { mesa: false })
   assert.deepEqual(estadoInicial.extras, [])
+  // D-14: estadoInicial YA NO tiene placeholders cocina/estar. El plano deriva esos flags
+  // de extras[] vía configDesdeEstado (una sola fuente de verdad).
+  assert.equal(estadoInicial.cocina, undefined)
+  assert.equal(estadoInicial.estar, undefined)
 })
 
 test('TOTAL_PASOS: 6 pasos', () => {
@@ -81,7 +83,6 @@ test('RESET: vuelve a estadoInicial sin compartir referencias anidadas', () => {
   assert.deepEqual(reseteado.dormitorio, estadoInicial.dormitorio)
   // Copia fresca: no comparte referencia con estadoInicial (no contamina el original).
   assert.notEqual(reseteado.dormitorio, estadoInicial.dormitorio)
-  assert.notEqual(reseteado.cocina, estadoInicial.cocina)
 })
 
 test('configDesdeEstado: produce el shape exacto que consume FloorPlan', () => {
@@ -117,4 +118,61 @@ test('configDesdeEstado: derivación dinámica del largo al cambiar de modelo (N
   const config = configDesdeEstado(estadoN1)
   assert.equal(config.largo, MODELOS.find((m) => m.id === 'N1').largo)
   assert.equal(config.largo, 4.5)
+})
+
+// --- D-14: el plano deriva horno/heladera/mesa SOLO de extras[] (una sola fuente de verdad) ---
+
+// Helper: estado con un set de extras dado, partiendo de estadoInicial vía el reducer real.
+function estadoConExtras(extras) {
+  return wizardReducer(estadoInicial, {
+    type: ACCIONES.SET_CAMPO,
+    campo: 'extras',
+    valor: extras,
+  })
+}
+
+test('configDesdeEstado (D-14): extras vacío -> cocina y estar caen a defaults neutros', () => {
+  const config = configDesdeEstado(estadoConExtras([]))
+  assert.deepEqual(config.cocina, { horno: false, heladera: null })
+  assert.deepEqual(config.estar, { mesa: false })
+})
+
+test('configDesdeEstado (D-14): cocina-horno en extras -> cocina.horno true', () => {
+  const config = configDesdeEstado(estadoConExtras(['cocina-horno']))
+  assert.equal(config.cocina.horno, true)
+})
+
+test('configDesdeEstado (D-14): heladera-220 en extras -> cocina.heladera "heladera-220"', () => {
+  const config = configDesdeEstado(estadoConExtras(['heladera-220']))
+  assert.equal(config.cocina.heladera, 'heladera-220')
+})
+
+test('configDesdeEstado (D-14): heladera-12v en extras -> cocina.heladera "heladera-12v"', () => {
+  const config = configDesdeEstado(estadoConExtras(['heladera-12v']))
+  assert.equal(config.cocina.heladera, 'heladera-12v')
+})
+
+test('configDesdeEstado (D-14): mesa-cano en extras -> estar.mesa true', () => {
+  const config = configDesdeEstado(estadoConExtras(['mesa-cano']))
+  assert.equal(config.estar.mesa, true)
+})
+
+test('configDesdeEstado (D-14): combinación de extras se deriva completa', () => {
+  const config = configDesdeEstado(
+    estadoConExtras(['cocina-horno', 'heladera-12v', 'mesa-cano']),
+  )
+  assert.equal(config.cocina.horno, true)
+  assert.equal(config.cocina.heladera, 'heladera-12v')
+  assert.equal(config.estar.mesa, true)
+})
+
+test('configDesdeEstado (T-05-05): estado sin extras (no-array) no crashea y cae a defaults', () => {
+  // Estado adulterado/legacy: sin extras, o extras no-array. No debe romper la proyección.
+  const config = configDesdeEstado({ modeloId: 'N4' })
+  assert.deepEqual(config.cocina, { horno: false, heladera: null })
+  assert.deepEqual(config.estar, { mesa: false })
+
+  const configNoArray = configDesdeEstado({ modeloId: 'N4', extras: 'no-soy-array' })
+  assert.deepEqual(configNoArray.cocina, { horno: false, heladera: null })
+  assert.deepEqual(configNoArray.estar, { mesa: false })
 })
