@@ -23,7 +23,7 @@ a punta y enviar el presupuesto sin un solo audio de WhatsApp.
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Cimientos y Datos** - Scaffolding Vite + React + Tailwind y datos reales Lista 108 aislados en `/data`
-- [ ] **Phase 2: Motor de Plano SVG** - El plano en planta cenital con estructura fija de zonas, geometría real y transiciones suaves
+- [x] **Phase 2: Motor de Plano SVG** - El plano en planta cenital con estructura fija de zonas, geometría real y transiciones suaves
 - [ ] **Phase 3: Cáscara del Wizard y Persistencia** - Landing, navegación de 6 pasos, barra de progreso, localStorage y layout del plano
 - [ ] **Phase 4: Pasos 1-3 (Uso, Dimensiones, Baño)** - Selección de uso/ocupantes, modelo sugerido y equipamiento de baño con reflejo en el plano
 - [ ] **Phase 5: Pasos 4-6 y Motores (Dormitorio, Cocina, Extras + Precios)** - Camas validadas por geometría, cocina/estar, extras y presupuesto en vivo
@@ -57,8 +57,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Al cambiar las props (largo, zonas, módulos), el plano transiciona suavemente (~300ms) sin saltos bruscos.
 **Plans**: 3 plans
   - [x] 02-01-PLAN.md — Contrato del prop config + helper puro de layout (zonas y camas desde geometry.js) (Wave 1)
-  - [ ] 02-02-PLAN.md — FloorPlan.jsx + subcomponentes SVG: paredes, zonas con color, camas, puerta, ventanas, cotas, estados (Wave 2)
-  - [ ] 02-03-PLAN.md — Transiciones 300ms + prefers-reduced-motion y demo en App.jsx con "Cambiar modelo" (Wave 3)
+  - [x] 02-02-PLAN.md — FloorPlan.jsx + subcomponentes SVG: paredes, zonas con color, camas, puerta, ventanas, cotas, estados (Wave 2)
+  - [x] 02-03-PLAN.md — Transiciones 300ms + prefers-reduced-motion y demo en App.jsx con "Cambiar modelo" (Wave 3)
 **UI hint**: yes
 
 ### Phase 3: Cáscara del Wizard y Persistencia
@@ -130,7 +130,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Cimientos y Datos | 2/2 | Complete | 2026-06-27 |
-| 2. Motor de Plano SVG | 2/3 | In progress | - |
+| 2. Motor de Plano SVG | 3/3 | Complete | 2026-06-27 |
 | 3. Cáscara del Wizard y Persistencia | 0/TBD | Not started | - |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 0/TBD | Not started | - |
 | 5. Pasos 4-6 y Motores | 0/TBD | Not started | - |

@@ -79,7 +79,7 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 - [x] **PLANO-01**: El plano se renderiza en SVG (vista en planta) con paredes, puerta (arco),
       ventanas y acotaciones en metros, y escala al viewport.
-- [ ] **PLANO-02**: El plano se actualiza con transición suave (~300ms) cada vez que el usuario
+- [x] **PLANO-02**: El plano se actualiza con transición suave (~300ms) cada vez que el usuario
       cambia una opción.
 - [ ] **PLANO-03**: En mobile el plano es colapsable ("Ver plano actual") y ampliable a pantalla
       completa / zoom; en desktop va sticky a la derecha.
@@ -175,7 +175,7 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | COCINA-04 | Phase 5 | Pending |
 | EXTRAS-01 | Phase 5 | Pending |
 | PLANO-01 | Phase 2 | Complete |
-| PLANO-02 | Phase 2 | Pending |
+| PLANO-02 | Phase 2 | Complete |
 | PLANO-03 | Phase 3 | Pending |
 | PLANO-04 | Phase 2 | Complete |
 | PRECIO-01 | Phase 5 | Pending |
@@ -199,4 +199,4 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 after roadmap creation (traceability completa, 34/34 mapeados a 7 fases)*
+*Last updated: 2026-06-27 after 02-03 completion (PLANO-02 marcado Complete; 3/34 v1 requirements completos: PLANO-01, PLANO-02, PLANO-04)*

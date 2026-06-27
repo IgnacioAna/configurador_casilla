@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-06-27T04:57:32.000Z"
-last_activity: 2026-06-27 -- Completed Plan 02-02 (FloorPlan.jsx + subcomponentes de equipamiento)
+stopped_at: Completed 02-03-PLAN.md (Phase 2 complete)
+last_updated: "2026-06-27T05:20:00.000Z"
+last_activity: 2026-06-27 -- Completed Plan 02-03 (transiciones 300ms + demo App.jsx, checkpoint aprobado)
 progress:
   total_phases: 7
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
-  percent: 80
+  completed_plans: 5
+  percent: 100
 ---
 
 # Project State
@@ -25,18 +25,19 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 
 ## Current Position
 
-Phase: 02 (Motor de Plano SVG) — EXECUTING
-Plan: 3 of 3
-Status: Executing Phase 02
-Last activity: 2026-06-27 -- Completed Plan 02-02 (FloorPlan.jsx + subcomponentes de equipamiento)
+Phase: 02 (Motor de Plano SVG) — COMPLETE
+Plan: 3 of 3 (all complete)
+Next: Phase 03 (Cascara del Wizard y Persistencia)
+Status: Phase 02 complete; ready for Phase 03
+Last activity: 2026-06-27 -- Completed Plan 02-03 (transiciones 300ms + prefers-reduced-motion + demo App.jsx, checkpoint visual aprobado)
 
-Progress: [████████░░] 80%
+Progress: [██████████] 100% (Phase 02 complete — 5/5 plans across phases 1-2)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 4 min
 - Total execution time: 0.28 hours
 
@@ -45,11 +46,11 @@ Progress: [████████░░] 80%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 — Cimientos y Datos | 2 | 8 min | 4 min |
-| 02 — Motor de Plano SVG | 2 | 9 min | 4.5 min |
+| 02 — Motor de Plano SVG | 3 | ~13 min | ~4.3 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (4 min), 01-02 (4 min), 02-01 (3 min), 02-02 (6 min)
+- Last 5 plans: 01-01 (4 min), 01-02 (4 min), 02-01 (3 min), 02-02 (6 min), 02-03 (4 min)
 - Trend: estable
 
 *Updated after each plan completion*
@@ -79,6 +80,7 @@ Recent decisions affecting current work:
 - [02-02]: FloorPlan es render declarativo puro: solo consume coordenadas YA calculadas por calcularLayout; no recalcula geometría en JSX. Subcomponentes de equipamiento presentacionales (reciben x/y/w/h en unidades de viewBox), cada uno con <title> accesible; <svg> raíz con role=img + <title>.
 - [02-02]: El rect interior de cada zona (donde van los módulos) se deriva del espesor de pared ((anchoExterior-anchoInterior)/2 × M_A_U) leído de GEOMETRIA — sin banda útil hardcodeada. Las cotas (cobre #8B6914) viven en el padding de 12u reservado por el viewBox.
 - [02-02]: Estados del componente como render condicional temprano (Empty antes de calcularLayout, Error tras valido===false) — mitiga DoS por config nula/inválida (T-02-04). FloorPlan embebido en App.jsx con CONFIG_MOCK_N4 para render real (evita tree-shaking del bundle).
+- [02-03]: fp-anim se aplica en los rects/lineas internos (no solo en el <g>): el <g> sin atributos x/y/width/height solo transiciona opacity; los hijos con coordenadas animan x/y/width/height. Camas con keys posicionales estables para fade-in al agregar camas nuevas. App.jsx cicla CONFIGS_MOCK con (idx+1) % length (mitiga T-02-08).
 
 ### Pending Todos
 
@@ -102,6 +104,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-27T04:57:32.000Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-06-27T05:20:00.000Z
+Stopped at: Completed 02-03-PLAN.md (Phase 2 complete, checkpoint aprobado)
 Resume file: None
