@@ -77,7 +77,7 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### Plano en planta (SVG)
 
-- [ ] **PLANO-01**: El plano se renderiza en SVG (vista en planta) con paredes, puerta (arco),
+- [x] **PLANO-01**: El plano se renderiza en SVG (vista en planta) con paredes, puerta (arco),
       ventanas y acotaciones en metros, y escala al viewport.
 - [ ] **PLANO-02**: El plano se actualiza con transición suave (~300ms) cada vez que el usuario
       cambia una opción.
@@ -174,7 +174,7 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | COCINA-03 | Phase 5 | Pending |
 | COCINA-04 | Phase 5 | Pending |
 | EXTRAS-01 | Phase 5 | Pending |
-| PLANO-01 | Phase 2 | Pending |
+| PLANO-01 | Phase 2 | Complete |
 | PLANO-02 | Phase 2 | Pending |
 | PLANO-03 | Phase 3 | Pending |
 | PLANO-04 | Phase 2 | Complete |

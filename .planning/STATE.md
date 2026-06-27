@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-06-27T04:46:21.000Z"
-last_activity: 2026-06-27 -- Completed Plan 02-01 (helper de layout + mock config)
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-06-27T04:57:32.000Z"
+last_activity: 2026-06-27 -- Completed Plan 02-02 (FloorPlan.jsx + subcomponentes de equipamiento)
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 5
-  completed_plans: 3
-  percent: 60
+  completed_plans: 4
+  percent: 80
 ---
 
 # Project State
@@ -26,30 +26,30 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 ## Current Position
 
 Phase: 02 (Motor de Plano SVG) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Executing Phase 02
-Last activity: 2026-06-27 -- Completed Plan 02-01 (helper de layout + mock config)
+Last activity: 2026-06-27 -- Completed Plan 02-02 (FloorPlan.jsx + subcomponentes de equipamiento)
 
-Progress: [██████░░░░] 60%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 4 min
-- Total execution time: 0.18 hours
+- Total execution time: 0.28 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 — Cimientos y Datos | 2 | 8 min | 4 min |
-| 02 — Motor de Plano SVG | 1 | 3 min | 3 min |
+| 02 — Motor de Plano SVG | 2 | 9 min | 4.5 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (4 min), 01-02 (4 min), 02-01 (3 min)
+- Last 5 plans: 01-01 (4 min), 01-02 (4 min), 02-01 (3 min), 02-02 (6 min)
 - Trend: estable
 
 *Updated after each plan completion*
@@ -76,6 +76,9 @@ Recent decisions affecting current work:
 - [02-01]: M_A_U=100 (100u viewBox = 1m) como única fuente del factor metros→viewBox; todas las medidas físicas leídas de GEOMETRIA (gate grep anti-hardcodeo en verify).
 - [02-01]: El padding de cotas (PAD=12) vive en el render (viewBox), no en las coordenadas: zonas y camas comparten origen (0,0) del interior.
 - [02-01]: Reparto del largo restante baño/dormitorio/estar por ratios nombrados (22/45/33); el estar absorbe el redondeo para que la suma cierre exacta contra config.largo. El largo se deriva de MODELOS (nunca inventado).
+- [02-02]: FloorPlan es render declarativo puro: solo consume coordenadas YA calculadas por calcularLayout; no recalcula geometría en JSX. Subcomponentes de equipamiento presentacionales (reciben x/y/w/h en unidades de viewBox), cada uno con <title> accesible; <svg> raíz con role=img + <title>.
+- [02-02]: El rect interior de cada zona (donde van los módulos) se deriva del espesor de pared ((anchoExterior-anchoInterior)/2 × M_A_U) leído de GEOMETRIA — sin banda útil hardcodeada. Las cotas (cobre #8B6914) viven en el padding de 12u reservado por el viewBox.
+- [02-02]: Estados del componente como render condicional temprano (Empty antes de calcularLayout, Error tras valido===false) — mitiga DoS por config nula/inválida (T-02-04). FloorPlan embebido en App.jsx con CONFIG_MOCK_N4 para render real (evita tree-shaking del bundle).
 
 ### Pending Todos
 
@@ -99,6 +102,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-27T04:46:21.000Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-06-27T04:57:32.000Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
