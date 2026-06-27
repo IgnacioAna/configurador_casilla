@@ -150,17 +150,53 @@ Excluido explícitamente para evitar scope creep.
 
 ## Traceability
 
-Mapeo de requirements a fases. **Se completa durante la creación del roadmap (Paso 8).**
+Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-27).
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (pendiente — lo llena el roadmapper) | — | Pending |
+| SHELL-01 | Phase 3 | Pending |
+| SHELL-02 | Phase 3 | Pending |
+| SHELL-03 | Phase 3 | Pending |
+| SHELL-04 | Phase 3 | Pending |
+| USO-01 | Phase 4 | Pending |
+| USO-02 | Phase 4 | Pending |
+| USO-03 | Phase 4 | Pending |
+| DIM-01 | Phase 4 | Pending |
+| DIM-02 | Phase 4 | Pending |
+| BANO-01 | Phase 4 | Pending |
+| BANO-02 | Phase 4 | Pending |
+| BANO-03 | Phase 4 | Pending |
+| DORM-01 | Phase 5 | Pending |
+| DORM-02 | Phase 5 | Pending |
+| DORM-03 | Phase 5 | Pending |
+| COCINA-01 | Phase 5 | Pending |
+| COCINA-02 | Phase 5 | Pending |
+| COCINA-03 | Phase 5 | Pending |
+| COCINA-04 | Phase 5 | Pending |
+| EXTRAS-01 | Phase 5 | Pending |
+| PLANO-01 | Phase 2 | Pending |
+| PLANO-02 | Phase 2 | Pending |
+| PLANO-03 | Phase 3 | Pending |
+| PLANO-04 | Phase 2 | Pending |
+| PRECIO-01 | Phase 5 | Pending |
+| RESUMEN-01 | Phase 6 | Pending |
+| RESUMEN-02 | Phase 6 | Pending |
+| RESUMEN-03 | Phase 6 | Pending |
+| EXPORT-01 | Phase 6 | Pending |
+| EXPORT-02 | Phase 6 | Pending |
+| UX-01 | Phase 7 | Pending |
+| UX-02 | Phase 7 | Pending |
+| UX-03 | Phase 3 | Pending |
+| UX-04 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 34 total
-- Mapped to phases: 0 (pendiente)
-- Unmapped: 34 ⚠️
+- Mapped to phases: 34 ✓
+- Unmapped: 0 ✓
+
+> Nota: Phase 1 (Cimientos y Datos) es infraestructura (scaffolding + datos Lista 108) que
+> habilita todos los requirements; no tiene un REQ-ID propio asignado.
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 after data update (Lista 108: 7 modelos, estructura fija, accesorios reales, IVA)*
+*Last updated: 2026-06-27 after roadmap creation (traceability completa, 34/34 mapeados a 7 fases)*
