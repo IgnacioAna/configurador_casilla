@@ -60,7 +60,7 @@ export default function PasoExtras({ estado, dispatch }) {
                     />
                     <span className="text-sm">{e.nombre}</span>
                     <span className="ml-auto text-xs text-impacar-texto/70">
-                      {formatPrecio(e.precioNeto)}
+                      {formatPrecio(e.precioNeto)} + IVA
                     </span>
                   </label>
                 )
