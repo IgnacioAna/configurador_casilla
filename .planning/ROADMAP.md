@@ -119,7 +119,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. El resumen muestra el presupuesto desglosado (base + accesorios, neto + IVA + total) con la nota "orientativo, sujeto a confirmación" y lista las opciones de financiación.
   3. El usuario abre WhatsApp con un mensaje pre-armado (resumen + total) vía link `wa.me`.
   4. El usuario descarga un PDF con el plano vectorial, la configuración, el precio, el logo IMPACAR y los datos de contacto.
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 06-01-PLAN.md — Lógica pura: detallePresupuesto (desglose) + resumenCampos (ids→nombres) + nombreArchivoPDF + deps jspdf/svg2pdf (Wave 1)
+  - [ ] 06-02-PLAN.md — Contacto único (wa.me + PDF) + exportWhatsApp (mensaje/link pre-armado) + verificación FINANCIACION (Wave 1)
+  - [ ] 06-03-PLAN.md — Pantalla Resumen (plano + secciones con Editar + presupuesto desglosado + financiación + WhatsApp/PDF) + estado izado a App + checkpoint visual (Wave 2)
 **UI hint**: yes
 
 ### Phase 7: Pulido Mobile y Accesibilidad
@@ -145,5 +148,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Cáscara del Wizard y Persistencia | 3/3 | Complete | 2026-06-27 |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 3/3 | Complete | 2026-06-27 |
 | 5. Pasos 4-6 y Motores | 0/5 | Planned | - |
-| 6. Resumen y Exportación | 0/TBD | Not started | - |
+| 6. Resumen y Exportación | 0/3 | Planned | - |
 | 7. Pulido Mobile y Accesibilidad | 0/TBD | Not started | - |
