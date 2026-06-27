@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 UI-SPEC aprobado
-last_updated: "2026-06-27T14:27:57.084Z"
-last_activity: 2026-06-27 -- Phase 4 planning complete
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-06-27T14:39:31Z"
+last_activity: 2026-06-27 -- Plan 04-01 ejecutado (lógica pura Pasos 1-3)
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 11
-  completed_plans: 8
-  percent: 73
+  completed_plans: 9
+  percent: 82
 ---
 
 # Project State
@@ -26,12 +26,12 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 ## Current Position
 
 Phase: 4
-Plan: Not started
-Next: Phase 04 (Pasos 1-3 — Uso, Dimensiones, Baño) — requiere planificación
-Status: Ready to execute
-Last activity: 2026-06-27 -- Phase 4 planning complete
+Plan: 1 of 3 complete (04-01)
+Next: 04-02-PLAN.md — Paso 1 (Uso/ocupantes + sugerencia) y Paso 2 (cards de modelo)
+Status: In Progress
+Last activity: 2026-06-27 -- Plan 04-01 ejecutado (lógica pura Pasos 1-3)
 
-Progress: [████░░░░░░] 43% (Phases 1-3 completas — 8 planes; Phase 4 es la próxima)
+Progress: [████████░░] 82% (9 de 11 planes; Phase 4 en curso: 1 de 3)
 
 ## Performance Metrics
 
@@ -52,7 +52,7 @@ Progress: [████░░░░░░] 43% (Phases 1-3 completas — 8 plane
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (4 min), 01-02 (4 min), 02-01 (3 min), 02-02 (6 min), 02-03 (4 min)
+- Last 5 plans: 02-01 (3 min), 02-02 (6 min), 02-03 (4 min), 03-* (3 planes), 04-01 (4 min)
 - Trend: estable
 
 *Updated after each plan completion*
@@ -83,6 +83,10 @@ Recent decisions affecting current work:
 - [02-02]: El rect interior de cada zona (donde van los módulos) se deriva del espesor de pared ((anchoExterior-anchoInterior)/2 × M_A_U) leído de GEOMETRIA — sin banda útil hardcodeada. Las cotas (cobre #8B6914) viven en el padding de 12u reservado por el viewBox.
 - [02-02]: Estados del componente como render condicional temprano (Empty antes de calcularLayout, Error tras valido===false) — mitiga DoS por config nula/inválida (T-02-04). FloorPlan embebido en App.jsx con CONFIG_MOCK_N4 para render real (evita tree-shaking del bundle).
 - [02-03]: fp-anim se aplica en los rects/lineas internos (no solo en el <g>): el <g> sin atributos x/y/width/height solo transiciona opacity; los hijos con coordenadas animan x/y/width/height. Camas con keys posicionales estables para fade-in al agregar camas nuevas. App.jsx cicla CONFIGS_MOCK con (idx+1) % length (mitiga T-02-08).
+- [04-01]: Umbral de baño ampliado como constante data-driven LARGO_MIN_BANO_AMPLIADO=6.1 (largo de N3) + MODELOS.find en banoReglas.js — sin lista de ids hardcodeada (gate anti-hardcodeo).
+- [04-01]: RATIO_BANO parametrizado por config.bano.tamano (estandar=0.22, ampliado=0.30); RATIO_ESTAR eliminado como constante fija — el estar absorbe el residuo para que la suma de zonas cierre exacta.
+- [04-01]: Optional chaining obligatorio (modelo?.largo ?? 0 / config?.bano?.tamano) — modeloId o bano.tamano adulterado de localStorage cae a default seguro sin crashear (mitiga T-04-01/T-04-02).
+- [04-01]: Interface-first: la lógica pura testeable (banoReglas, layout, sugerencia) se construye antes que PasoDimensiones/PasoBano; sin dependencias de test nuevas (node:test built-in).
 
 ### Pending Todos
 
@@ -106,6 +110,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-27T14:03:49.356Z
-Stopped at: Phase 4 UI-SPEC aprobado
-Resume file: .planning/phases/04-pasos-1-3-uso-dimensiones-ba-o/04-UI-SPEC.md
+Last session: 2026-06-27T14:39:31Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: None

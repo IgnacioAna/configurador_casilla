@@ -27,8 +27,8 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 - [ ] **USO-01**: El usuario elige el uso entre 5 opciones (contratista, ganadero, agrícola,
       vivienda, otro) en cards con ícono (selección única).
 - [ ] **USO-02**: El usuario elige la cantidad de ocupantes (2/3/4/5/6/8).
-- [ ] **USO-03**: Según los ocupantes, el sistema sugiere automáticamente un modelo/largo
-      (editable en el paso 2).
+- [x] **USO-03**: Según los ocupantes, el sistema sugiere automáticamente un modelo/largo
+      (editable en el paso 2). _(Lógica + test de datos en 04-01: SUGERENCIA_OCUPANTES → ids reales.)_
 
 ### Paso 2 — Dimensiones
 
@@ -160,12 +160,12 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | SHELL-04 | Phase 3 | Pending |
 | USO-01 | Phase 4 | Pending |
 | USO-02 | Phase 4 | Pending |
-| USO-03 | Phase 4 | Pending |
+| USO-03 | Phase 4 | Complete (04-01) |
 | DIM-01 | Phase 4 | Pending |
 | DIM-02 | Phase 4 | Pending |
 | BANO-01 | Phase 4 | Pending |
-| BANO-02 | Phase 4 | Pending |
-| BANO-03 | Phase 4 | Pending |
+| BANO-02 | Phase 4 | Lógica lista (04-01); UI en 04-03 |
+| BANO-03 | Phase 4 | Lógica lista (04-01); UI en 04-03 |
 | DORM-01 | Phase 5 | Pending |
 | DORM-02 | Phase 5 | Pending |
 | DORM-03 | Phase 5 | Pending |
