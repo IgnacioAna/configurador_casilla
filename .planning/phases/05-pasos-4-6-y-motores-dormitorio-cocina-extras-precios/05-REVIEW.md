@@ -24,7 +24,10 @@ findings:
   warning: 3
   info: 2
   total: 6
-status: issues_found
+status: partially_resolved
+resolved: [CR-01, WR-01]
+open: [WR-02, WR-03, IN-01, IN-02]
+resolution_note: "CR-01 (crash por pasoActual adulterado) y WR-01 (+ IVA en PasoExtras) corregidos y verificados (npm test 70/70, build OK). Commits 1cdf6b1 (CR-01, con test de rango) y 64ba3ff (WR-01). Quedan abiertos WR-02/WR-03 (polish) e IN-01/IN-02 (opcionales)."
 ---
 
 # Phase 05: Code Review Report
@@ -45,6 +48,8 @@ One critical crash is found: tampered localStorage with an out-of-range `pasoAct
 ## Critical Issues
 
 ### CR-01: Tampered `pasoActual` in localStorage crashes the app on load
+
+> ✓ **RESUELTO** (commit `1cdf6b1`): `esEstadoValido` ahora exige `Number.isInteger(pasoActual) && 0 <= pasoActual < TOTAL_PASOS`; `ConfiguratorWizard` usa `PASOS[estado.pasoActual] ?? PASOS[0]` como red de seguridad. Test nuevo en `usePersistedConfig.test.js` cubre fuera de rango / negativo / no entero. npm test 70/70.
 
 **File:** `src/hooks/usePersistedConfig.js:29` / `src/components/ConfiguratorWizard.jsx:13`
 
@@ -87,6 +92,8 @@ Both fixes should be applied: defense-in-depth at the validation boundary is the
 ## Warnings
 
 ### WR-01: `PasoExtras` omits `+ IVA` label on item prices — inconsistent with `PasoDormitorio`
+
+> ✓ **RESUELTO** (commit `64ba3ff`): `PasoExtras` ahora muestra `{formatPrecio(e.precioNeto)} + IVA`, consistente con `PasoDormitorio`.
 
 **File:** `src/components/wizard/pasos/PasoExtras.jsx:63`
 
