@@ -1,10 +1,11 @@
 ---
 phase: 6
 slug: resumen-y-exportaci-n
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-06-27
+reviewed_at: 2026-06-27
 ---
 
 # Phase 6 — UI Design Contract
