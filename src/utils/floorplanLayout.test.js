@@ -4,7 +4,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { calcularLayout, M_A_U } from './floorplanLayout.js'
-import { CONFIG_MOCK_N4 } from '../data/mockConfig.js'
+import { CONFIG_MOCK_N4, CONFIG_MOCK_N1 } from '../data/mockConfig.js'
 import { GEOMETRIA } from '../data/geometry.js'
 
 const TOL = 1e-9
@@ -106,4 +106,28 @@ test('config inválida (largo imposible) devuelve { valido: false } sin anchos n
       assert.ok(z.anchoU >= 0, 'ninguna zona con ancho negativo')
     }
   }
+})
+
+// --- T-02-02: suma de control geométrica (el layout de camas cierra contra el interior real). ---
+test('checksum geométrico: anchoCama*2 + pasilloCentral === anchoInterior', () => {
+  assert.ok(
+    Math.abs(GEOMETRIA.anchoCama * 2 + GEOMETRIA.pasilloCentral - GEOMETRIA.anchoInterior) < TOL,
+    `0.80×2 + 0.92 debe === 2.52 (interior útil)`,
+  )
+})
+
+// --- Transición de config (prepara PLANO-02 del Plan 03): el layout reacciona al modelo. ---
+test('transición N1↔N4: totalU distintos y ambos válidos', () => {
+  const n1 = calcularLayout(CONFIG_MOCK_N1)
+  const n4 = calcularLayout(CONFIG_MOCK_N4)
+  assert.equal(n1.valido, true)
+  assert.equal(n4.valido, true)
+  assert.ok(Math.abs(n1.totalU - CONFIG_MOCK_N1.largo * M_A_U) < TOL)
+  assert.ok(Math.abs(n4.totalU - CONFIG_MOCK_N4.largo * M_A_U) < TOL)
+  assert.notEqual(n1.totalU, n4.totalU, 'distinto modelo → distinto largo total')
+  // Mismas zonas en mismo orden (estructura determinística), distinto reparto.
+  assert.deepEqual(
+    n1.zonas.map((z) => z.id),
+    n4.zonas.map((z) => z.id),
+  )
 })
