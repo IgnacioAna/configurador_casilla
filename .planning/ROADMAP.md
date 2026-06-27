@@ -86,7 +86,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Según los ocupantes, el sistema pre-selecciona un modelo sugerido, y el usuario lo puede cambiar entre los 7 modelos reales (N1-N7) en cards con largo, camas base e "ideal para N personas".
   3. Al elegir un modelo, el plano dibuja la casilla acotada (largo × 2.60m ext / 2.52m interior) con las zonas fijas marcadas.
   4. El usuario elige equipamiento de baño (inodoro c/ depósito y cámara séptica, vanitory c/ espejo) y tamaño (estándar / ampliado, ampliado solo en N3+), y el módulo de baño (celeste, con íconos) aparece en su posición fija ajustando su tamaño.
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 04-01-PLAN.md — Lógica pura + tests: helper banoReglas (BANO-02), test de sugerencia (USO-03) y BANO-03 en floorplanLayout (Wave 1)
+  - [ ] 04-02-PLAN.md — Paso 1 (Uso/ocupantes + sugerencia) y Paso 2 (7 cards de modelo + reflejo del plano) (Wave 2)
+  - [ ] 04-03-PLAN.md — Paso 3 (equipamiento + tamaño de baño) + enchufe de los 3 pasos en el registro (Wave 3)
 **UI hint**: yes
 
 ### Phase 5: Pasos 4-6 y Motores (Dormitorio, Cocina, Extras + Precios)
@@ -135,7 +138,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Cimientos y Datos | 2/2 | Complete | 2026-06-27 |
 | 2. Motor de Plano SVG | 3/3 | Complete | 2026-06-27 |
 | 3. Cáscara del Wizard y Persistencia | 3/3 | Complete | 2026-06-27 |
-| 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 0/TBD | Not started | - |
+| 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 0/3 | Planned | - |
 | 5. Pasos 4-6 y Motores | 0/TBD | Not started | - |
 | 6. Resumen y Exportación | 0/TBD | Not started | - |
 | 7. Pulido Mobile y Accesibilidad | 0/TBD | Not started | - |
