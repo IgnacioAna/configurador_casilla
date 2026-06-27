@@ -153,3 +153,34 @@ test('BANO-03: N3 ampliado deja las 3 zonas centrales con largoM positivo', () =
     assert.ok(zonas.find((z) => z.id === id).largoM > 0, `${id} debe ser > 0`)
   }
 })
+
+// --- WR-01: invariante de producción — el estar nunca es <= 0 en una config válida. ---
+// Con los ratios actuales (bano + dormitorio = 0.75 o 0.67) el estar siempre es positivo
+// mientras `restante > 0`; esta aserción codifica el invariante para que un futuro cambio de
+// ratios que lo rompa falle el test en vez de producir zonas negativas en silencio.
+test('WR-01: toda config válida deja el estar con largoM estrictamente positivo', () => {
+  const configs = [
+    CONFIG_MOCK_N1,
+    CONFIG_MOCK_N4,
+    { ...CONFIG_MOCK_N4, bano: { tamano: 'estandar' } },
+    { ...CONFIG_MOCK_N4, bano: { tamano: 'ampliado' } },
+    { largo: 6.1, bano: { tamano: 'ampliado' }, dormitorio: { camas: [] } },
+  ]
+  for (const cfg of configs) {
+    const layout = calcularLayout(cfg)
+    assert.equal(layout.valido, true, `config largo=${cfg.largo} debe ser válida`)
+    const estar = layout.zonas.find((z) => z.id === 'estar')
+    assert.ok(estar.largoM > 0, `estar (${estar.largoM}) debe ser > 0 para largo=${cfg.largo}`)
+  }
+})
+
+// WR-01: si los ratios rompieran el reparto y el estar quedara <= 0, el guard devuelve inválido
+// en lugar de zonas degeneradas. Probamos el contorno del guard con un `restante` mínimo viable
+// (justo por encima de minimoTotal) para confirmar que sigue cerrando con estar positivo.
+test('WR-01: el guard de estar<=0 no se dispara en el largo mínimo viable (estar > 0)', () => {
+  const minimoTotal = GEOMETRIA.zonaBaulera + GEOMETRIA.zonaCocina + 0.4
+  const layout = calcularLayout({ largo: minimoTotal + 0.01, bano: { tamano: 'ampliado' }, dormitorio: { camas: [] } })
+  assert.equal(layout.valido, true)
+  const estar = layout.zonas.find((z) => z.id === 'estar')
+  assert.ok(estar.largoM > 0, `estar (${estar.largoM}) debe seguir siendo > 0 en el largo mínimo`)
+})

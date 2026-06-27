@@ -74,6 +74,13 @@ export function calcularLayout(config) {
   const largoDormitorio = restante * RATIO_DORMITORIO
   // El estar absorbe el redondeo para que la suma cierre exacta contra config.largo.
   const largoEstar = restante - largoBano - largoDormitorio
+  // Invariante de producción (WR-01): el estar nunca puede ser <= 0. El guard de `minimoTotal`
+  // valida el largo bruto, pero no protege contra un futuro cambio de ratios cuya suma supere 1
+  // (lo que volvería negativo/degenerado al estar silenciosamente). Codificamos el invariante
+  // post-cálculo: si los ratios rompen el reparto, devolvemos inválido en lugar de zonas negativas.
+  if (largoEstar <= 0) {
+    return { valido: false }
+  }
 
   // Orden fijo e inmutable (UI-SPEC). El baño SIEMPRE entre baulera y dormitorio.
   const orden = [
