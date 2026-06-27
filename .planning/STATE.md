@@ -21,17 +21,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-27)
 
 **Core value:** El cliente ve su casilla tomar forma visualmente (plano en planta en vivo) mientras la configura paso a paso, y termina con un resumen + presupuesto listo para enviar.
-**Current focus:** Phase 05 — pasos-4-6-y-motores-dormitorio-cocina-extras-precios
+**Current focus:** Phase 06 — resumen-y-exportaci-n (planificada, lista para ejecutar)
 
 ## Current Position
 
 Phase: 6
-Plan: Not started
-Next: Phase 05 — ejecutar con /gsd-execute-phase 5 (Wave 1: 05-01 ∥ 05-02 → Wave 2: 05-03 ∥ 05-04 → Wave 3: 05-05 con checkpoint visual)
+Plan: Not started (planificada — 3 planes, 2 waves)
+Next: Phase 06 — ejecutar con /gsd-execute-phase 6 (Wave 1: 06-01 → 06-02 → Wave 2: 06-03 con checkpoint visual)
 Status: Ready to execute
 Last activity: 2026-06-27 -- Phase 6 planning complete
 
-Progress: [█████░░░░░] 57% (4 de 7 fases completas; Phase 5 es la próxima)
+Progress: [███████░░░] 71% (5 de 7 fases completas; Phase 6 planificada y lista para ejecutar)
 
 ## Performance Metrics
 

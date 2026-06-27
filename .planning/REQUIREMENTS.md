@@ -49,28 +49,28 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### Paso 4 — Dormitorio
 
-- [ ] **DORM-01**: El usuario combina tipos y cantidades de camas (cucheta marinera, cama
+- [x] **DORM-01**: El usuario combina tipos y cantidades de camas (cucheta marinera, cama
       simple, matrimonial máx 1).
-- [ ] **DORM-02**: El sistema valida la combinación contra la capacidad del modelo usando la
+- [x] **DORM-02**: El sistema valida la combinación contra la capacidad del modelo usando la
       geometría real (camas 0.80m, 2 por fila + pasillo 0.92m, largo de zona de dormitorio) y
       muestra una advertencia clara si no entra. N5+ son personalizables (mayor capacidad).
-- [ ] **DORM-03**: El plano dibuja las camas como rectángulos (marrón) con etiqueta C/S/M contra
+- [x] **DORM-03**: El plano dibuja las camas como rectángulos (marrón) con etiqueta C/S/M contra
       las paredes laterales, con el pasillo central.
 
 ### Paso 5 — Cocina y estar
 
-- [ ] **COCINA-01**: El usuario configura la cocina (mesada/bacha/cocina a gas estándar incluida;
+- [x] **COCINA-01**: El usuario configura la cocina (mesada/bacha/cocina a gas estándar incluida;
       opción "cocina con horno industrial").
-- [ ] **COCINA-02**: El usuario elige la heladera (sin / 220V freezer A++ / 12V freezer con
+- [x] **COCINA-02**: El usuario elige la heladera (sin / 220V freezer A++ / 12V freezer con
       pantalla y regulador).
-- [ ] **COCINA-03**: El usuario agrega elementos del estar/comedor (mesa de caño, banco
+- [x] **COCINA-03**: El usuario agrega elementos del estar/comedor (mesa de caño, banco
       despensero).
-- [ ] **COCINA-04**: El plano dibuja la zona de cocina/estar (verde) entre el dormitorio y la
+- [x] **COCINA-04**: El plano dibuja la zona de cocina/estar (verde) entre el dormitorio y la
       cocina fija, con los módulos elegidos.
 
 ### Paso 6 — Extras (confort y energía)
 
-- [ ] **EXTRAS-01**: El usuario selecciona accesorios múltiples del catálogo real (calefactor
+- [x] **EXTRAS-01**: El usuario selecciona accesorios múltiples del catálogo real (calefactor
       4000 CAL, caldera 12V a gasoil, split inverter, panel solar 160W, sistema solar 220 off
       grid, TV 32" con DirecTV, mueble estéreo Pioneer, cortinas roller blackout, toldo,
       cajonera bajo cama).
@@ -89,7 +89,7 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### Precio
 
-- [ ] **PRECIO-01**: El sistema calcula el presupuesto (base del modelo + accesorios) y lo
+- [x] **PRECIO-01**: El sistema calcula el presupuesto (base del modelo + accesorios) y lo
       muestra desglosado en **neto + IVA (21%) + total con IVA**, en formato argentino
       (`$29.108.976`), actualizándose en vivo.
 
@@ -166,19 +166,19 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | BANO-01 | Phase 4 | Complete (04-03) |
 | BANO-02 | Phase 4 | Complete (04-01 lógica + 04-03 UI) |
 | BANO-03 | Phase 4 | Complete (04-01 motor + 04-03 UI) |
-| DORM-01 | Phase 5 | Pending |
-| DORM-02 | Phase 5 | Pending |
-| DORM-03 | Phase 5 | Pending |
-| COCINA-01 | Phase 5 | Pending |
-| COCINA-02 | Phase 5 | Pending |
-| COCINA-03 | Phase 5 | Pending |
-| COCINA-04 | Phase 5 | Pending |
-| EXTRAS-01 | Phase 5 | Pending |
+| DORM-01 | Phase 5 | Complete (verificado PASSED) |
+| DORM-02 | Phase 5 | Complete (verificado PASSED) |
+| DORM-03 | Phase 5 | Complete (verificado PASSED) |
+| COCINA-01 | Phase 5 | Complete (verificado PASSED) |
+| COCINA-02 | Phase 5 | Complete (verificado PASSED) |
+| COCINA-03 | Phase 5 | Complete (verificado PASSED) |
+| COCINA-04 | Phase 5 | Complete (verificado PASSED) |
+| EXTRAS-01 | Phase 5 | Complete (verificado PASSED) |
 | PLANO-01 | Phase 2 | Complete |
 | PLANO-02 | Phase 2 | Complete |
 | PLANO-03 | Phase 3 | Complete (verificado PASSED) |
 | PLANO-04 | Phase 2 | Complete |
-| PRECIO-01 | Phase 5 | Pending |
+| PRECIO-01 | Phase 5 | Complete (verificado PASSED) |
 | RESUMEN-01 | Phase 6 | Pending |
 | RESUMEN-02 | Phase 6 | Pending |
 | RESUMEN-03 | Phase 6 | Pending |
@@ -199,4 +199,4 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 tras auditoría de milestone (/gsd-audit-milestone): sincronizada la trazabilidad de Phase 3 (SHELL-01..04, PLANO-03, UX-03/04 marcados Complete — estaban verificados PASSED pero quedaron `[ ]`). 18/34 v1 requirements completos: PLANO-01/02/03/04, SHELL-01/02/03/04, USO-01/02/03, DIM-01/02, BANO-01/02/03, UX-03/04. Pendientes (16): Phase 5 (DORM, COCINA, EXTRAS, PRECIO), Phase 6 (RESUMEN, EXPORT), Phase 7 (UX-01/02).*
+*Last updated: 2026-06-27 — sincronización de tracking de Phase 5: DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01 y PRECIO-01 marcados Complete (estaban `[ ]`/Pending pese a que la fase se ejecutó y verificó PASSED — el paso "complete phase execution" del execute-phase no actualizó los checkboxes por usar namespaces de CLI ausentes; ver commit 768f165 y memoria gsd-cli-invocation). 27/34 v1 requirements completos: PLANO-01/02/03/04, SHELL-01/02/03/04, USO-01/02/03, DIM-01/02, BANO-01/02/03, UX-03/04, DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01, PRECIO-01. Pendientes (7): Phase 6 (RESUMEN-01/02/03, EXPORT-01/02), Phase 7 (UX-01/02). — Previo (02877f7): auditoría de milestone (/gsd-audit-milestone) sincronizó trazabilidad de Phase 3.*
