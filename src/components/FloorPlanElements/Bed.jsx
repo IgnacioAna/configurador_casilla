@@ -14,9 +14,12 @@ export default function Bed({ x, y, w, h, tipo }) {
   const cy = y + h / 2
   const letra = tipo ?? ''
   return (
-    <g>
+    // fp-anim en el <g> para el fade (opacity) al aparecer/desaparecer una cama; el <rect>
+    // y el <text> internos llevan la clase para transicionar su x/y/width/height al reacomodarse.
+    <g className="fp-anim">
       <title>{TITULO[tipo] ?? 'Cama'}</title>
       <rect
+        className="fp-anim"
         x={x}
         y={y}
         width={w}
@@ -29,6 +32,7 @@ export default function Bed({ x, y, w, h, tipo }) {
       />
       {/* Almohada: línea fina sobre el lado corto (cabecera) para legibilidad de croquis */}
       <line
+        className="fp-anim"
         x1={x + w * 0.12}
         y1={y + h * 0.15}
         x2={x + w * 0.12}
@@ -38,6 +42,7 @@ export default function Bed({ x, y, w, h, tipo }) {
         strokeWidth="0.75"
       />
       <text
+        className="fp-anim"
         x={cx}
         y={cy}
         textAnchor="middle"

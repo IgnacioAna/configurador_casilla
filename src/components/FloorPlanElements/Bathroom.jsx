@@ -16,7 +16,7 @@ export default function Bathroom({ x, y, w, h }) {
   const lavX = ix + pieza * 2
 
   return (
-    <g stroke="#1A1A1A" strokeOpacity="0.7" strokeWidth="1" fill="none">
+    <g className="fp-anim" stroke="#1A1A1A" strokeOpacity="0.7" strokeWidth="1" fill="none">
       <title>Baño: ducha, inodoro, lavatorio</title>
       {/* Ducha */}
       <rect x={duchaX} y={iy} width={pieza * 0.9} height={ih} />

@@ -47,11 +47,12 @@ function EstadoError() {
 function CotaH({ x1, x2, y, label }) {
   const cx = (x1 + x2) / 2
   return (
-    <g stroke={COBRE} strokeWidth="0.75" fill="none">
-      <line x1={x1} y1={y} x2={x2} y2={y} />
-      <line x1={x1} y1={y - 3} x2={x1} y2={y + 3} />
-      <line x1={x2} y1={y - 3} x2={x2} y2={y + 3} />
+    <g className="fp-anim" stroke={COBRE} strokeWidth="0.75" fill="none">
+      <line className="fp-anim" x1={x1} y1={y} x2={x2} y2={y} />
+      <line className="fp-anim" x1={x1} y1={y - 3} x2={x1} y2={y + 3} />
+      <line className="fp-anim" x1={x2} y1={y - 3} x2={x2} y2={y + 3} />
       <text
+        className="fp-anim"
         x={cx}
         y={y - 3}
         textAnchor="middle"
@@ -70,11 +71,12 @@ function CotaH({ x1, x2, y, label }) {
 function CotaV({ x, y1, y2, label }) {
   const cy = (y1 + y2) / 2
   return (
-    <g stroke={COBRE} strokeWidth="0.75" fill="none">
-      <line x1={x} y1={y1} x2={x} y2={y2} />
-      <line x1={x - 3} y1={y1} x2={x + 3} y2={y1} />
-      <line x1={x - 3} y1={y2} x2={x + 3} y2={y2} />
+    <g className="fp-anim" stroke={COBRE} strokeWidth="0.75" fill="none">
+      <line className="fp-anim" x1={x} y1={y1} x2={x} y2={y2} />
+      <line className="fp-anim" x1={x - 3} y1={y1} x2={x + 3} y2={y1} />
+      <line className="fp-anim" x1={x - 3} y1={y2} x2={x + 3} y2={y2} />
       <text
+        className="fp-anim"
         x={x - 3}
         y={cy}
         textAnchor="middle"
@@ -141,11 +143,20 @@ export default function FloorPlan({ config }) {
         {/* (2) Rellenos de zona + divisores + etiquetas. */}
         <g>
           {zonas.map((z) => (
-            <rect key={z.id} x={z.x} y={0} width={z.anchoU} height={anchoU} fill={z.fill} />
+            <rect
+              key={z.id}
+              className="fp-anim"
+              x={z.x}
+              y={0}
+              width={z.anchoU}
+              height={anchoU}
+              fill={z.fill}
+            />
           ))}
           {zonas.slice(1).map((z) => (
             <line
               key={`div-${z.id}`}
+              className="fp-anim"
               x1={z.x}
               y1={0}
               x2={z.x}
@@ -158,6 +169,7 @@ export default function FloorPlan({ config }) {
           {zonas.map((z) => (
             <text
               key={`lbl-${z.id}`}
+              className="fp-anim"
               x={z.x + z.anchoU / 2}
               y={anchoU / 2}
               textAnchor="middle"

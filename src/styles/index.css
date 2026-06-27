@@ -7,3 +7,27 @@ body {
   color: #1A1A1A;
   margin: 0;
 }
+
+/*
+ * Transición del plano (PLANO-02 / UI-SPEC "Animación / Transición"): al cambiar el config,
+ * zonas, camas, módulos y cotas reposicionan/redimensionan suavemente en ~300ms ease-in-out
+ * (cubic-bezier(0.4,0,0.2,1)). Se animan los atributos de presentación SVG x/y/width/height,
+ * más opacity (fade de módulos que aparecen/desaparecen) y transform (reposición). NO se aplica
+ * a la pared exterior (su stroke-width no debe animar) ni al viewBox.
+ */
+.fp-anim {
+  transition:
+    x 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    y 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Accesibilidad (UI-SPEC): si el usuario pide menos movimiento, cambio instantáneo. */
+@media (prefers-reduced-motion: reduce) {
+  .fp-anim {
+    transition: none;
+  }
+}

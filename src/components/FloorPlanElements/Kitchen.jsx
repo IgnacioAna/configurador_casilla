@@ -13,7 +13,7 @@ export default function Kitchen({ x, y, w, h, opciones = {} }) {
   const hornallaR = Math.min(iw, mesadaH) * 0.12
 
   return (
-    <g stroke="#1A1A1A" strokeOpacity="0.7" strokeWidth="1" fill="none">
+    <g className="fp-anim" stroke="#1A1A1A" strokeOpacity="0.7" strokeWidth="1" fill="none">
       <title>Cocina</title>
       {/* Mesada */}
       <rect x={ix} y={iy} width={iw} height={mesadaH} />

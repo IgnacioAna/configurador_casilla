@@ -5,9 +5,10 @@
 // Trazo: #1A1A1A opacidad 0.7, ancho 1.
 export default function Table({ x, y, w, h, rebatible = false }) {
   return (
-    <g stroke="#1A1A1A" strokeOpacity="0.7" strokeWidth="1" fill="none">
+    <g className="fp-anim" stroke="#1A1A1A" strokeOpacity="0.7" strokeWidth="1" fill="none">
       <title>{rebatible ? 'Mesa rebatible' : 'Mesa'}</title>
       <rect
+        className="fp-anim"
         x={x}
         y={y}
         width={w}
