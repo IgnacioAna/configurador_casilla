@@ -55,7 +55,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. El plano muestra la estructura fija de zonas (baulera 0.60m | baño | dormitorio | estar/comedor | cocina 0.60m) con sus colores (baño celeste, dormitorio marrón, cocina verde).
   3. El plano respeta la geometría real (interior 2.52m, camas 0.80m, pasillo central 0.92m) al ubicar elementos.
   4. Al cambiar las props (largo, zonas, módulos), el plano transiciona suavemente (~300ms) sin saltos bruscos.
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 02-01-PLAN.md — Contrato del prop config + helper puro de layout (zonas y camas desde geometry.js) (Wave 1)
+  - [ ] 02-02-PLAN.md — FloorPlan.jsx + subcomponentes SVG: paredes, zonas con color, camas, puerta, ventanas, cotas, estados (Wave 2)
+  - [ ] 02-03-PLAN.md — Transiciones 300ms + prefers-reduced-motion y demo en App.jsx con "Cambiar modelo" (Wave 3)
 **UI hint**: yes
 
 ### Phase 3: Cáscara del Wizard y Persistencia
@@ -127,7 +130,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Cimientos y Datos | 2/2 | Complete | 2026-06-27 |
-| 2. Motor de Plano SVG | 0/TBD | Not started | - |
+| 2. Motor de Plano SVG | 0/3 | Not started | - |
 | 3. Cáscara del Wizard y Persistencia | 0/TBD | Not started | - |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 0/TBD | Not started | - |
 | 5. Pasos 4-6 y Motores | 0/TBD | Not started | - |
