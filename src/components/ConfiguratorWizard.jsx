@@ -10,7 +10,10 @@ import PlanoPanel from './wizard/PlanoPanel.jsx'
 // Los pasos son stubs en la Fase 3; las Fases 4-5 reemplazan PASOS[].Componente.
 export default function ConfiguratorWizard({ onVolverInicio }) {
   const { estado, dispatch, reiniciar } = usePersistedConfig()
-  const Paso = PASOS[estado.pasoActual]
+  // CR-01 (code review 05): fallback defensivo. esEstadoValido ya acota pasoActual al rango válido,
+  // pero ?? PASOS[0] evita una pantalla en blanco si pasoActual quedara fuera de rango por cualquier
+  // vía (índice undefined → Paso.Componente tiraría TypeError).
+  const Paso = PASOS[estado.pasoActual] ?? PASOS[0]
   const esPrimero = estado.pasoActual === 0
   const esUltimo = estado.pasoActual === TOTAL_PASOS - 1
 

@@ -10,7 +10,7 @@
 //  - T-03-03 (DoS): setItem/getItem/removeItem van dentro de try/catch; si la cuota se excede o el
 //    almacenamiento no está disponible (modo privado/SSR), la app sigue en memoria sin romper.
 import { useEffect, useReducer } from 'react'
-import { estadoInicial, wizardReducer, ACCIONES } from '../state/wizardReducer.js'
+import { estadoInicial, wizardReducer, ACCIONES, TOTAL_PASOS } from '../state/wizardReducer.js'
 
 // Key EXACTA del almacenamiento (constante única, sin variaciones).
 export const STORAGE_KEY = 'impacar_config_v1'
@@ -22,11 +22,16 @@ export const STORAGE_KEY = 'impacar_config_v1'
 // y luego PasoBano/PasoDimensiones crasheaban al leer estado.bano.tamano / estado.extras.includes()
 // (CR-01: pantalla blanca). Por eso también se exige bano (objeto) y extras (array): la frontera de
 // confianza protege a TODOS los componentes en un solo lugar.
+// CR-01 (code review 05): pasoActual además debe ser un entero EN RANGO [0, TOTAL_PASOS). Un
+// pasoActual adulterado fuera de rango (p.ej. 99) pasaba la validación de "es number" y luego
+// PASOS[99] === undefined hacía que ConfiguratorWizard tirara TypeError al leer Paso.Componente.
 export function esEstadoValido(valor) {
   return (
     valor !== null &&
     typeof valor === 'object' &&
-    typeof valor.pasoActual === 'number' &&
+    Number.isInteger(valor.pasoActual) &&
+    valor.pasoActual >= 0 &&
+    valor.pasoActual < TOTAL_PASOS &&
     typeof valor.modeloId === 'string' &&
     valor.bano !== null &&
     typeof valor.bano === 'object' &&
