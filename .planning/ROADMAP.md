@@ -72,9 +72,9 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. En mobile el plano es colapsable ("Ver plano actual"); en desktop va sticky a la derecha.
   5. Toda la interfaz está en español argentino con trato de usted, y cada paso completado se registra con `console.log` + timestamp.
 **Plans**: 3 plans
-  - [ ] 03-01-PLAN.md — Estado central (useReducer) + persistencia localStorage (key impacar_config_v1) + analytics (Wave 1)
-  - [ ] 03-02-PLAN.md — Landing Impacar (trato de usted) + cáscara del wizard navegable (6 pasos stub, barra de progreso) + ruteo en App.jsx (Wave 2)
-  - [ ] 03-03-PLAN.md — Layout responsive del plano: sticky en desktop / colapsable en mobile, derivado del estado del wizard (Wave 3)
+  - [x] 03-01-PLAN.md — Estado central (useReducer) + persistencia localStorage (key impacar_config_v1) + analytics (Wave 1)
+  - [x] 03-02-PLAN.md — Landing Impacar (trato de usted) + cáscara del wizard navegable (6 pasos stub, barra de progreso) + ruteo en App.jsx (Wave 2)
+  - [x] 03-03-PLAN.md — Layout responsive del plano: sticky en desktop / colapsable en mobile, derivado del estado del wizard (Wave 3)
 **UI hint**: yes
 
 ### Phase 4: Pasos 1-3 (Uso, Dimensiones, Baño)
