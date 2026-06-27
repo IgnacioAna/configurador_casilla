@@ -435,22 +435,26 @@ está prohibido por CLAUDE.md / decisión 01-01 — usar v3 con las 3 directivas
 | A3 | No hace falta acción nueva en el reducer; `SET_CAMPO` con array completo cubre el toggle de extras | Standard Stack / Patterns | Si se prefiere legibilidad, agregar `TOGGLE_EXTRA` es trivial y no rompe nada. Riesgo nulo |
 | A4 | Mantener `extras: string[]` y `bano: { tamano }` evita bumpear la key de localStorage | Runtime State Inventory | Si Phase 4 cambia la forma de esos campos, un estado guardado viejo podría quedar inconsistente (aunque `esEstadoValido` no lo rechazaría). Mantener la forma actual elimina el riesgo |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Valor exacto de `RATIO_BANO_AMPLIADO`**
    - What we know: el UI-SPEC sugiere ≈0.30; el estándar es 0.22; el estar absorbe el residuo.
    - What's unclear: el valor que se vea "claramente más grande" sin comprimir de más el dormitorio.
    - Recommendation: empezar con 0.30, agregar un test que verifique zonas centrales > `MINIMO_CENTRAL`
      en N3 ampliado, y ajustar visualmente. Es discreción de implementación, no bloquea.
+   - **RESOLVED:** `RATIO_BANO_AMPLIADO = 0.30` fijado en el plan 04-01 (T3), con test BANO-03 que
+     verifica que en N3 ampliado ninguna zona central queda < `MINIMO_CENTRAL`.
 
 2. **¿Acción dedicada `TOGGLE_EXTRA` vs `SET_CAMPO` con array?**
    - What we know: ambas funcionan; el patrón actual del reducer es minimalista (`SET_CAMPO`).
    - What's unclear: preferencia de legibilidad del planner.
    - Recommendation: usar `SET_CAMPO` para no crecer la superficie del reducer; si se agrega
      `TOGGLE_EXTRA`, testearlo en `wizardReducer.test.js`.
+   - **RESOLVED:** se usa `SET_CAMPO` (sin acción nueva) en el plan 04-03 (T1), manteniendo el reducer minimalista.
 
 3. **Consistencia de voz plano (tuteo) vs wizard (usted)** — diferida a Phase 7 por el UI-SPEC (Q3).
    No se resuelve acá; no tocar `FloorPlan.jsx`.
+   - **RESOLVED (deferred):** decisión documentada — diferida a Phase 7; los planes de Phase 4 no tocan `FloorPlan.jsx`.
 
 ## Environment Availability
 
