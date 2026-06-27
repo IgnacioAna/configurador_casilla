@@ -120,9 +120,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. El usuario abre WhatsApp con un mensaje pre-armado (resumen + total) vía link `wa.me`.
   4. El usuario descarga un PDF con el plano vectorial, la configuración, el precio, el logo IMPACAR y los datos de contacto.
 **Plans**: 3 plans
-  - [ ] 06-01-PLAN.md — Lógica pura: detallePresupuesto (desglose) + resumenCampos (ids→nombres) + nombreArchivoPDF + deps jspdf/svg2pdf (Wave 1)
-  - [ ] 06-02-PLAN.md — Contacto único (wa.me + PDF) + exportWhatsApp (mensaje/link pre-armado) + verificación FINANCIACION (Wave 1)
-  - [ ] 06-03-PLAN.md — Pantalla Resumen (plano + secciones con Editar + presupuesto desglosado + financiación + WhatsApp/PDF) + estado izado a App + checkpoint visual (Wave 2)
+  - **Wave 1** *(lógica pura + deps, interface-first; 06-02 ordenado tras 06-01 por dependencia de datos)*
+    - [ ] 06-01-PLAN.md — Lógica pura: detallePresupuesto (desglose) + resumenCampos (ids→nombres) + nombreArchivoPDF + deps jspdf/svg2pdf (Wave 1)
+    - [ ] 06-02-PLAN.md — Contacto único (wa.me + PDF) + exportWhatsApp (mensaje/link pre-armado) + verificación FINANCIACION (Wave 1, depende de 06-01)
+  - **Wave 2** *(bloqueada hasta completar Wave 1)*
+    - [ ] 06-03-PLAN.md — Pantalla Resumen (plano + secciones con Editar + presupuesto desglosado + financiación + WhatsApp/PDF) + estado izado a App + checkpoint visual (Wave 2)
+  - **Cross-cutting constraints** (aparecen en ≥2 planes): una sola fuente de la suma (`detallePresupuesto` compone sobre `calcularPresupuesto`, total idéntico a BarraPrecio); `formatPrecio` para todo `$` (nunca formateo a mano); trato de usted + gate anti-voseo; degradación elegante ante estado adulterado (optional chaining + `Array.isArray`, nunca `$NaN`); plano vectorial con jsPDF+svg2pdf (NO html2canvas).
 **UI hint**: yes
 
 ### Phase 7: Pulido Mobile y Accesibilidad

@@ -448,19 +448,21 @@ const planoRef = useRef(null)
 **Nota:** No hay assumptions de alto riesgo. Las APIs de jsPDF/svg2pdf y el formato wa.me están
 verificados/citados; los colores inline del plano están verificados en el código.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Aspect ratio exacto del `viewBox` del plano para la caja A4**
+1. **RESOLVED: Aspect ratio exacto del `viewBox` del plano para la caja A4**
    - What we know: `FloorPlan` usa `viewBox={layout.viewBox}` y el contenido es `totalU+pad*2` ×
      `anchoU+pad*2` (muy apaisado). [VERIFIED: codebase]
    - What's unclear: el valor numérico exacto del alto para el modelo más largo (N7) vs el más corto (N1).
-   - Recommendation: en `generarPDF`, leer `svgNode.viewBox.baseVal` (width/height) y derivar
+   - Resolution: en `generarPDF`, leer `svgNode.viewBox.baseVal` (width/height) y derivar
      `height = width × (vb.height / vb.width)`. Cero hardcodeo, válido para todos los modelos.
+     Implementado en 06-03 Task 2 (generarPDF lee el viewBox en runtime).
 
-2. **Copy exacto del mensaje WhatsApp y de la nota orientativa**
+2. **RESOLVED: Copy exacto del mensaje WhatsApp y de la nota orientativa**
    - What we know: estructura y línea final fijadas (D-09/D-10 + UI-SPEC); trato de usted obligatorio.
    - What's unclear: redacción palabra por palabra (es discreción del planner/executor).
-   - Recommendation: usar el ejemplo de Pattern 2 como base; gate anti-voseo en revisión (como Fase 3).
+   - Resolution: usar el ejemplo de Pattern 2 como base verbatim; gate anti-voseo en revisión
+     (como Fase 3). Implementado en 06-02 Task 2 (mensajeWhatsApp + test anti-voseo).
 
 ## Environment Availability
 
