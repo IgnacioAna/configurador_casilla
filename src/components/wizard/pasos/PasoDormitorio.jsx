@@ -9,6 +9,8 @@
 import { ACCIONES } from '../../../state/wizardReducer.js'
 import { camasEntran } from '../../../utils/validacionCamas.js'
 import { MODELOS } from '../../../data/models.js'
+import { EXTRAS } from '../../../data/extras.js'
+import { formatPrecio } from '../../../utils/formato.js'
 
 // Conjunto de UI (etiquetas de los steppers, no datos de negocio): los tipos de cama son labels
 // de la fila, no entran en /data. Copy EXACTO del UI-SPEC "Copywriting Contract".
@@ -34,6 +36,21 @@ export default function PasoDormitorio({ estado, dispatch }) {
     const idx = camas.findIndex((c) => c.tipo === tipo)
     if (idx === -1) return
     setCamas(camas.filter((_, i) => i !== idx))
+  }
+
+  // EXTRAS-01: accesorios del dormitorio (p.ej. cajonera bajo cama) data-driven — filtrar EXTRAS
+  // por categoria, NO hardcodear ids. La cajonera no tiene footprint en el plano (como confort/energia,
+  // D-09): solo se escribe en extras[] y el motor (calcularPresupuesto) la suma sola. D-13: única
+  // fuente de verdad para selecciones de accesorios = estado.extras[].
+  const extrasDormitorio = EXTRAS.filter((e) => e.categoria === 'dormitorio')
+
+  // T-05-08: extras adulterado de localStorage cae a [] sin crashear antes de includes/filter.
+  const extras = Array.isArray(estado.extras) ? estado.extras : []
+
+  // Toggle inmutable en extras[] (idéntico a PasoBano/PasoCocina — Pitfall 3: array nuevo, nunca mutar).
+  const toggleExtra = (id) => {
+    const nuevos = extras.includes(id) ? extras.filter((x) => x !== id) : [...extras, id]
+    dispatch({ type: ACCIONES.SET_CAMPO, campo: 'extras', valor: nuevos })
   }
 
   // DORM-03: advertencia de capacidad data-driven (camasEntran). Para modelos personalizables
@@ -108,6 +125,41 @@ export default function PasoDormitorio({ estado, dispatch }) {
       {/* Nota tope matrimonial (D-02) — visible solo cuando ya hay 1 matrimonial. */}
       {contar('M') >= 1 && (
         <p className="mt-2 text-xs text-impacar-texto/70">Máximo 1 matrimonial por casilla.</p>
+      )}
+
+      {/* Accesorios del dormitorio (EXTRAS-01) — selección múltiple por checkboxes, data-driven
+          (categoria 'dormitorio'). El toggle va en extras[] (D-13). Sin footprint en el plano (D-09). */}
+      {extrasDormitorio.length > 0 && (
+        <>
+          <p className="mt-6 text-sm font-medium text-impacar-texto/70">Accesorios del dormitorio</p>
+          <div className="mt-3 space-y-2">
+            {extrasDormitorio.map((e) => {
+              const marcado = extras.includes(e.id)
+              return (
+                <label
+                  key={e.id}
+                  className={[
+                    'flex min-h-[44px] cursor-pointer items-center gap-3 rounded border p-3 transition-colors',
+                    marcado
+                      ? 'border-impacar-campo bg-impacar-campo/10'
+                      : 'border-impacar-texto/10 bg-white/40 hover:border-impacar-campo/40',
+                  ].join(' ')}
+                >
+                  <input
+                    type="checkbox"
+                    checked={marcado}
+                    onChange={() => toggleExtra(e.id)}
+                    className="accent-[#2D5016]"
+                  />
+                  <span className="flex flex-col">
+                    <span className="text-sm">{e.nombre}</span>
+                    <span className="text-xs text-impacar-texto/70">{formatPrecio(e.precioNeto)} + IVA</span>
+                  </span>
+                </label>
+              )
+            })}
+          </div>
+        </>
       )}
 
       {/* Bloque de capacidad (DORM-03, D-03) — nota "a medida" para personalizables (N5-N7),
