@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-02-PLAN.md
-last_updated: "2026-06-27T14:52:42Z"
-last_activity: 2026-06-27 -- Plan 04-02 ejecutado (Pasos 1-2 del wizard: PasoUso + PasoDimensiones)
+stopped_at: Completed 04-03-PLAN.md
+last_updated: "2026-06-27T15:10:00Z"
+last_activity: 2026-06-27 -- Plan 04-03 ejecutado (Paso 3 Baño + enchufe de los 3 pasos; checkpoint human-verify aprobado)
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 11
-  completed_plans: 10
-  percent: 91
+  completed_plans: 11
+  percent: 100
 ---
 
 # Project State
@@ -26,12 +26,12 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 ## Current Position
 
 Phase: 4
-Plan: 2 of 3 complete (04-01, 04-02)
-Next: 04-03-PLAN.md — Paso 3 (equipamiento + tamaño de baño) + enchufe de los 3 pasos en el registro
-Status: In Progress
-Last activity: 2026-06-27 -- Plan 04-02 ejecutado (Pasos 1-2 del wizard: PasoUso + PasoDimensiones)
+Plan: 3 of 3 complete (04-01, 04-02, 04-03)
+Next: Verificación de fase (verifier) → cierre de la Fase 4 por el orquestador
+Status: In Progress (planes 3/3; pendiente verificación de fase)
+Last activity: 2026-06-27 -- Plan 04-03 ejecutado (Paso 3 Baño + enchufe de los 3 pasos; checkpoint human-verify aprobado)
 
-Progress: [█████████░] 91% (10 de 11 planes; Phase 4 en curso: 2 de 3)
+Progress: [██████████] 100% (11 de 11 planes; Phase 4: 3 de 3, pendiente verificación de fase)
 
 ## Performance Metrics
 
@@ -92,6 +92,10 @@ Recent decisions affecting current work:
 - [04-02]: node --check no soporta .jsx en Node 24 (ERR_UNKNOWN_FILE_EXTENSION); sintaxis JSX validada con esbuild (el transformador del Vite del proyecto).
 - [04-02]: Badge "Sugerido" independiente del estado seleccionado (Pitfall 4) y corrección silenciosa de baño ampliado clonando bano con spread (Pitfall 3, Q4); reflejo del plano sin props nuevas (solo se escribe modeloId).
 - [04-02]: Checkpoint human-verify aprobado con verificación visual a ~375px DIFERIDA al cierre del Plan 04-03 (cuando los 3 pasos estén enchufados y en vivo).
+- [04-03]: Equipamiento de baño guardado en extras[] de forma inmutable (filter/spread vía SET_CAMPO), NO en bano.equipamiento — Phase 5 lo suma sin migración (Pitfall 5).
+- [04-03]: Chip "Ampliado" disabled data-driven con permiteBanoAmpliado(estado.modeloId) (disabled + aria-disabled); nota exacta "Disponible desde el modelo N3 (6,10 m) en adelante." visible solo cuando deshabilitado; tolera modeloId adulterado (mitiga T-04-07).
+- [04-03]: pasosRegistro.jsx con file ownership exclusivo del Plan 04-03 enchufa los 3 pasos reales (Componente real reemplaza StubPaso en uso/dimensiones/baño); 4-6 siguen StubPaso (Phase 5); cáscara del wizard intacta.
+- [04-03]: Checkpoint human-verify APROBADO con verificación visual real a ~375px (todos los criterios pasaron): navegación 1→2→3, sugerencia N3 para 4 ocupantes, badge Sugerido independiente del seleccionado, baño ampliado crece 162.8→222 (estar se recomprime, suma exacta), disabled+nota en N1, corrección Q4, persistencia F5, sin precios. npm test 33/33, npm run build OK.
 
 ### Pending Todos
 
@@ -115,6 +119,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-27T14:52:42Z
-Stopped at: Completed 04-02-PLAN.md
+Last session: 2026-06-27T15:10:00Z
+Stopped at: Completed 04-03-PLAN.md (Fase 4: 3/3 planes; pendiente verificación de fase)
 Resume file: None

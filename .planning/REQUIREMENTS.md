@@ -39,13 +39,13 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### Paso 3 — Baño (posición fija entre baulera y dormitorio)
 
-- [ ] **BANO-01**: El usuario elige el equipamiento del baño (inodoro con depósito y cámara
+- [x] **BANO-01**: El usuario elige el equipamiento del baño (inodoro con depósito y cámara
       séptica, vanitory completo con espejo) — la **ubicación es fija** (entre baulera y
-      dormitorio).
-- [ ] **BANO-02**: El usuario elige el tamaño del baño (estándar / ampliado); "ampliado" solo en
-      modelos 6.10m+ (N3 en adelante).
-- [ ] **BANO-03**: El plano ubica el módulo de baño (celeste, con íconos de ducha/inodoro/
-      lavatorio) en su posición fija, ajustando su tamaño según la elección.
+      dormitorio). _(UI en 04-03: PasoBano.jsx, checkboxes data-driven (EXTRAS categoria 'bano') con toggle inmutable en extras[].)_
+- [x] **BANO-02**: El usuario elige el tamaño del baño (estándar / ampliado); "ampliado" solo en
+      modelos 6.10m+ (N3 en adelante). _(Lógica en 04-01: permiteBanoAmpliado; UI en 04-03: chip 'Ampliado' disabled+aria-disabled en N1/N2 con nota exacta.)_
+- [x] **BANO-03**: El plano ubica el módulo de baño (celeste, con íconos de ducha/inodoro/
+      lavatorio) en su posición fija, ajustando su tamaño según la elección. _(Motor en 04-01: RATIO_BANO parametrizado; UI en 04-03: PasoBano.jsx escribe bano.tamano y el plano reacciona con .fp-anim — verificado visualmente: 162.8→222 unidades.)_
 
 ### Paso 4 — Dormitorio
 
@@ -163,9 +163,9 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | USO-03 | Phase 4 | Complete (04-01 lógica + 04-02 UI) |
 | DIM-01 | Phase 4 | Complete (04-02) |
 | DIM-02 | Phase 4 | Complete (04-02) |
-| BANO-01 | Phase 4 | Pending |
-| BANO-02 | Phase 4 | Lógica lista (04-01); UI en 04-03 |
-| BANO-03 | Phase 4 | Lógica lista (04-01); UI en 04-03 |
+| BANO-01 | Phase 4 | Complete (04-03) |
+| BANO-02 | Phase 4 | Complete (04-01 lógica + 04-03 UI) |
+| BANO-03 | Phase 4 | Complete (04-01 motor + 04-03 UI) |
 | DORM-01 | Phase 5 | Pending |
 | DORM-02 | Phase 5 | Pending |
 | DORM-03 | Phase 5 | Pending |
@@ -199,4 +199,4 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 after 02-03 completion (PLANO-02 marcado Complete; 3/34 v1 requirements completos: PLANO-01, PLANO-02, PLANO-04)*
+*Last updated: 2026-06-27 after 04-03 completion (BANO-01/BANO-02/BANO-03 marcados Complete; 11/34 v1 requirements completos: PLANO-01/02/04, USO-01/02/03, DIM-01/02, BANO-01/02/03)*
