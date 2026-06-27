@@ -25,6 +25,10 @@ export const STORAGE_KEY = 'impacar_config_v1'
 // CR-01 (code review 05): pasoActual además debe ser un entero EN RANGO [0, TOTAL_PASOS). Un
 // pasoActual adulterado fuera de rango (p.ej. 99) pasaba la validación de "es number" y luego
 // PASOS[99] === undefined hacía que ConfiguratorWizard tirara TypeError al leer Paso.Componente.
+// WR-03 (code review 05): también se valida dormitorio (objeto con camas array). PasoDormitorio se
+// defiende hoy con optional chaining (estado.dormitorio?.camas), pero la frontera de confianza
+// promete proteger a TODOS los componentes en un solo lugar: un futuro consumidor que lea
+// estado.dormitorio.camas sin fallback crasharía con estado adulterado. Se honra la garantía aquí.
 export function esEstadoValido(valor) {
   return (
     valor !== null &&
@@ -35,7 +39,10 @@ export function esEstadoValido(valor) {
     typeof valor.modeloId === 'string' &&
     valor.bano !== null &&
     typeof valor.bano === 'object' &&
-    Array.isArray(valor.extras)
+    Array.isArray(valor.extras) &&
+    valor.dormitorio !== null &&
+    typeof valor.dormitorio === 'object' &&
+    Array.isArray(valor.dormitorio.camas)
   )
 }
 

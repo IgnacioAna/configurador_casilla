@@ -29,13 +29,22 @@ test('CR-01: rechaza extras que no es array (estado.extras.includes crasheaba)',
 })
 
 test('CR-01 (code review 05): rechaza pasoActual fuera de rango / no entero (PASOS[idx] undefined → pantalla blanca)', () => {
-  const base = { modeloId: 'N4', bano: { tamano: 'estandar' }, extras: [] }
+  const base = { modeloId: 'N4', bano: { tamano: 'estandar' }, dormitorio: { camas: [] }, extras: [] }
   assert.equal(esEstadoValido({ ...base, pasoActual: 99 }), false)            // fuera de rango (alto)
   assert.equal(esEstadoValido({ ...base, pasoActual: TOTAL_PASOS }), false)   // un paso más allá del último índice
   assert.equal(esEstadoValido({ ...base, pasoActual: -1 }), false)            // negativo
   assert.equal(esEstadoValido({ ...base, pasoActual: 1.5 }), false)           // no entero
   assert.equal(esEstadoValido({ ...base, pasoActual: 0 }), true)              // límite inferior válido
   assert.equal(esEstadoValido({ ...base, pasoActual: TOTAL_PASOS - 1 }), true) // límite superior válido
+})
+
+test('WR-03 (code review 05): rechaza dormitorio null o dormitorio.camas no-array (frontera de confianza completa)', () => {
+  const base = { pasoActual: 0, modeloId: 'N4', bano: { tamano: 'estandar' }, extras: [] }
+  assert.equal(esEstadoValido({ ...base, dormitorio: null }), false)              // dormitorio null
+  assert.equal(esEstadoValido({ ...base, dormitorio: { camas: 'x' } }), false)    // camas no es array
+  assert.equal(esEstadoValido({ ...base, dormitorio: {} }), false)                // sin camas
+  assert.equal(esEstadoValido({ ...base /* sin dormitorio */ }), false)           // falta dormitorio
+  assert.equal(esEstadoValido({ ...base, dormitorio: { camas: [] } }), true)      // dormitorio válido
 })
 
 test('esEstadoValido: sigue rechazando los casos previos (null, no-objeto, sin pasoActual/modeloId)', () => {
