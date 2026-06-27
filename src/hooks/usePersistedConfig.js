@@ -16,13 +16,21 @@ import { estadoInicial, wizardReducer, ACCIONES } from '../state/wizardReducer.j
 export const STORAGE_KEY = 'impacar_config_v1'
 
 // Valida que el estado restaurado tenga la forma mínima esperada del wizard.
-// Mitiga T-03-01: si está adulterado/corrupto, se descarta y se vuelve a estadoInicial.
-function esEstadoValido(valor) {
+// Mitiga T-03-01 / T-04-01 / T-04-09: si está adulterado/corrupto O incompleto (le faltan claves
+// que los pasos consumen sin fallback), se descarta y se vuelve a estadoInicial. Verificar solo
+// pasoActual+modeloId no alcanzaba: un estado parcial { pasoActual, modeloId } pasaba la validación
+// y luego PasoBano/PasoDimensiones crasheaban al leer estado.bano.tamano / estado.extras.includes()
+// (CR-01: pantalla blanca). Por eso también se exige bano (objeto) y extras (array): la frontera de
+// confianza protege a TODOS los componentes en un solo lugar.
+export function esEstadoValido(valor) {
   return (
     valor !== null &&
     typeof valor === 'object' &&
     typeof valor.pasoActual === 'number' &&
-    typeof valor.modeloId === 'string'
+    typeof valor.modeloId === 'string' &&
+    valor.bano !== null &&
+    typeof valor.bano === 'object' &&
+    Array.isArray(valor.extras)
   )
 }
 
