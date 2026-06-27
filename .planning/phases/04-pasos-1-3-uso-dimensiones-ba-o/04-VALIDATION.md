@@ -1,10 +1,11 @@
 ---
 phase: 4
 slug: pasos-1-3-uso-dimensiones-ba-o
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: validated
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-06-27
+validated: 2026-06-27
 ---
 
 # Phase 4 — Validation Strategy
@@ -45,12 +46,12 @@ created: 2026-06-27
 
 | Requirement | Wave | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |-------------|------|------------|-----------------|-----------|-------------------|-------------|--------|
-| BANO-02 | 0/1 | — | umbral "ampliado" derivado de `MODELOS.largo >= 6.1` (N1/N2 no; N3+ sí), sin lista hardcodeada | unit (helper puro) | `node --test src/utils/banoReglas.test.js` | ❌ W0 | ⬜ pending |
-| USO-03 | 0/1 | — | `SUGERENCIA_OCUPANTES[n]` mapea cada ocupante (2/3/4/5/6/8) a un id válido de `MODELOS` | unit | `node --test src/data/models.test.js` | ❌ W0 | ⬜ pending |
-| BANO-03 | 1 | T-04-DoS | `calcularLayout` con `bano.tamano:'ampliado'` agranda baño vs 'estandar' | unit | `node --test src/utils/floorplanLayout.test.js` | ✅ (extender) | ⬜ pending |
-| BANO-03 | 1 | T-04-DoS | la suma de `largoM` sigue === `config.largo` con baño ampliado | unit | `node --test src/utils/floorplanLayout.test.js` | ✅ (extender) | ⬜ pending |
-| BANO-03 | 1 | T-04-DoS | con N3 ampliado ninguna zona central < `MINIMO_CENTRAL` (sin zonas negativas) | unit | `node --test src/utils/floorplanLayout.test.js` | ✅ (extender) | ⬜ pending |
-| USO-01, USO-02, DIM-01, DIM-02, BANO-01 | 1 | T-04-Tamper | render de cards/chips/checkbox + selección única; ids leídos validados contra `MODELOS`/`EXTRAS` | manual (visual en dev) | `npm run dev` + inspección a ~375px | n/a | ⬜ pending |
+| BANO-02 | 0/1 | — | umbral "ampliado" derivado de `MODELOS.largo >= 6.1` (N1/N2 no; N3+ sí), sin lista hardcodeada | unit (helper puro) | `node --test src/utils/banoReglas.test.js` | ✅ (4 tests) | ✅ green |
+| USO-03 | 0/1 | — | `SUGERENCIA_OCUPANTES[n]` mapea cada ocupante (2/3/4/5/6/8) a un id válido de `MODELOS` | unit | `node --test src/data/models.test.js` | ✅ (2 tests) | ✅ green |
+| BANO-03 | 1 | T-04-DoS | `calcularLayout` con `bano.tamano:'ampliado'` agranda baño vs 'estandar' | unit | `node --test src/utils/floorplanLayout.test.js` | ✅ (line 136) | ✅ green |
+| BANO-03 | 1 | T-04-DoS | la suma de `largoM` sigue === `config.largo` con baño ampliado | unit | `node --test src/utils/floorplanLayout.test.js` | ✅ (line 144) | ✅ green |
+| BANO-03 | 1 | T-04-DoS | con N3 ampliado ninguna zona central < `MINIMO_CENTRAL` (sin zonas negativas) | unit | `node --test src/utils/floorplanLayout.test.js` | ✅ (line 150, `largoM > 0`) | ✅ green |
+| USO-01, USO-02, DIM-01, DIM-02, BANO-01 | 1 | T-04-Tamper | render de cards/chips/checkbox + selección única; ids leídos validados contra `MODELOS`/`EXTRAS` | manual (visual en dev) | `npm run dev` + inspección a ~375px | n/a | ✅ verificado (checkpoint 04-03 @375px) |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -58,11 +59,11 @@ created: 2026-06-27
 
 ## Wave 0 Requirements
 
-- [ ] `src/utils/banoReglas.test.js` — extraer `permiteBanoAmpliado(modeloId)` a helper puro y testearlo (BANO-02)
-- [ ] `src/data/models.test.js` — verificar que `SUGERENCIA_OCUPANTES` mapea cada ocupante a un id válido de `MODELOS` (USO-03)
-- [ ] Extender `src/utils/floorplanLayout.test.js` — 3 casos de BANO-03 (ampliado > estándar, suma exacta, N3 sin zonas negativas)
-- [ ] (Opcional) Script `test` en package.json para un comando único
-- [ ] (Opcional) Si se agrega `TOGGLE_EXTRA`, test en `src/state/wizardReducer.test.js`
+- [x] `src/utils/banoReglas.test.js` — `permiteBanoAmpliado(modeloId)` extraído a helper puro y testeado, 4 tests verdes (BANO-02)
+- [x] `src/data/models.test.js` — `SUGERENCIA_OCUPANTES` mapea cada ocupante a un id válido de `MODELOS`, 2 tests verdes (USO-03)
+- [x] Extender `src/utils/floorplanLayout.test.js` — 3 casos de BANO-03 verdes (ampliado > estándar, suma exacta, N3 sin zonas degeneradas)
+- [x] Script `test` en package.json (`node --test` listando archivos explícitos) — agregado (commit `3d0e6b9`)
+- [ ] (N/A) No se agregó `TOGGLE_EXTRA`: el equipamiento de baño se persiste en `extras[]` vía `SET_CAMPO` (toggle inmutable), sin acción nueva
 
 ---
 
@@ -80,11 +81,32 @@ created: 2026-06-27
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references (banoReglas.test.js, models.test.js, floorplanLayout.test.js extendido)
-- [ ] No watch-mode flags (`node --test` corre y sale)
-- [ ] Feedback latency < 5s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies (los visuales puros quedan manual-only documentados — sin jsdom/RTL por decisión 01-02)
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references (banoReglas.test.js, models.test.js, floorplanLayout.test.js extendido) — todos verdes
+- [x] No watch-mode flags (`node --test` corre y sale)
+- [x] Feedback latency < 5s (suite completa ~0.2s)
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** validated 2026-06-27 (auditoría /gsd-validate-phase 4)
+
+---
+
+## Validation Audit 2026-06-27
+
+State A: VALIDATION.md draft auditado contra la implementación ejecutada. Los 3 ítems Wave 0
+que el draft marcaba MISSING ahora existen y corren verdes; los visuales puros se confirman
+manual-only (sin jsdom/RTL por decisión 01-02), verificados a ~375px en el checkpoint 04-03.
+
+| Metric | Count |
+|--------|-------|
+| Gaps found | 0 |
+| Resolved | 0 |
+| Escalated | 0 |
+| Requirements COVERED (automatizados) | 5 aserciones / 3 suites (BANO-02 ·4, USO-03 ·2, BANO-03 ·3) |
+| Requirements manual-only (verificados) | 5 (USO-01, USO-02, DIM-01, DIM-02, BANO-01) |
+
+**Evidencia:** `node --test src/utils/banoReglas.test.js src/data/models.test.js src/utils/floorplanLayout.test.js`
+→ 19/19 verde · `npm test` (suite completa) → 39/39 verde, 0 fallos, sin flaky.
+
+**Auditor:** no se invocó `gsd-nyquist-auditor` — no había gaps que rellenar (Step 3: "No gaps → skip").
