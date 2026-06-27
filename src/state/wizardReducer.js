@@ -26,8 +26,9 @@ export const estadoInicial = {
   modeloId: 'N4',
   bano: { tamano: 'estandar' }, // 'estandar' | 'ampliado'
   dormitorio: { camas: [] }, // Array<{ tipo: 'C' | 'S' | 'M' }>
-  cocina: { horno: false, heladera: null }, // heladera: null | string
-  estar: { mesa: false },
+  // D-14: NO hay placeholders cocina/estar. El horno, la heladera y la mesa se eligen como
+  // accesorios en extras[] (una sola fuente de verdad); configDesdeEstado los DERIVA de ahí
+  // para el plano. Tener un segundo lugar (cocina.horno) los desincronizaría (Pitfall 3).
   extras: [], // Array<string> (ids de accesorios; los carga el Paso 6)
 }
 
@@ -52,8 +53,6 @@ function copiaEstadoInicial() {
     ...estadoInicial,
     bano: { ...estadoInicial.bano },
     dormitorio: { ...estadoInicial.dormitorio, camas: [...estadoInicial.dormitorio.camas] },
-    cocina: { ...estadoInicial.cocina },
-    estar: { ...estadoInicial.estar },
     extras: [...estadoInicial.extras],
   }
 }
@@ -79,15 +78,28 @@ export function wizardReducer(estado, accion) {
 // Proyecta el estado del wizard a la forma `config` EXACTA que consume FloorPlan.
 // El largo se deriva de MODELOS por modeloId (nunca se inventa); si el modelo no existe,
 // largo queda undefined y el plano cae a su estado Error (degradación elegante).
-// NO se incluyen pasoActual ni extras: el plano no los lee.
+//
+// D-14: cocina/estar NO se leen del estado (ya no existen como placeholders) — se DERIVAN de
+// extras[], la única fuente de verdad para horno/heladera/mesa. El shape de salida es idéntico
+// al que consume el plano: cocina = { horno, heladera }, estar = { mesa }.
+//
+// T-05-05 (Tampering): estado restaurado de localStorage puede traer extras no-array o ausente
+// (config legacy/adulterada). Array.isArray cae a [] y cocina/estar se derivan a defaults
+// neutros, sin crashear. Estado viejo con cocina/estar legacy se IGNORA (no se lee).
 export function configDesdeEstado(estado) {
   const largo = MODELOS.find((m) => m.id === estado.modeloId)?.largo
+  const extras = Array.isArray(estado.extras) ? estado.extras : []
+  const heladera = extras.includes('heladera-220')
+    ? 'heladera-220'
+    : extras.includes('heladera-12v')
+      ? 'heladera-12v'
+      : null
   return {
     modeloId: estado.modeloId,
     largo,
     bano: estado.bano,
     dormitorio: estado.dormitorio,
-    cocina: estado.cocina,
-    estar: estado.estar,
+    cocina: { horno: extras.includes('cocina-horno'), heladera },
+    estar: { mesa: extras.includes('mesa-cano') },
   }
 }
