@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-06-27T14:39:31Z"
-last_activity: 2026-06-27 -- Plan 04-01 ejecutado (lógica pura Pasos 1-3)
+stopped_at: Completed 04-02-PLAN.md
+last_updated: "2026-06-27T14:52:42Z"
+last_activity: 2026-06-27 -- Plan 04-02 ejecutado (Pasos 1-2 del wizard: PasoUso + PasoDimensiones)
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 11
-  completed_plans: 9
-  percent: 82
+  completed_plans: 10
+  percent: 91
 ---
 
 # Project State
@@ -26,12 +26,12 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 ## Current Position
 
 Phase: 4
-Plan: 1 of 3 complete (04-01)
-Next: 04-02-PLAN.md — Paso 1 (Uso/ocupantes + sugerencia) y Paso 2 (cards de modelo)
+Plan: 2 of 3 complete (04-01, 04-02)
+Next: 04-03-PLAN.md — Paso 3 (equipamiento + tamaño de baño) + enchufe de los 3 pasos en el registro
 Status: In Progress
-Last activity: 2026-06-27 -- Plan 04-01 ejecutado (lógica pura Pasos 1-3)
+Last activity: 2026-06-27 -- Plan 04-02 ejecutado (Pasos 1-2 del wizard: PasoUso + PasoDimensiones)
 
-Progress: [████████░░] 82% (9 de 11 planes; Phase 4 en curso: 1 de 3)
+Progress: [█████████░] 91% (10 de 11 planes; Phase 4 en curso: 2 de 3)
 
 ## Performance Metrics
 
@@ -87,6 +87,11 @@ Recent decisions affecting current work:
 - [04-01]: RATIO_BANO parametrizado por config.bano.tamano (estandar=0.22, ampliado=0.30); RATIO_ESTAR eliminado como constante fija — el estar absorbe el residuo para que la suma de zonas cierre exacta.
 - [04-01]: Optional chaining obligatorio (modelo?.largo ?? 0 / config?.bano?.tamano) — modeloId o bano.tamano adulterado de localStorage cae a default seguro sin crashear (mitiga T-04-01/T-04-02).
 - [04-01]: Interface-first: la lógica pura testeable (banoReglas, layout, sugerencia) se construye antes que PasoDimensiones/PasoBano; sin dependencias de test nuevas (node:test built-in).
+- [04-02]: Subcarpeta src/components/wizard/pasos/ nueva (imports ../../../); los componentes quedan creados pero NO enchufados — pasosRegistro.jsx lo modifica el Plan 04-03 para no compartir ese archivo entre planes.
+- [04-02]: Cards/chips render data-driven con .map() (anti-hardcodeo): el literal type=button aparece una vez por bucle, no uno por elemento; en runtime se renderizan los 11 botones (gate grep -c >=11 reinterpretado como conteo de runtime, no de literales).
+- [04-02]: node --check no soporta .jsx en Node 24 (ERR_UNKNOWN_FILE_EXTENSION); sintaxis JSX validada con esbuild (el transformador del Vite del proyecto).
+- [04-02]: Badge "Sugerido" independiente del estado seleccionado (Pitfall 4) y corrección silenciosa de baño ampliado clonando bano con spread (Pitfall 3, Q4); reflejo del plano sin props nuevas (solo se escribe modeloId).
+- [04-02]: Checkpoint human-verify aprobado con verificación visual a ~375px DIFERIDA al cierre del Plan 04-03 (cuando los 3 pasos estén enchufados y en vivo).
 
 ### Pending Todos
 
@@ -110,6 +115,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-27T14:39:31Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-06-27T14:52:42Z
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None

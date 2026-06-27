@@ -24,18 +24,18 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### Paso 1 — Uso y ocupantes
 
-- [ ] **USO-01**: El usuario elige el uso entre 5 opciones (contratista, ganadero, agrícola,
-      vivienda, otro) en cards con ícono (selección única).
-- [ ] **USO-02**: El usuario elige la cantidad de ocupantes (2/3/4/5/6/8).
+- [x] **USO-01**: El usuario elige el uso entre 5 opciones (contratista, ganadero, agrícola,
+      vivienda, otro) en cards con ícono (selección única). _(UI en 04-02: PasoUso.jsx, cards data-driven con SVG inline y aria-pressed.)_
+- [x] **USO-02**: El usuario elige la cantidad de ocupantes (2/3/4/5/6/8). _(UI en 04-02: PasoUso.jsx, chips segmentados.)_
 - [x] **USO-03**: Según los ocupantes, el sistema sugiere automáticamente un modelo/largo
-      (editable en el paso 2). _(Lógica + test de datos en 04-01: SUGERENCIA_OCUPANTES → ids reales.)_
+      (editable en el paso 2). _(Lógica + test de datos en 04-01: SUGERENCIA_OCUPANTES → ids reales; UI del feedback en 04-02: PasoUso.jsx.)_
 
 ### Paso 2 — Dimensiones
 
-- [ ] **DIM-01**: El usuario elige el modelo entre los **7 modelos reales (N1–N7, incl. N4)** en
-      cards con largo, camas base e "ideal para N personas", con el sugerido pre-seleccionado.
-- [ ] **DIM-02**: Al elegir el modelo, el plano dibuja la casilla (largo × 2.60m ext / 2.52m
-      interior) acotada, con la estructura de zonas fija marcada.
+- [x] **DIM-01**: El usuario elige el modelo entre los **7 modelos reales (N1–N7, incl. N4)** en
+      cards con largo, camas base e "ideal para N personas", con el sugerido pre-seleccionado. _(UI en 04-02: PasoDimensiones.jsx, cards derivadas de MODELOS + badge Sugerido.)_
+- [x] **DIM-02**: Al elegir el modelo, el plano dibuja la casilla (largo × 2.60m ext / 2.52m
+      interior) acotada, con la estructura de zonas fija marcada. _(UI en 04-02: PasoDimensiones.jsx escribe modeloId; el plano reacciona vía el cableado existente.)_
 
 ### Paso 3 — Baño (posición fija entre baulera y dormitorio)
 
@@ -158,11 +158,11 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | SHELL-02 | Phase 3 | Pending |
 | SHELL-03 | Phase 3 | Pending |
 | SHELL-04 | Phase 3 | Pending |
-| USO-01 | Phase 4 | Pending |
-| USO-02 | Phase 4 | Pending |
-| USO-03 | Phase 4 | Complete (04-01) |
-| DIM-01 | Phase 4 | Pending |
-| DIM-02 | Phase 4 | Pending |
+| USO-01 | Phase 4 | Complete (04-02) |
+| USO-02 | Phase 4 | Complete (04-02) |
+| USO-03 | Phase 4 | Complete (04-01 lógica + 04-02 UI) |
+| DIM-01 | Phase 4 | Complete (04-02) |
+| DIM-02 | Phase 4 | Complete (04-02) |
 | BANO-01 | Phase 4 | Pending |
 | BANO-02 | Phase 4 | Lógica lista (04-01); UI en 04-03 |
 | BANO-03 | Phase 4 | Lógica lista (04-01); UI en 04-03 |
