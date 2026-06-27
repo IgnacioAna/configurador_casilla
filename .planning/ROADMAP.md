@@ -102,7 +102,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. El usuario configura la cocina (horno industrial opcional), elige heladera (sin / 220V A++ / 12V con pantalla) y agrega elementos del estar (mesa de caño, banco despensero), y la zona verde de cocina/estar se dibuja con los módulos elegidos.
   4. El usuario selecciona múltiples accesorios del catálogo real (calefactor, caldera, split, paneles/sistema solar, TV, estéreo, cortinas, toldo, cajonera).
   5. El presupuesto (base del modelo + accesorios) se muestra desglosado en neto + IVA 21% + total con IVA, en formato argentino (`$29.108.976`), actualizándose en vivo.
-**Plans**: TBD
+**Plans**: 5 plans
+  - [ ] 05-01-PLAN.md — Motores de logica pura: validacion de capacidad de camas + motor de precios + metadato subgrupo en extras (Wave 1)
+  - [ ] 05-02-PLAN.md — configDesdeEstado deriva cocina/estar de extras[] (D-14, una sola fuente) (Wave 1)
+  - [ ] 05-03-PLAN.md — Pasos 4-6: PasoDormitorio (steppers + advertencia), PasoCocina (horno/heladera/estar), PasoExtras (Confort/Energia) (Wave 2)
+  - [ ] 05-04-PLAN.md — BarraPrecio: presupuesto en vivo neto+IVA+total (Wave 2)
+  - [ ] 05-05-PLAN.md — Enchufe de Pasos 4-6 + montaje de BarraPrecio (pasoActual>=3) + checkpoint visual ~375px (Wave 3)
 **UI hint**: yes
 
 ### Phase 6: Resumen y Exportación
@@ -139,6 +144,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Motor de Plano SVG | 3/3 | Complete | 2026-06-27 |
 | 3. Cáscara del Wizard y Persistencia | 3/3 | Complete | 2026-06-27 |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 3/3 | Complete | 2026-06-27 |
-| 5. Pasos 4-6 y Motores | 0/TBD | Not started | - |
+| 5. Pasos 4-6 y Motores | 0/5 | Planned | - |
 | 6. Resumen y Exportación | 0/TBD | Not started | - |
 | 7. Pulido Mobile y Accesibilidad | 0/TBD | Not started | - |
