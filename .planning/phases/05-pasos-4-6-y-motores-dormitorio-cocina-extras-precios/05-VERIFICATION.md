@@ -1,10 +1,11 @@
 ---
 phase: 05-pasos-4-6-y-motores-dormitorio-cocina-extras-precios
 verified: 2026-06-27T22:00:00Z
-reverified: 2026-06-27T22:40:00Z
-status: human_needed
-score: 9/9 must-haves verified (automated); 4 visual items pending human eyeball
+reverified: 2026-06-27T23:30:00Z
+status: passed
+score: 9/9 must-haves verified; los 4 ítems visuales CERRADOS vía UAT automatizada (05-UAT.md, dev server 375px)
 overrides_applied: 0
+human_verification_closed: "Los 4 ítems de human_verification pasaron en 05-UAT.md (verificación en vivo a 375px): DORM-03 plano dibuja C/M, barra de precio ausente Pasos 1-3 / presente desde Paso 4 (3 líneas), COCINA-04 mesa en plano + exclusividad heladera + precio en vivo, persistencia F5. Sin issues."
 gaps: []
 gaps_resolved:
   - truth: "El usuario selecciona múltiples accesorios del catálogo real (calefactor, caldera, split, paneles/sistema solar, TV, estéreo, cortinas, toldo, cajonera)."
@@ -29,8 +30,8 @@ human_verification:
 
 **Phase Goal:** El usuario completa los pasos finales de configuración: arma el dormitorio con camas validadas contra la capacidad real del modelo, configura la cocina/estar, selecciona extras de confort y energía — y ve el presupuesto (base + accesorios, neto + IVA 21% + total) actualizándose en vivo mientras el plano refleja cada cambio.
 **Verified:** 2026-06-27T22:00:00Z
-**Status:** human_needed (el gap bloqueante EXTRAS-01/cajonera fue resuelto post-verificación en commit 9d2dc19; restan 4 ítems visuales para eyeball humano)
-**Re-verification:** Sí — el gap de la cajonera se cerró tras la verificación inicial
+**Status:** passed (gap EXTRAS-01/cajonera resuelto en 9d2dc19; los 4 ítems visuales cerrados vía UAT automatizada en 05-UAT.md a 375px)
+**Re-verification:** Sí — gap de cajonera cerrado + verificación visual en vivo de los 4 ítems human_needed
 
 ---
 
