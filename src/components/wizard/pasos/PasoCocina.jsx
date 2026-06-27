@@ -25,6 +25,14 @@ const TOGGLES = [
   { id: 'banco-despensero', label: 'Banco despensero' },
 ]
 
+// COCINA-02 / D-05 / Pattern 2: ids de heladera DERIVADOS de EXTRAS por prefijo (anti-hardcodeo,
+// T-05-09). Constante de módulo: EXTRAS es inmutable en runtime, así que se computa una sola vez
+// (WR-02 code review 05: antes se filtraba dentro del componente, re-corriendo en cada render y
+// dando identidad nueva a elegirHeladera). Referencia estable para memoización.
+const IDS_HELADERA = EXTRAS.filter(
+  (e) => e.categoria === 'cocina' && e.id.startsWith('heladera-')
+).map((e) => e.id)
+
 export default function PasoCocina({ estado, dispatch }) {
   // T-05-08: extras adulterado de localStorage cae a [] sin crashear antes de includes/filter.
   const extras = Array.isArray(estado.extras) ? estado.extras : []
@@ -35,12 +43,9 @@ export default function PasoCocina({ estado, dispatch }) {
     dispatch({ type: ACCIONES.SET_CAMPO, campo: 'extras', valor: nuevos })
   }
 
-  // COCINA-02 / D-05 / Pattern 2: ids de heladera DERIVADOS de EXTRAS por prefijo (anti-hardcodeo,
-  // T-05-09). El handler garantiza exclusividad mutua: filtra AMBAS heladeras y agrega la elegida
-  // (o ninguna para "Sin"). Imposible quedar con 2 heladeras (Pitfall 2).
-  const IDS_HELADERA = EXTRAS.filter(
-    (e) => e.categoria === 'cocina' && e.id.startsWith('heladera-')
-  ).map((e) => e.id)
+  // COCINA-02 / D-05 / Pattern 2: el handler garantiza exclusividad mutua usando IDS_HELADERA
+  // (constante de módulo): filtra AMBAS heladeras y agrega la elegida (o ninguna para "Sin").
+  // Imposible quedar con 2 heladeras (Pitfall 2).
   const elegirHeladera = (id /* string | null */) => {
     const sinHeladera = extras.filter((x) => !IDS_HELADERA.includes(x))
     const nuevos = id ? [...sinHeladera, id] : sinHeladera
