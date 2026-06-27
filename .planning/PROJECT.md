@@ -29,11 +29,12 @@ el ida y vuelta de audios y croquis por WhatsApp.
 
 - [ ] Landing de bienvenida con identidad Impacar y CTA "Comenzar"
 - [ ] Wizard de 6 pasos: uso/ocupantes, dimensiones, baño, dormitorio, cocina/estar, extras
-- [ ] Plano en planta SVG que se actualiza en tiempo real con cada elección
+- [ ] Plano en planta SVG con **estructura fija de zonas** (baulera | baño | dormitorio |
+      estar/comedor | cocina) que se actualiza en tiempo real
 - [ ] Sugerencia automática de largo según cantidad de ocupantes (editable)
-- [ ] Reglas de disponibilidad por modelo (baño centro/ampliado, mesa fija, heladera de pie)
-- [ ] Motor de validación de capacidad de camas por modelo, con advertencia si no cabe
-- [ ] Motor de precios (base del modelo + extras) con formato argentino `$14.000.000`
+- [ ] Reglas de disponibilidad por modelo (baño ampliado, opciones de cocina, personalización N5+)
+- [ ] Motor de validación de capacidad de camas por modelo (geometría real 2.52m / camas 0.80m)
+- [ ] Motor de precios (base del modelo + accesorios) con neto + IVA 21% + total, formato `$`
 - [ ] Pantalla de resumen: plano final + configuración + presupuesto desglosado + financiación
 - [ ] Exportar por WhatsApp (link `wa.me` con mensaje pre-armado)
 - [ ] Descargar resumen en PDF (jsPDF, plano vectorial, logo + contacto)
@@ -52,24 +53,74 @@ el ida y vuelta de audios y croquis por WhatsApp.
 - Reserva / pago online — la conversión es por WhatsApp, no transaccional
 - Chat en vivo — el canal de contacto es WhatsApp
 - Render 3D — el plano es 2D en planta (vista cenital), por claridad y peso
-- Precios reales — se usan placeholders; deben reemplazarse antes de producción
+- Ubicación de baño libre (adelante/atrás/centro) — el catálogo real fija la estructura de zonas
 
 ## Context
 
 - **Cliente:** Industrias Impacar, General Pico, La Pampa, Argentina. Sitio:
   https://www.industriaimpacar.com/ — IG: https://www.instagram.com/industriasimpacar/
-- **Diferencial del negocio:** cada casilla se diseña a pedido (largo, distribución de
-  ambientes, cuchetas, ubicación de baño/cocina, extras). El configurador digitaliza ese
-  proceso a medida.
+- **Diferencial del negocio:** cada casilla se diseña a pedido (largo, distribución de camas,
+  equipamiento, accesorios). El catálogo muestra múltiples variantes por modelo (N4/N5/N6/N7
+  tienen 3 layouts cada uno) — la personalización es el corazón del negocio.
 - **Proceso actual:** configuración por WhatsApp con audios, fotos de croquis a mano, mucho
   ida y vuelta. El configurador busca reemplazar eso con una herramienta visual autoguiada.
 - **Público:** ~80% navega desde el celular (productores rurales con Samsung de gama media) →
   mobile-first no negociable.
-- **Modelos (6):** N1 4.50m, N2 5.50m, N3 6.20m, N5 7.50m, N6 8.40m, N7 9.60m. Ancho fijo
-  2.60m (límite de transporte vial). Precios base y de extras = placeholders de la spec.
+- **Estructura fija de la casilla (del catálogo):** todas tienen baulera (0.60m) en un extremo
+  y cocina (0.60m) en el otro. El baño va siempre entre la baulera y el dormitorio; el
+  estar/comedor entre el dormitorio y la cocina. Lo que varía es el largo de cada zona y la
+  distribución de camas. Del N5 en adelante las camas son "opcionales" (más personalizables).
 - **El plano es el corazón del producto** — debe ser claro y esquemático, no
   arquitectónicamente perfecto (nota explícita del cliente).
 - **Objetivo inmediato:** presentar la demo a los dueños de la fábrica como prueba de concepto.
+
+## Datos reales (Lista 108 — Febrero 2026)
+
+> Fuente autoritativa para `data/models.js` y `data/extras.js`. **Precios netos (+ IVA 21%).**
+> Reemplazan por completo los placeholders del prompt original (los reales son 2-3x más altos).
+
+### Modelos (ancho exterior fijo 2.60m — transporte vial)
+
+| Modelo | Largo | Camas (base) | Precio neto |
+|--------|-------|--------------|-------------|
+| N1 | 4.50m | 2 | $29.108.976 |
+| N2 | 5.20m | 2 | $34.150.926 |
+| N3 | 6.10m | 3 | $37.181.710 |
+| N4 | 6.60m | 4 | $38.971.845 |
+| N5 | 7.60m | Opcional (personalizable) | $40.937.114 |
+| N6 | 8.60m | Opcional (personalizable) | $42.048.149 |
+| N7 | 9.60m | Opcional (personalizable) | $46.180.786 |
+
+### Geometría (clave para el plano y la validación de camas)
+
+- **Ancho interior útil: 2.52m** (el 2.60m es exterior).
+- **Camas: 0.80m de ancho estándar**, 2.00m de largo.
+- Contra las paredes laterales (largas) entran **exactamente 2 camas de 0.80m con un pasillo
+  central de 0.92m** (0.80 + 0.92 + 0.80 = 2.52). Las camas corren a lo largo (2.00m sobre el
+  eje del largo) contra cada pared larga.
+- **Cucheta marinera** = litera (2 plazas apiladas, mismo footprint en planta).
+
+### Accesorios (precios netos + IVA)
+
+| Accesorio | Precio neto | Paso sugerido |
+|-----------|-------------|---------------|
+| Inodoro con depósito y cámara séptica | $495.000 | Baño |
+| Vanitory completo con espejo | $283.294 | Baño |
+| Cajonera bajo cama (x4) | $322.000 | Dormitorio |
+| Cocina con horno industrial | $585.800 | Cocina/estar |
+| Heladera con freezer 220V cat A++ | $1.699.000 | Cocina/estar |
+| Heladera con freezer 12V + pantalla + regulador | $1.690.000 | Cocina/estar |
+| Mesa de caño + melamina + aluminio | $218.000 | Cocina/estar |
+| Banco despensero | $172.098 | Cocina/estar |
+| Calefactor 4000 CAL | $342.000 | Extras/confort |
+| Caldera 12V a gasoil | $718.000 | Extras/confort |
+| Split frío/calor 3200 frigorías inverter | $1.550.000 | Extras/confort |
+| Panel solar 160W + regulador 30A (12V) | $410.000 | Extras/energía |
+| Sistema solar 220 off grid (inv 3kVA, 4 paneles 485W, 2 baterías litio 100Ah) | $6.755.000 | Extras/energía |
+| TV 32" con DirecTV | $458.000 | Extras/confort |
+| Mueble estéreo Pioneer + parlantes + antena | $328.220 | Extras/confort |
+| Cortinas roller black out (habitación y cocina) | $483.600 | Extras/confort |
+| Toldo | $496.011 | Extras/confort |
 
 ## Constraints
 
@@ -79,6 +130,9 @@ el ida y vuelta de audios y croquis por WhatsApp.
   requisito de descarga de archivo real.
 - **Sin backend**: todo client-side; el estado vive en `localStorage` (key `impacar_config_v1`).
 - **Idioma**: español argentino, trato de usted (contexto comercial rural).
+- **Estructura de zonas fija**: baulera 0.60m | baño | dormitorio | estar/comedor | cocina 0.60m.
+- **Geometría real**: ancho exterior 2.60m, interior útil 2.52m, camas 0.80m, pasillo 0.92m.
+- **Precios**: netos de Lista 108 (Feb-2026); el presupuesto muestra neto + IVA 21% + total.
 - **Identidad visual**: sobria/industrial (catálogo de maquinaria agrícola, no startup tech).
   Paleta fondo #F5F5F0, verde campo #2D5016, cobre #8B6914, texto #1A1A1A. Zonas del plano:
   baño celeste, dormitorio marrón, cocina verde. Logo: texto "IMPACAR" bold (placeholder).
@@ -95,7 +149,10 @@ el ida y vuelta de audios y croquis por WhatsApp.
 | jsPDF con plano vectorial (no html2canvas) | PDF nítido y descargable, mejor para presentar | — Pending |
 | Estado en localStorage, sin backend | Es un MVP/demo client-side | — Pending |
 | Plano esquemático, no arquitectónico | Cliente prioriza claridad sobre precisión milimétrica | — Pending |
-| Precios placeholder aislados en /data | Reemplazo fácil cuando lleguen los reales | — Pending |
+| Datos reales Lista 108 (Feb-26) aislados en /data | Fuente real; precios 2-3x los placeholders | — Pending |
+| Estructura de zonas fija (baño entre baulera y dormitorio) | El catálogo real la fija; el Paso 3 pasa a equipamiento/tamaño | — Pending |
+| Geometría real 2.52m / camas 0.80m / pasillo 0.92m | Define el dibujo del dormitorio y la validación de capacidad | — Pending |
+| Presupuesto neto + IVA 21% + total c/IVA | Estándar B2B argentino, claridad para el cliente | — Pending |
 
 ## Evolution
 
@@ -115,4 +172,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-27 after initialization*
+*Last updated: 2026-06-27 after data update (Lista 108, real models/prices/structure)*
