@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 01-01-PLAN.md (scaffolding Vite + React 18 + Tailwind v3 con paleta Impacar)
-last_updated: "2026-06-27T03:54:18.000Z"
-last_activity: 2026-06-27 -- Completed Phase 01 Plan 01 (scaffolding)
+stopped_at: Completed 01-02-PLAN.md (datos reales Lista 108 + formato/IVA + geometría)
+last_updated: "2026-06-27T04:02:21.000Z"
+last_activity: 2026-06-27 -- Completed Phase 01 Plan 02 (datos Lista 108)
 progress:
   total_phases: 7
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
-  percent: 50
+  completed_plans: 2
+  percent: 100
 ---
 
 # Project State
@@ -25,31 +25,31 @@ See: .planning/PROJECT.md (updated 2026-06-27)
 
 ## Current Position
 
-Phase: 01 (Cimientos y Datos) — EXECUTING
+Phase: 01 (Cimientos y Datos) — COMPLETE
 Plan: 2 of 2
-Status: Executing Phase 01 — Plan 01 completo, Plan 02 pendiente
-Last activity: 2026-06-27 -- Completed Phase 01 Plan 01 (scaffolding)
+Status: Phase 01 completa (2/2 planes) — lista para Phase 02 (Motor de Plano SVG)
+Last activity: 2026-06-27 -- Completed Phase 01 Plan 02 (datos Lista 108)
 
-Progress: [█████░░░░░] 50%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 1
+- Total plans completed: 2
 - Average duration: 4 min
-- Total execution time: 0.07 hours
+- Total execution time: 0.13 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 — Cimientos y Datos | 1 | 4 min | 4 min |
+| 01 — Cimientos y Datos | 2 | 8 min | 4 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (4 min)
-- Trend: —
+- Last 5 plans: 01-01 (4 min), 01-02 (4 min)
+- Trend: estable
 
 *Updated after each plan completion*
 
@@ -67,6 +67,10 @@ Recent decisions affecting current work:
 - [01-01]: Tailwind v3 (3.4.19) vía PostCSS con las 3 directivas @tailwind (NO v4 / NO @import "tailwindcss").
 - [01-01]: Paleta Impacar como clases custom en theme.extend.colors (impacar-fondo/campo/cobre/texto, zona-bano/dormitorio/cocina); fuente sans Inter + fallbacks.
 - [01-01]: JS (no TypeScript); package-lock.json commiteado para reproducibilidad.
+- [01-02]: Datos reales Lista 108 aislados en src/data como constantes ESM (MODELOS, EXTRAS, GEOMETRIA, IVA, FINANCIACION, SUGERENCIA_OCUPANTES); sumas de control validan integridad.
+- [01-02]: IVA con una sola fuente de verdad en data/geometry.js; utils/formato.js lo importa de ahí.
+- [01-02]: formatPrecio con toLocaleString('es-AR') + fallback regex de agrupamiento (formato argentino garantizado sin ICU).
+- [01-02]: Gate TDD con node:test (built-in, sin Vitest) para formato.js.
 
 ### Pending Todos
 
@@ -91,5 +95,5 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-06-27
-Stopped at: Completed 01-01-PLAN.md (scaffolding Vite + React 18 + Tailwind v3 con paleta Impacar)
+Stopped at: Completed 01-02-PLAN.md (datos reales Lista 108 + formato/IVA + geometría); Phase 01 completa
 Resume file: None

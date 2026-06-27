@@ -22,7 +22,7 @@ a punta y enviar el presupuesto sin un solo audio de WhatsApp.
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Cimientos y Datos** - Scaffolding Vite + React + Tailwind y datos reales Lista 108 aislados en `/data`
+- [x] **Phase 1: Cimientos y Datos** - Scaffolding Vite + React + Tailwind y datos reales Lista 108 aislados en `/data`
 - [ ] **Phase 2: Motor de Plano SVG** - El plano en planta cenital con estructura fija de zonas, geometría real y transiciones suaves
 - [ ] **Phase 3: Cáscara del Wizard y Persistencia** - Landing, navegación de 6 pasos, barra de progreso, localStorage y layout del plano
 - [ ] **Phase 4: Pasos 1-3 (Uso, Dimensiones, Baño)** - Selección de uso/ocupantes, modelo sugerido y equipamiento de baño con reflejo en el plano
@@ -43,7 +43,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Las constantes de geometría real (exterior 2.60m, interior 2.52m, camas 0.80m, pasillo 0.92m) están centralizadas y disponibles para el resto de la app.
 **Plans**: 2 plans
   - [x] 01-01-PLAN.md — Scaffolding Vite + React 18 + Tailwind v3 con la paleta Impacar y estructura de carpetas (Wave 1)
-  - [ ] 01-02-PLAN.md — Datos reales Lista 108 (models/extras/geometry/financiación) + utilidades formatPrecio/IVA, wireadas en App.jsx (Wave 2)
+  - [x] 01-02-PLAN.md — Datos reales Lista 108 (models/extras/geometry/financiación) + utilidades formatPrecio/IVA, wireadas en App.jsx (Wave 2)
 **UI hint**: yes
 
 ### Phase 2: Motor de Plano SVG
@@ -126,7 +126,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Cimientos y Datos | 1/2 | In progress | - |
+| 1. Cimientos y Datos | 2/2 | Complete | 2026-06-27 |
 | 2. Motor de Plano SVG | 0/TBD | Not started | - |
 | 3. Cáscara del Wizard y Persistencia | 0/TBD | Not started | - |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 0/TBD | Not started | - |
