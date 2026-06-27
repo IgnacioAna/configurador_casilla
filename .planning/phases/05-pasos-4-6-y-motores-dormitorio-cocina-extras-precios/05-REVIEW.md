@@ -24,10 +24,10 @@ findings:
   warning: 3
   info: 2
   total: 6
-status: partially_resolved
-resolved: [CR-01, WR-01]
-open: [WR-02, WR-03, IN-01, IN-02]
-resolution_note: "CR-01 (crash por pasoActual adulterado) y WR-01 (+ IVA en PasoExtras) corregidos y verificados (npm test 70/70, build OK). Commits 1cdf6b1 (CR-01, con test de rango) y 64ba3ff (WR-01). Quedan abiertos WR-02/WR-03 (polish) e IN-01/IN-02 (opcionales)."
+status: resolved_actionable
+resolved: [CR-01, WR-01, WR-02, WR-03]
+open: [IN-01, IN-02]
+resolution_note: "Todos los findings accionables (1 critical + 3 warnings) corregidos y verificados (npm test 71/71, build OK). Commits: 1cdf6b1 (CR-01, +test de rango), 64ba3ff (WR-01), 9259c8b (WR-02), d649c70 (WR-03, +test de frontera). Quedan solo los 2 Info (IN-01 mensaje de test, IN-02 console.log guard) — opcionales, fuera de scope sin --all. Ver 05-REVIEW-FIX.md."
 ---
 
 # Phase 05: Code Review Report
@@ -112,6 +112,8 @@ Both fixes should be applied: defense-in-depth at the validation boundary is the
 
 ### WR-02: `IDS_HELADERA` recomputed on every render inside `PasoCocina`
 
+> ✓ **RESUELTO** (commit `9259c8b`): `IDS_HELADERA` movido a constante de módulo (misma lógica de filtro derivada de `EXTRAS`, sin ids literales).
+
 **File:** `src/components/wizard/pasos/PasoCocina.jsx:41-43`
 
 **Issue:** `IDS_HELADERA` is derived by filtering `EXTRAS` on every render call. `EXTRAS` is a module-level constant that never changes at runtime. Computing it inside the function body means a `filter` + `map` runs on every keystroke, state change, or parent re-render. More importantly, `elegirHeladera` closes over `IDS_HELADERA` from the same render, creating a new function identity every render — which breaks memoization if this component is ever wrapped in `React.memo` or if `elegirHeladera` is ever passed as a dependency.
@@ -132,6 +134,8 @@ export default function PasoCocina({ estado, dispatch }) {
 ---
 
 ### WR-03: `esEstadoValido` does not validate `dormitorio` — inconsistent protection boundary
+
+> ✓ **RESUELTO** (commit `d649c70`): `esEstadoValido` ahora valida `dormitorio` (objeto con `camas` array); fixtures de test ajustados + caso nuevo de rechazo. npm test 71/71.
 
 **File:** `src/hooks/usePersistedConfig.js:25-35`
 
