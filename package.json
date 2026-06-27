@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test src/utils/banoReglas.test.js src/utils/floorplanLayout.test.js src/utils/formato.test.js src/data/models.test.js src/state/wizardReducer.test.js src/hooks/usePersistedConfig.test.js src/utils/validacionCamas.test.js src/utils/motorPrecios.test.js src/data/extras.test.js"
+    "test": "node --test src/utils/banoReglas.test.js src/utils/floorplanLayout.test.js src/utils/formato.test.js src/data/models.test.js src/state/wizardReducer.test.js src/hooks/usePersistedConfig.test.js src/utils/validacionCamas.test.js src/utils/motorPrecios.test.js src/data/extras.test.js src/utils/resumenCampos.test.js src/utils/exportPDF.test.js src/utils/exportWhatsApp.test.js"
   },
   "dependencies": {
+    "jspdf": "4.2.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "svg2pdf.js": "2.7.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.0",
