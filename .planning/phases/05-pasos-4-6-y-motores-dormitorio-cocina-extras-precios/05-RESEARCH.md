@@ -547,29 +547,36 @@ cocina/estar, que D-14 resuelve.
 | A5 | El split confort/energía de PROJECT.md ("Paso sugerido") es el canónico | Pattern 3 | Bajo: verificado contra PROJECT.md y la lista explícita de D-08 (coinciden exactamente). |
 | A6 | El ícono de heladera en el plano (D-07) es opcional/micro-decisión, no bloqueante para COCINA-04 | Phase Requirements | Bajo: `Kitchen.jsx` ya dibuja un bloque de heladera siempre; reflejar el tipo elegido es un realce, no un requisito duro. Planner decide alcance. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Copy exacto de la advertencia de capacidad (DORM-02/D-03)**
    - Qué sabemos: aviso sin bloqueo, estilo "No entran en el modelo Nx; considere un modelo más largo".
    - Qué falta: el texto final con trato de usted (p.ej. "Esta combinación de camas no entra en el
      modelo N{n}. Le sugerimos un modelo más largo.").
    - Recomendación: el planner fija el copy; debe pasar el gate anti-voseo (trato de usted).
+   - **RESOLVED:** copy exacta fijada en 05-03 Task 1: "Esta combinación de camas no entra en el
+     modelo {nombre}. Le sugerimos elegir un modelo más largo." (trato de usted).
 
 2. **Comportamiento del total al borrar la última cama / vaciar extras**
    - Qué sabemos: el total = modelo + Σ extras; con `extras` vacío el total = solo el modelo.
    - Qué falta: ¿la barra muestra siempre el total del modelo aunque no haya extras? (Sí, recomendado).
    - Recomendación: la barra siempre muestra `neto/iva/total` ≥ precio del modelo; nunca $0.
+   - **RESOLVED:** 05-04 garantiza neto = precioNeto del modelo con extras vacío; nunca $0 si hay
+     modelo válido.
 
 3. **¿Glob de tests o lista fija en `package.json`?**
    - Qué sabemos: hoy es lista fija (Pitfall 5).
    - Qué falta: decisión de migrar a `node --test src/`.
    - Recomendación: migrar a descubrimiento bajo `src/` para robustez; si no, agregar los 2 archivos
      a mano (gate: el wave que crea cada test toca `package.json`).
+   - **RESOLVED:** 05-01 Task 3 mantiene la lista fija explícita y agrega los 3 archivos nuevos.
 
 4. **Ícono/representación de la heladera elegida en el plano (D-07)**
    - Qué sabemos: `Kitchen.jsx` ya dibuja una heladera genérica; recibe `opciones={config.cocina}`.
    - Qué falta: ¿diferenciar 220V vs 12V visualmente? Probablemente no hace falta (esquemático).
    - Recomendación: reflejar "hay heladera / no hay" como mucho; no diferenciar tipo en el dibujo.
+   - **RESOLVED:** 05-02 deriva `config.cocina.heladera` (string null/'heladera-220'/'heladera-12v')
+     que Kitchen.jsx ya consume de forma esquemática; sin ícono distinto por tipo (A6, bajo riesgo).
 
 ## Environment Availability
 
@@ -660,3 +667,4 @@ cocina/estar, que D-14 resuelve.
 
 **Research date:** 2026-06-27
 **Valid until:** estable (proyecto interno, stack congelado) — revalidar solo si cambian `/data` o el contrato de `configDesdeEstado`.
+</content>
