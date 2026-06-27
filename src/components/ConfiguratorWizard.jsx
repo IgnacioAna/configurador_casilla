@@ -3,6 +3,7 @@ import { ACCIONES, TOTAL_PASOS, configDesdeEstado } from '../state/wizardReducer
 import { logPasoCompletado } from '../utils/analytics.js'
 import { PASOS } from './wizard/pasosRegistro.jsx'
 import BarraProgreso from './wizard/BarraProgreso.jsx'
+import BarraPrecio from './wizard/BarraPrecio.jsx'
 import PlanoPanel from './wizard/PlanoPanel.jsx'
 
 // Cáscara navegable del wizard (SHELL-02). Consume el estado/persistencia del Plan 01.
@@ -45,6 +46,13 @@ export default function ConfiguratorWizard({ onVolverInicio }) {
               quede arriba; en desktop lo mandamos a la 2da columna (sticky) con lg:order-2. */}
           <div className="mb-4 lg:order-2 lg:mb-0">
             <PlanoPanel config={configPlano} />
+            {/* Barra de precio (DESKTOP, D-10): bloque debajo del plano, SOLO desde el Paso 4
+                (índice 3). En Pasos 1-3 no renderiza — regla "sin precios" de Fase 4 (Pitfall 6). */}
+            {estado.pasoActual >= 3 && (
+              <div className="mt-4 hidden lg:block">
+                <BarraPrecio estado={estado} />
+              </div>
+            )}
           </div>
 
           {/* Pasos + navegación (columna izquierda en desktop). */}
@@ -84,6 +92,15 @@ export default function ConfiguratorWizard({ onVolverInicio }) {
             </div>
           </div>
         </div>
+
+        {/* Barra de precio (MOBILE, D-10): sticky al fondo del viewport, ancho completo, SOLO desde
+            el Paso 4 (índice 3). Fuera del grid de 2 columnas para anclar el sticky al scroll del
+            contenido. En Pasos 1-3 no renderiza (Pitfall 6). lg:hidden → solo mobile. */}
+        {estado.pasoActual >= 3 && (
+          <div className="sticky bottom-0 z-10 mt-4 border-t border-impacar-texto/10 bg-impacar-fondo p-3 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] lg:hidden">
+            <BarraPrecio estado={estado} />
+          </div>
+        )}
       </main>
     </div>
   )
