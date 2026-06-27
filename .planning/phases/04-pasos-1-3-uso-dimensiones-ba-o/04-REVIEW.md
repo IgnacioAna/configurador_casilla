@@ -13,11 +13,11 @@ files_reviewed_list:
   - package.json
 findings:
   critical: 0
-  warning: 1
+  warning: 0
   info: 1
   total: 3
 status: resolved
-blocker_resolved: "CR-01 corregido en commit ab59f3f (endurecimiento de esEstadoValido). WR-01 e IN-01 quedan como advisory no bloqueantes."
+blocker_resolved: "CR-01 corregido en commit ab59f3f (endurecimiento de esEstadoValido). WR-01 corregido en commit de6f6ca (invariante largoEstar>0 codificado). IN-01 (info, cosmético) queda como advisory no bloqueante."
 ---
 
 # Fase 04: Informe de Revisión de Código
@@ -143,6 +143,12 @@ necesitar optional chaining defensivo en cada componente.
 ## Advertencias (WARNING)
 
 ### WR-01: `MINIMO_CENTRAL` no valida que el estar sea positivo con baño ampliado activado
+
+> **✅ RESUELTO (commit `de6f6ca`).** Se codificó el invariante en producción: tras calcular
+> `const largoEstar = restante - largoBano - largoDormitorio`, se agregó el guard
+> `if (largoEstar <= 0) return { valido: false }` (mismo estilo que los guards existentes).
+> 2 tests de regresión en `floorplanLayout.test.js` prueban que toda config válida deja el estar
+> > 0, sin debilitar BANO-03. Suite 41/41 verde. Detalle en `04-REVIEW-FIX.md`.
 
 **Archivo:** `src/utils/floorplanLayout.js:28, 62-65`
 
