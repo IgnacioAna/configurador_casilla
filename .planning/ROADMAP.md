@@ -71,7 +71,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Al recargar la página, el usuario retoma su configuración exactamente donde la dejó (estado en `localStorage`, key `impacar_config_v1`), y puede "Volver a empezar" para resetearla.
   4. En mobile el plano es colapsable ("Ver plano actual"); en desktop va sticky a la derecha.
   5. Toda la interfaz está en español argentino con trato de usted, y cada paso completado se registra con `console.log` + timestamp.
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 03-01-PLAN.md — Estado central (useReducer) + persistencia localStorage (key impacar_config_v1) + analytics (Wave 1)
+  - [ ] 03-02-PLAN.md — Landing Impacar (trato de usted) + cáscara del wizard navegable (6 pasos stub, barra de progreso) + ruteo en App.jsx (Wave 2)
+  - [ ] 03-03-PLAN.md — Layout responsive del plano: sticky en desktop / colapsable en mobile, derivado del estado del wizard (Wave 3)
 **UI hint**: yes
 
 ### Phase 4: Pasos 1-3 (Uso, Dimensiones, Baño)
@@ -131,7 +134,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Cimientos y Datos | 2/2 | Complete | 2026-06-27 |
 | 2. Motor de Plano SVG | 3/3 | Complete | 2026-06-27 |
-| 3. Cáscara del Wizard y Persistencia | 0/TBD | Not started | - |
+| 3. Cáscara del Wizard y Persistencia | 0/3 | Not started | - |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 0/TBD | Not started | - |
 | 5. Pasos 4-6 y Motores | 0/TBD | Not started | - |
 | 6. Resumen y Exportación | 0/TBD | Not started | - |
