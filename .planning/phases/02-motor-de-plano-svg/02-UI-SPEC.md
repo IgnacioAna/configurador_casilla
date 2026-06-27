@@ -1,7 +1,7 @@
 ---
 phase: 2
 slug: motor-de-plano-svg
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-06-27
@@ -73,13 +73,14 @@ con el plano vía `vector-effect`/escala uniforme) salvo la leyenda HTML, que va
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
 | Display — n/a en esta fase | — | — | — (el plano no tiene títulos display propios) |
-| Heading — etiqueta de zona dentro del plano ("BAÑO", "DORMITORIO", "COCINA", "ESTAR", "BAULERA") | 11 unidades viewBox (uppercase, letter-spacing 0.5) | semibold (600) | 1.2 |
+| Heading — etiqueta de zona dentro del plano ("BAÑO", "DORMITORIO", "COCINA", "ESTAR", "BAULERA") | 12 unidades viewBox (uppercase, letter-spacing 0.5) | semibold (600) | 1.2 |
 | Body — número de cota en metros ("2.60 m", "6.60 m", "0.80") | 10 unidades viewBox | regular (400) | 1.2 |
 | Label — etiqueta de cama dentro del rectángulo ("C" / "S" / "M") y leyenda HTML | 12px (leyenda HTML) · 14 unidades viewBox (etiqueta de cama, centrada) | semibold (600) | 1.2 |
 
 **Reglas:**
-- Exactamente **3 tamaños efectivos** dentro del SVG (10, 11, 14 unidades viewBox) + 12px en la
-  leyenda HTML. Exactamente **2 pesos**: regular 400 (cotas) y semibold 600 (etiquetas).
+- Exactamente **3 tamaños efectivos** dentro del SVG (10, 12, 14 unidades viewBox) + 12px en la
+  leyenda HTML. Exactamente **2 pesos**: regular 400 (cotas) y semibold 600 (etiquetas). La
+  separación 10→12 evita que el rótulo de zona compita con el número de cota.
 - Line-height de cuerpo/etiqueta: 1.2 (texto técnico de croquis, no prosa; no aplica 1.5).
 - Las etiquetas de cota deben permanecer **legibles a ~340px de ancho de contenedor** (target
   Samsung ~6"). Regla: si el ancho renderizado del `<svg>` < 360px, el número de cota nunca debe
@@ -134,6 +135,24 @@ nuevos.** Reparto 60/30/10 dentro del componente del plano:
 **Contraste:** las etiquetas de zona (`#1A1A1A` sobre `#BFE3EE` / `#C9A66B` / `#A7C796`) deben
 mantener contraste legible. `#1A1A1A` sobre los tres rellenos supera 4.5:1 — usar siempre texto
 oscuro sobre los rellenos de zona, nunca texto claro.
+
+---
+
+## Jerarquía visual y accesibilidad
+
+> Incorpora las recomendaciones (no bloqueantes) del gsd-ui-checker para dejar el contrato cerrado.
+
+**Orden de atención visual (focal point):** el plano completo es el focal point del componente.
+Dentro del SVG la jerarquía de lectura es: **(1) paredes exteriores** (trazo 3, el anclaje visual
+más fuerte) → **(2) rellenos de zona** (el 30% de color que identifica los ambientes) →
+**(3) módulos y etiquetas** (camas C/S/M, mesada, mesa) → **(4) capa de cotas en cobre** (lectura
+secundaria de medición). La leyenda HTML va subordinada, debajo del plano.
+
+**Accesibilidad de los íconos SVG:** cada ícono de equipamiento (ducha, inodoro, lavatorio,
+mesada, cocina, heladera) dibujado como primitiva SVG inline debe incluir un `<title>` dentro de
+su `<g>` (o `aria-label` en el contenedor) que lo describa para lectores de pantalla. El `<svg>`
+raíz lleva `role="img"` y un `<title>`/`aria-label` que resume el plano (ej.: "Plano en planta de
+la casilla modelo N4, 6,60 m × 2,60 m"). Alinea con UX-02 (accesibilidad, Fase 7).
 
 ---
 
@@ -247,11 +266,11 @@ No hay registries de terceros ni bloques externos. El componente `FloorPlan` es 
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS (recomendaciones incorporadas: focal point explícito + accesibilidad de íconos SVG)
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS
+- [x] Dimension 5 Spacing: PASS
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved — 6/6 dimensiones (gsd-ui-checker, 2026-06-27). 3 recomendaciones no bloqueantes incorporadas al contrato.
