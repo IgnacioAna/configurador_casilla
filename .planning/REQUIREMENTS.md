@@ -13,14 +13,14 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### Landing & Shell
 
-- [ ] **SHELL-01**: El usuario ve una landing de bienvenida con título, subtítulo, datos de
-      Impacar y botón "Comenzar" que inicia el wizard.
-- [ ] **SHELL-02**: El usuario navega el wizard con "Anterior"/"Siguiente" y ve una barra de
-      progreso de los 6 pasos.
-- [ ] **SHELL-03**: El estado del wizard se persiste en `localStorage`; al recargar, el usuario
-      retoma su configuración donde la dejó.
-- [ ] **SHELL-04**: El usuario puede "Volver a empezar" desde el resumen, reseteando la
-      configuración.
+- [x] **SHELL-01**: El usuario ve una landing de bienvenida con título, subtítulo, datos de
+      Impacar y botón "Comenzar" que inicia el wizard. _(Phase 3, verificado PASSED 2026-06-27.)_
+- [x] **SHELL-02**: El usuario navega el wizard con "Anterior"/"Siguiente" y ve una barra de
+      progreso de los 6 pasos. _(Phase 3, verificado PASSED 2026-06-27.)_
+- [x] **SHELL-03**: El estado del wizard se persiste en `localStorage`; al recargar, el usuario
+      retoma su configuración donde la dejó. _(Phase 3, verificado PASSED — fix ruteo `vistaInicial`.)_
+- [x] **SHELL-04**: El usuario puede "Volver a empezar" desde el resumen, reseteando la
+      configuración. _(Phase 3, verificado PASSED 2026-06-27.)_
 
 ### Paso 1 — Uso y ocupantes
 
@@ -81,8 +81,8 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
       ventanas y acotaciones en metros, y escala al viewport.
 - [x] **PLANO-02**: El plano se actualiza con transición suave (~300ms) cada vez que el usuario
       cambia una opción.
-- [ ] **PLANO-03**: En mobile el plano es colapsable ("Ver plano actual") y ampliable a pantalla
-      completa / zoom; en desktop va sticky a la derecha.
+- [x] **PLANO-03**: En mobile el plano es colapsable ("Ver plano actual") y ampliable a pantalla
+      completa / zoom; en desktop va sticky a la derecha. _(Phase 3, verificado PASSED 2026-06-27.)_
 - [x] **PLANO-04**: El plano refleja la **estructura fija de zonas** (baulera 0.60m | baño |
       dormitorio | estar/comedor | cocina 0.60m) y la geometría real (interior 2.52m, camas
       0.80m, pasillo central 0.92m).
@@ -113,9 +113,9 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 - [ ] **UX-01**: La interfaz es mobile-first y usable en un viewport de ~375px (Samsung 6").
 - [ ] **UX-02**: Todos los inputs tienen labels, contraste suficiente y el wizard es navegable
       por teclado.
-- [ ] **UX-03**: Toda la interfaz está en español argentino con trato de usted.
-- [ ] **UX-04**: Cada paso completado se registra con `console.log` + timestamp (placeholder de
-      analytics).
+- [x] **UX-03**: Toda la interfaz está en español argentino con trato de usted. _(Phase 3, verificado PASSED; gate anti-voseo grep=0.)_
+- [x] **UX-04**: Cada paso completado se registra con `console.log` + timestamp (placeholder de
+      analytics). _(Phase 3, verificado PASSED — `[analytics] paso completado` + ISO timestamp.)_
 
 ## v2 Requirements
 
@@ -154,10 +154,10 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SHELL-01 | Phase 3 | Pending |
-| SHELL-02 | Phase 3 | Pending |
-| SHELL-03 | Phase 3 | Pending |
-| SHELL-04 | Phase 3 | Pending |
+| SHELL-01 | Phase 3 | Complete (verificado PASSED) |
+| SHELL-02 | Phase 3 | Complete (verificado PASSED) |
+| SHELL-03 | Phase 3 | Complete (verificado PASSED) |
+| SHELL-04 | Phase 3 | Complete (verificado PASSED) |
 | USO-01 | Phase 4 | Complete (04-02) |
 | USO-02 | Phase 4 | Complete (04-02) |
 | USO-03 | Phase 4 | Complete (04-01 lógica + 04-02 UI) |
@@ -176,7 +176,7 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | EXTRAS-01 | Phase 5 | Pending |
 | PLANO-01 | Phase 2 | Complete |
 | PLANO-02 | Phase 2 | Complete |
-| PLANO-03 | Phase 3 | Pending |
+| PLANO-03 | Phase 3 | Complete (verificado PASSED) |
 | PLANO-04 | Phase 2 | Complete |
 | PRECIO-01 | Phase 5 | Pending |
 | RESUMEN-01 | Phase 6 | Pending |
@@ -186,8 +186,8 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | EXPORT-02 | Phase 6 | Pending |
 | UX-01 | Phase 7 | Pending |
 | UX-02 | Phase 7 | Pending |
-| UX-03 | Phase 3 | Pending |
-| UX-04 | Phase 3 | Pending |
+| UX-03 | Phase 3 | Complete (verificado PASSED) |
+| UX-04 | Phase 3 | Complete (verificado PASSED) |
 
 **Coverage:**
 - v1 requirements: 34 total
@@ -199,4 +199,4 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 after 04-03 completion (BANO-01/BANO-02/BANO-03 marcados Complete; 11/34 v1 requirements completos: PLANO-01/02/04, USO-01/02/03, DIM-01/02, BANO-01/02/03)*
+*Last updated: 2026-06-27 tras auditoría de milestone (/gsd-audit-milestone): sincronizada la trazabilidad de Phase 3 (SHELL-01..04, PLANO-03, UX-03/04 marcados Complete — estaban verificados PASSED pero quedaron `[ ]`). 18/34 v1 requirements completos: PLANO-01/02/03/04, SHELL-01/02/03/04, USO-01/02/03, DIM-01/02, BANO-01/02/03, UX-03/04. Pendientes (16): Phase 5 (DORM, COCINA, EXTRAS, PRECIO), Phase 6 (RESUMEN, EXPORT), Phase 7 (UX-01/02).*
