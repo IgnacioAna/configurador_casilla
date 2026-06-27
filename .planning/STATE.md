@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 UI-SPEC approved
-last_updated: "2026-06-27T04:40:21.098Z"
-last_activity: 2026-06-27 -- Phase 2 planning complete
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-06-27T04:46:21.000Z"
+last_activity: 2026-06-27 -- Completed Plan 02-01 (helper de layout + mock config)
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 5
-  completed_plans: 2
-  percent: 40
+  completed_plans: 3
+  percent: 60
 ---
 
 # Project State
@@ -21,35 +21,35 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-27)
 
 **Core value:** El cliente ve su casilla tomar forma visualmente (plano en planta en vivo) mientras la configura paso a paso, y termina con un resumen + presupuesto listo para enviar.
-**Current focus:** Phase 01 — Cimientos y Datos
+**Current focus:** Phase 02 — Motor de Plano SVG
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-06-27 -- Phase 2 planning complete
+Phase: 02 (Motor de Plano SVG) — EXECUTING
+Plan: 2 of 3
+Status: Executing Phase 02
+Last activity: 2026-06-27 -- Completed Plan 02-01 (helper de layout + mock config)
 
-Progress: [██████████] 100%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 4 min
-- Total execution time: 0.13 hours
+- Total execution time: 0.18 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 — Cimientos y Datos | 2 | 8 min | 4 min |
-| 01 | 2 | - | - |
+| 02 — Motor de Plano SVG | 1 | 3 min | 3 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 01-01 (4 min), 01-02 (4 min)
+- Last 5 plans: 01-01 (4 min), 01-02 (4 min), 02-01 (3 min)
 - Trend: estable
 
 *Updated after each plan completion*
@@ -72,6 +72,10 @@ Recent decisions affecting current work:
 - [01-02]: IVA con una sola fuente de verdad en data/geometry.js; utils/formato.js lo importa de ahí.
 - [01-02]: formatPrecio con toLocaleString('es-AR') + fallback regex de agrupamiento (formato argentino garantizado sin ICU).
 - [01-02]: Gate TDD con node:test (built-in, sin Vitest) para formato.js.
+- [02-01]: calcularLayout es un helper puro (sin React/DOM) que traduce config → zonas + camas + viewBox; el render queda declarativo y la transición anima sobre coordenadas ya calculadas.
+- [02-01]: M_A_U=100 (100u viewBox = 1m) como única fuente del factor metros→viewBox; todas las medidas físicas leídas de GEOMETRIA (gate grep anti-hardcodeo en verify).
+- [02-01]: El padding de cotas (PAD=12) vive en el render (viewBox), no en las coordenadas: zonas y camas comparten origen (0,0) del interior.
+- [02-01]: Reparto del largo restante baño/dormitorio/estar por ratios nombrados (22/45/33); el estar absorbe el redondeo para que la suma cierre exacta contra config.largo. El largo se deriva de MODELOS (nunca inventado).
 
 ### Pending Todos
 
@@ -95,6 +99,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-27T04:21:05.180Z
-Stopped at: Phase 2 UI-SPEC approved
-Resume file: .planning/phases/02-motor-de-plano-svg/02-UI-SPEC.md
+Last session: 2026-06-27T04:46:21.000Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: None

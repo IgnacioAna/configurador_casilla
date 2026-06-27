@@ -83,7 +83,7 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
       cambia una opción.
 - [ ] **PLANO-03**: En mobile el plano es colapsable ("Ver plano actual") y ampliable a pantalla
       completa / zoom; en desktop va sticky a la derecha.
-- [ ] **PLANO-04**: El plano refleja la **estructura fija de zonas** (baulera 0.60m | baño |
+- [x] **PLANO-04**: El plano refleja la **estructura fija de zonas** (baulera 0.60m | baño |
       dormitorio | estar/comedor | cocina 0.60m) y la geometría real (interior 2.52m, camas
       0.80m, pasillo central 0.92m).
 
@@ -177,7 +177,7 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | PLANO-01 | Phase 2 | Pending |
 | PLANO-02 | Phase 2 | Pending |
 | PLANO-03 | Phase 3 | Pending |
-| PLANO-04 | Phase 2 | Pending |
+| PLANO-04 | Phase 2 | Complete |
 | PRECIO-01 | Phase 5 | Pending |
 | RESUMEN-01 | Phase 6 | Pending |
 | RESUMEN-02 | Phase 6 | Pending |
