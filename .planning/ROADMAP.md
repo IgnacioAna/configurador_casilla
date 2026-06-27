@@ -24,7 +24,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Cimientos y Datos** - Scaffolding Vite + React + Tailwind y datos reales Lista 108 aislados en `/data`
 - [x] **Phase 2: Motor de Plano SVG** - El plano en planta cenital con estructura fija de zonas, geometría real y transiciones suaves
-- [ ] **Phase 3: Cáscara del Wizard y Persistencia** - Landing, navegación de 6 pasos, barra de progreso, localStorage y layout del plano
+- [x] **Phase 3: Cáscara del Wizard y Persistencia** - Landing, navegación de 6 pasos, barra de progreso, localStorage y layout del plano
 - [ ] **Phase 4: Pasos 1-3 (Uso, Dimensiones, Baño)** - Selección de uso/ocupantes, modelo sugerido y equipamiento de baño con reflejo en el plano
 - [ ] **Phase 5: Pasos 4-6 y Motores (Dormitorio, Cocina, Extras + Precios)** - Camas validadas por geometría, cocina/estar, extras y presupuesto en vivo
 - [ ] **Phase 6: Resumen y Exportación** - Pantalla final con presupuesto desglosado, financiación, envío por WhatsApp y PDF vectorial
@@ -134,7 +134,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Cimientos y Datos | 2/2 | Complete | 2026-06-27 |
 | 2. Motor de Plano SVG | 3/3 | Complete | 2026-06-27 |
-| 3. Cáscara del Wizard y Persistencia | 0/3 | Not started | - |
+| 3. Cáscara del Wizard y Persistencia | 3/3 | Complete | 2026-06-27 |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 0/TBD | Not started | - |
 | 5. Pasos 4-6 y Motores | 0/TBD | Not started | - |
 | 6. Resumen y Exportación | 0/TBD | Not started | - |
