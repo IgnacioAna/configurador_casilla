@@ -110,8 +110,8 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### UX / Calidad
 
-- [ ] **UX-01**: La interfaz es mobile-first y usable en un viewport de ~375px (Samsung 6").
-- [ ] **UX-02**: Todos los inputs tienen labels, contraste suficiente y el wizard es navegable
+- [x] **UX-01**: La interfaz es mobile-first y usable en un viewport de ~375px (Samsung 6").
+- [x] **UX-02**: Todos los inputs tienen labels, contraste suficiente y el wizard es navegable
       por teclado.
 - [x] **UX-03**: Toda la interfaz está en español argentino con trato de usted. _(Phase 3, verificado PASSED; gate anti-voseo grep=0.)_
 - [x] **UX-04**: Cada paso completado se registra con `console.log` + timestamp (placeholder de
@@ -184,8 +184,8 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | RESUMEN-03 | Phase 6 | Complete (verificado PASSED) |
 | EXPORT-01 | Phase 6 | Complete (verificado PASSED) |
 | EXPORT-02 | Phase 6 | Complete (verificado PASSED) |
-| UX-01 | Phase 7 | Pending |
-| UX-02 | Phase 7 | Pending |
+| UX-01 | Phase 7 | Complete (verificado PASSED) |
+| UX-02 | Phase 7 | Complete (verificado PASSED) |
 | UX-03 | Phase 3 | Complete (verificado PASSED) |
 | UX-04 | Phase 3 | Complete (verificado PASSED) |
 
@@ -199,4 +199,4 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 — sincronización de tracking de Phase 5: DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01 y PRECIO-01 marcados Complete (estaban `[ ]`/Pending pese a que la fase se ejecutó y verificó PASSED — el paso "complete phase execution" del execute-phase no actualizó los checkboxes por usar namespaces de CLI ausentes; ver commit 768f165 y memoria gsd-cli-invocation). 32/34 v1 requirements completos: PLANO-01/02/03/04, SHELL-01/02/03/04, USO-01/02/03, DIM-01/02, BANO-01/02/03, UX-03/04, DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01, PRECIO-01, RESUMEN-01/02/03, EXPORT-01/02 (Phase 6 ejecutada y verificada PASSED 2026-06-27). Pendientes (2): Phase 7 (UX-01/02). — Previo (02877f7): auditoría de milestone (/gsd-audit-milestone) sincronizó trazabilidad de Phase 3.*
+*Last updated: 2026-06-27 — sincronización de tracking de Phase 5: DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01 y PRECIO-01 marcados Complete (estaban `[ ]`/Pending pese a que la fase se ejecutó y verificó PASSED — el paso "complete phase execution" del execute-phase no actualizó los checkboxes por usar namespaces de CLI ausentes; ver commit 768f165 y memoria gsd-cli-invocation). **34/34 v1 requirements completos** — milestone v1.0 COMPLETO. Phase 7 (UX-01, UX-02) ejecutada y verificada PASSED 2026-06-28 (pulido mobile a 375px + accesibilidad: labels, contraste, teclado end-to-end, reduced-motion; verificación manual D-02 + UAT aprobado). Las 7 fases del roadmap están completas. — Previo (02877f7): auditoría de milestone (/gsd-audit-milestone) sincronizó trazabilidad de Phase 3.*

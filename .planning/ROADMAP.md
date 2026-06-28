@@ -28,7 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: Pasos 1-3 (Uso, Dimensiones, Baño)** - Selección de uso/ocupantes, modelo sugerido y equipamiento de baño con reflejo en el plano
 - [x] **Phase 5: Pasos 4-6 y Motores (Dormitorio, Cocina, Extras + Precios)** - Camas validadas por geometría, cocina/estar, extras y presupuesto en vivo
 - [x] **Phase 6: Resumen y Exportación** - Pantalla final con presupuesto desglosado, financiación, envío por WhatsApp y PDF vectorial
-- [ ] **Phase 7: Pulido Mobile y Accesibilidad** - Usabilidad en ~375px, labels, contraste y navegación por teclado
+- [x] **Phase 7: Pulido Mobile y Accesibilidad** - Usabilidad en ~375px, labels, contraste y navegación por teclado
 
 ## Phase Details
 
@@ -138,11 +138,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. El usuario puede completar el wizard de punta a punta usando solo el teclado (foco visible, orden lógico, controles operables).
 **Plans**: 3 plans
   - **Wave 1** *(cross-cutting global fixes — bajo riesgo, alto apalancamiento)*
-    - [ ] 07-01-PLAN.md — Foco al cambiar de vista/paso (D-03) + reduced-motion global (D-04) + contraste /60->/70 (D-01) + role=group heladera (D-01) (Wave 1)
+    - [x] 07-01-PLAN.md — Foco al cambiar de vista/paso (D-03) + reduced-motion global (D-04) + contraste /60->/70 (D-01) + role=group heladera (D-01) (Wave 1)
   - **Wave 2** *(auditoria por superficie; depende de Wave 1 por owners de archivo disjuntos)*
-    - [ ] 07-02-PLAN.md — Anti-overflow a 375px (UX-01) + labels de grupo en los pasos (UX-02) en Landing/pasos/plano/resumen (Wave 2)
+    - [x] 07-02-PLAN.md — Anti-overflow a 375px (UX-01) + labels de grupo en los pasos (UX-02) en Landing/pasos/plano/resumen (Wave 2)
   - **Wave 3** *(gate de cierre — verificacion 100% manual por D-02)*
-    - [ ] 07-03-PLAN.md — Smoke de regresion (npm test/build) + checkpoint human-verify del UAT manual a 375px/teclado/contraste/reduced-motion (Wave 3)
+    - [x] 07-03-PLAN.md — Smoke de regresion (npm test/build) + checkpoint human-verify del UAT manual a 375px/teclado/contraste/reduced-motion (Wave 3)
   - **Cross-cutting constraints** (aparecen en ≥2 planes): verificación 100% MANUAL con DevTools, CERO deps nuevas (D-02); `npm test`/`npm run build` solo como guarda de regresión; identidad sobria/paleta LOCKED (solo se sube opacidad `/60`→`/70`, no se cambian tokens); trato de usted + gate anti-voseo; NO agregar features (sin control de zoom nuevo, sin redesign, sin barrido WCAG AA formal); no regresar atributos de seguridad existentes (`rel="noopener noreferrer"`).
 **UI hint**: yes
 
@@ -159,4 +159,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 3/3 | Complete | 2026-06-27 |
 | 5. Pasos 4-6 y Motores | 5/5 | Complete | 2026-06-27 |
 | 6. Resumen y Exportación | 3/3 | Complete | 2026-06-27 |
-| 7. Pulido Mobile y Accesibilidad | 0/3 | Planned | - |
+| 7. Pulido Mobile y Accesibilidad | 3/3 | Complete | 2026-06-28 |
