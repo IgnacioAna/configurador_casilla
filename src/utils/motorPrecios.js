@@ -17,3 +17,23 @@ export function calcularPresupuesto(estado) {
   const neto = base + sumaExtras
   return { neto, iva: calcularIVA(neto), total: calcularTotal(neto) }
 }
+
+// Desglose item-por-item para la pantalla de resumen (RESUMEN-02, D-05). COMPONE sobre
+// calcularPresupuesto: arma los items para mostrar (base + accesorios con su categoria/subgrupo
+// para agrupar, D-04) pero NO re-suma — neto/iva/total se delegan a calcularPresupuesto, que es la
+// UNICA fuente de la suma. Re-sumar aca divergiria del total de BarraPrecio por redondeo (Pitfall).
+// El largo se muestra con coma decimal (6.6 → "6,6 m") igual que FloorPlan. Estado adulterado
+// (modeloId inexistente/ausente, extras no-array, null): item base "Modelo no disponible" + totales
+// 0, sin $NaN ni crash (degradacion elegante, patron de calcularPresupuesto).
+export function detallePresupuesto(estado) {
+  const modelo = MODELOS.find((m) => m.id === estado?.modeloId)
+  const ids = Array.isArray(estado?.extras) ? estado.extras : []
+  const itemBase = modelo
+    ? { id: modelo.id, label: `Casilla ${modelo.nombre} — ${String(modelo.largo).replace('.', ',')} m`, precioNeto: modelo.precioNeto, categoria: 'modelo' }
+    : { id: 'sin-modelo', label: 'Modelo no disponible', precioNeto: 0, categoria: 'modelo' }
+  const itemsExtras = EXTRAS
+    .filter((e) => ids.includes(e.id)) // conserva el ORDEN de EXTRAS, ignora ids inexistentes
+    .map((e) => ({ id: e.id, label: e.nombre, precioNeto: e.precioNeto, categoria: e.categoria, subgrupo: e.subgrupo }))
+  const { neto, iva, total } = calcularPresupuesto(estado) // ÚNICA fuente de la suma — NO re-sumar
+  return { items: [itemBase, ...itemsExtras], neto, iva, total }
+}
