@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import { ACCIONES, TOTAL_PASOS, configDesdeEstado } from '../state/wizardReducer.js'
 import { logPasoCompletado } from '../utils/analytics.js'
 import { PASOS } from './wizard/pasosRegistro.jsx'
@@ -18,6 +19,15 @@ export default function ConfiguratorWizard({ estado, dispatch, reiniciar, onVolv
   const Paso = PASOS[estado.pasoActual] ?? PASOS[0]
   const esPrimero = estado.pasoActual === 0
   const esUltimo = estado.pasoActual === TOTAL_PASOS - 1
+
+  // A11y (D-03, UX-02): al avanzar/retroceder de paso el foco quedaba en el botón pulsado, obligando
+  // a re-tabular desde el fondo. Como el <h2> del título vive DENTRO de cada Paso*.jsx, el target del
+  // foco es la <section> que lo envuelve (Pattern 1 del RESEARCH: useRef + useEffect + tabIndex={-1}).
+  // Así, al cambiar pasoActual, el foco arranca al principio del nuevo paso (justo antes de su <h2>).
+  const headingPasoRef = useRef(null)
+  useEffect(() => {
+    headingPasoRef.current?.focus()
+  }, [estado.pasoActual])
 
   // Forma `config` derivada del estado del wizard (PLANO-03: el plano se dibuja desde el estado,
   // no desde un mock fijo). En Fase 3 los pasos son stubs, así que muestra el modelo inicial (N4).
@@ -63,7 +73,7 @@ export default function ConfiguratorWizard({ estado, dispatch, reiniciar, onVolv
           {/* Pasos + navegación (columna izquierda en desktop). */}
           <div className="lg:order-1">
             {/* Paso actual (stub en Fase 3; el contenido real llega en Fases 4-5). */}
-            <section className="rounded border border-impacar-texto/10 bg-white/40 p-4">
+            <section ref={headingPasoRef} tabIndex={-1} className="rounded border border-impacar-texto/10 bg-white/40 p-4 focus:outline-none">
               <Paso.Componente estado={estado} dispatch={dispatch} />
             </section>
 
@@ -101,7 +111,7 @@ export default function ConfiguratorWizard({ estado, dispatch, reiniciar, onVolv
               <button
                 type="button"
                 onClick={volverAEmpezar}
-                className="min-h-[44px] text-sm font-medium text-impacar-texto/60 underline-offset-2 transition-colors hover:text-impacar-cobre hover:underline focus:outline-none focus:ring-2 focus:ring-impacar-cobre/30"
+                className="min-h-[44px] text-sm font-medium text-impacar-texto/70 underline-offset-2 transition-colors hover:text-impacar-cobre hover:underline focus:outline-none focus:ring-2 focus:ring-impacar-cobre/30"
               >
                 Volver a empezar
               </button>

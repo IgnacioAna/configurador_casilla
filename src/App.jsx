@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Landing from './components/Landing.jsx'
 import ConfiguratorWizard from './components/ConfiguratorWizard.jsx'
 import Resumen from './components/Resumen.jsx'
@@ -28,25 +28,37 @@ export default function App() {
   const [vista, setVista] = useState(vistaInicial)
   const { estado, dispatch, reiniciar } = usePersistedConfig()
 
+  // A11y (D-03, UX-02): al cambiar de vista (landing → wizard → resumen) el foco quedaba al fondo
+  // del DOM (en el botón pulsado) o se iba al <body>. Como el <h1> de cada vista vive DENTRO de su
+  // componente hijo, movemos el foco a un contenedor focuseable que envuelve la vista montada
+  // (useRef + useEffect + tabIndex={-1}, Pattern 1 del RESEARCH). Así el teclado/lector arranca
+  // arriba de la nueva pantalla en lugar de obligar a re-tabular desde abajo.
+  const vistaRef = useRef(null)
+  useEffect(() => {
+    vistaRef.current?.focus()
+  }, [vista])
+
   return (
     <div className="min-h-screen bg-impacar-fondo text-impacar-texto font-sans">
-      {vista === 'landing' && <Landing onComenzar={() => setVista('wizard')} />}
-      {vista === 'wizard' && (
-        <ConfiguratorWizard
-          estado={estado}
-          dispatch={dispatch}
-          reiniciar={reiniciar}
-          onVolverInicio={() => setVista('landing')}
-          onVerResumen={() => setVista('resumen')}
-        />
-      )}
-      {vista === 'resumen' && (
-        <Resumen
-          estado={estado}
-          dispatch={dispatch}
-          onVolverEditar={() => setVista('wizard')}
-        />
-      )}
+      <div ref={vistaRef} tabIndex={-1} className="focus:outline-none">
+        {vista === 'landing' && <Landing onComenzar={() => setVista('wizard')} />}
+        {vista === 'wizard' && (
+          <ConfiguratorWizard
+            estado={estado}
+            dispatch={dispatch}
+            reiniciar={reiniciar}
+            onVolverInicio={() => setVista('landing')}
+            onVerResumen={() => setVista('resumen')}
+          />
+        )}
+        {vista === 'resumen' && (
+          <Resumen
+            estado={estado}
+            dispatch={dispatch}
+            onVolverEditar={() => setVista('wizard')}
+          />
+        )}
+      </div>
     </div>
   )
 }
