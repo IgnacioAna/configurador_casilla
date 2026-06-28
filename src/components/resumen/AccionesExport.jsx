@@ -53,11 +53,18 @@ function IconoDescarga() {
 
 export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
   const [generando, setGenerando] = useState(false)
+  const [errorPDF, setErrorPDF] = useState(null)
 
   const onDescargar = async () => {
     setGenerando(true)
+    setErrorPDF(null)
     try {
       await generarPDF(getSvgNode?.(), estado)
+    } catch (err) {
+      // T-06-09 / WR-04: el PDF puede fallar (import dinámico, doc.svg, cuota del navegador).
+      // Sin catch el error se tragaba y el usuario no sabía si descargó o falló. Feedback sobrio.
+      console.error('Error al generar el PDF:', err)
+      setErrorPDF('No se pudo generar el PDF. Intente nuevamente.')
     } finally {
       setGenerando(false)
     }
@@ -85,6 +92,12 @@ export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
           {generando ? 'Generando…' : 'Descargar PDF'}
         </button>
       </div>
+
+      {errorPDF && (
+        <p role="alert" className="mt-3 text-sm text-red-700">
+          {errorPDF}
+        </p>
+      )}
 
       <div className="mt-6 text-center">
         <button
