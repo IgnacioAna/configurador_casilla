@@ -60,11 +60,15 @@ export default function PasoCocina({ estado, dispatch }) {
         La cocina incluye mesada, bacha y cocina a gas. Sume las opciones que necesite.
       </p>
 
-      {/* Selector exclusivo de heladera (COCINA-02, Component Inventory 2) — semántica radio. */}
+      {/* Selector exclusivo de heladera (COCINA-02, Component Inventory 2). A11y (D-01, Pitfall 4):
+          role group (no radiogroup): los botones usan aria-pressed (semántica toggle), no semántica
+          radio (aria-checked), así que un radiogroup era inconsistente. El grupo sigue etiquetado
+          por el <p id="label-heladera">. Radios "de verdad" (flechas/roving tabindex) serían ARIA
+          exhaustivo, fuera del listón D-01. */}
       <p className="mt-6 text-sm font-medium text-impacar-texto/70" id="label-heladera">
         Heladera
       </p>
-      <div role="radiogroup" aria-labelledby="label-heladera" className="mt-3 flex flex-wrap gap-2">
+      <div role="group" aria-labelledby="label-heladera" className="mt-3 flex flex-wrap gap-2">
         {SEGMENTOS_HELADERA.map((s) => {
           // "Sin" marcado = ninguna heladera presente; 220V/12V = ese id en extras[].
           const marcado = s.id === null ? !hayHeladera : extras.includes(s.id)

@@ -103,7 +103,7 @@ export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
         <button
           type="button"
           onClick={onVolverEditar}
-          className="min-h-[44px] text-sm font-medium text-impacar-texto/60 underline-offset-2 transition-colors hover:text-impacar-cobre hover:underline focus:outline-none focus:ring-2 focus:ring-impacar-cobre/30"
+          className="min-h-[44px] text-sm font-medium text-impacar-texto/70 underline-offset-2 transition-colors hover:text-impacar-cobre hover:underline focus:outline-none focus:ring-2 focus:ring-impacar-cobre/30"
         >
           Volver a editar
         </button>
