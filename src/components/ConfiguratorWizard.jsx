@@ -1,4 +1,3 @@
-import { usePersistedConfig } from '../hooks/usePersistedConfig.js'
 import { ACCIONES, TOTAL_PASOS, configDesdeEstado } from '../state/wizardReducer.js'
 import { logPasoCompletado } from '../utils/analytics.js'
 import { PASOS } from './wizard/pasosRegistro.jsx'
@@ -8,8 +7,11 @@ import PlanoPanel from './wizard/PlanoPanel.jsx'
 
 // Cáscara navegable del wizard (SHELL-02). Consume el estado/persistencia del Plan 01.
 // Los pasos son stubs en la Fase 3; las Fases 4-5 reemplazan PASOS[].Componente.
-export default function ConfiguratorWizard({ onVolverInicio }) {
-  const { estado, dispatch, reiniciar } = usePersistedConfig()
+//
+// D-01 (Fase 6): el estado ya NO se crea acá. App.jsx iza el hook de configuración persistida
+// (lifting state up) y pasa { estado, dispatch, reiniciar } por props, para que el resumen comparta
+// la MISMA fuente de verdad. onVerResumen lleva al resumen desde el Paso 6 (último).
+export default function ConfiguratorWizard({ estado, dispatch, reiniciar, onVolverInicio, onVerResumen }) {
   // CR-01 (code review 05): fallback defensivo. esEstadoValido ya acota pasoActual al rango válido,
   // pero ?? PASOS[0] evita una pantalla en blanco si pasoActual quedara fuera de rango por cualquier
   // vía (índice undefined → Paso.Componente tiraría TypeError).
@@ -74,14 +76,25 @@ export default function ConfiguratorWizard({ onVolverInicio }) {
               >
                 Anterior
               </button>
-              <button
-                type="button"
-                onClick={siguiente}
-                disabled={esUltimo}
-                className="min-h-[44px] rounded bg-impacar-campo px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-impacar-campo/90 focus:outline-none focus:ring-2 focus:ring-impacar-campo/40 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Siguiente
-              </button>
+              {/* Paso 6 (esUltimo): en lugar del "Siguiente" deshabilitado, el botón que lleva al
+                  resumen (D-01). Reusa el className del botón primario "Siguiente" (relleno verde). */}
+              {esUltimo ? (
+                <button
+                  type="button"
+                  onClick={onVerResumen}
+                  className="min-h-[44px] rounded bg-impacar-campo px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-impacar-campo/90 focus:outline-none focus:ring-2 focus:ring-impacar-campo/40"
+                >
+                  Ver resumen y presupuesto
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={siguiente}
+                  className="min-h-[44px] rounded bg-impacar-campo px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-impacar-campo/90 focus:outline-none focus:ring-2 focus:ring-impacar-campo/40 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Siguiente
+                </button>
+              )}
             </div>
 
             <div className="mt-8 border-t border-impacar-texto/10 pt-4 text-center">
