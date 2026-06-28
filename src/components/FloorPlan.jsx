@@ -252,9 +252,9 @@ export default function FloorPlan({ config }) {
         {/* (4) Capa de cotas en cobre, en el padding reservado. */}
         <g>
           {/* (1) Largo total: cota abajo del dibujo. */}
-          <CotaH x1={0} x2={totalU} y={anchoU + pad * 0.7} label={metros(totalU / M_A_U)} />
+          <CotaH x1={0} x2={totalU} y={anchoU + pad * 0.45} label={metros(totalU / M_A_U)} />
           {/* (2) Ancho total: cota vertical a la izquierda. */}
-          <CotaV x={-pad * 0.5} y1={0} y2={anchoU} label={metros(anchoU / M_A_U)} />
+          <CotaV x={-pad * 0.3} y1={0} y2={anchoU} label={metros(anchoU / M_A_U)} />
           {/* (3) Largo por zona (cotas segmentadas arriba): baulera/dormitorio/cocina. */}
           {['baulera', 'dormitorio', 'cocina'].map((id) => {
             const z = zonas.find((zz) => zz.id === id)
@@ -264,7 +264,7 @@ export default function FloorPlan({ config }) {
                 key={`cota-${id}`}
                 x1={z.x}
                 x2={z.x + z.anchoU}
-                y={-pad * 0.4}
+                y={-pad * 0.3}
                 label={metros(z.largoM)}
               />
             )

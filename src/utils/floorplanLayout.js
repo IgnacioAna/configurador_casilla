@@ -12,8 +12,10 @@ import { GEOMETRIA } from '../data/geometry.js'
 // 100 unidades de viewBox = 1 metro (factor único; ver UI-SPEC "Escala metros→unidades").
 export const M_A_U = 100
 
-// Padding lateral del viewBox reservado para las líneas de cota (UI-SPEC: 12 unidades por lado).
-export const PAD = 12
+// Padding lateral del viewBox reservado para las líneas de cota (línea + ticks + texto fontSize 10).
+// 26u por lado: con 12u el texto rotado de la cota izquierda y las cotas superiores se salían del
+// viewBox y el <svg> los recortaba (overflow hidden). 26u deja margen para todas las cotas.
+export const PAD = 26
 
 // Reparto del largo restante (lo que sobra tras baulera + cocina fijas) entre los 3 ambientes
 // centrales. Documentado como constantes nombradas (no medidas físicas, son ratios de reparto).
