@@ -21,26 +21,27 @@ el ida y vuelta de audios y croquis por WhatsApp.
 
 <!-- Shipped and confirmed valuable. -->
 
-(None yet — ship to validate)
+- ✓ Landing de bienvenida con identidad Impacar y CTA "Comenzar" — v1.0
+- ✓ Wizard de 6 pasos: uso/ocupantes, dimensiones, baño, dormitorio, cocina/estar, extras — v1.0
+- ✓ Plano en planta SVG con **estructura fija de zonas** que se actualiza en tiempo real — v1.0
+- ✓ Sugerencia automática de largo según cantidad de ocupantes (editable) — v1.0
+- ✓ Reglas de disponibilidad por modelo (baño ampliado, opciones de cocina, personalización N5+) — v1.0
+- ✓ Motor de validación de capacidad de camas por modelo (geometría real 2.52m / camas 0.80m) — v1.0
+- ✓ Motor de precios (base + accesorios) neto + IVA 21% + total, formato `$` argentino — v1.0
+- ✓ Pantalla de resumen: plano final + configuración + presupuesto desglosado + financiación — v1.0
+- ✓ Exportar por WhatsApp (link `wa.me` con mensaje pre-armado) — v1.0
+- ✓ Descargar resumen en PDF (jsPDF + svg2pdf, plano vectorial, logo + contacto) — v1.0
+- ✓ Persistencia del estado del wizard en `localStorage` — v1.0
+- ✓ Responsive mobile-first (~375px), plano colapsable en mobile / sticky en desktop — v1.0
+- ✓ Accesibilidad (labels, contraste ≥4.5:1, teclado end-to-end, reduced-motion) y animaciones suaves del SVG — v1.0
 
 ### Active
 
-<!-- Current scope. Building toward these. -->
+<!-- Current scope. Building toward these. Próximo milestone se define con /gsd-new-milestone. -->
 
-- [ ] Landing de bienvenida con identidad Impacar y CTA "Comenzar"
-- [ ] Wizard de 6 pasos: uso/ocupantes, dimensiones, baño, dormitorio, cocina/estar, extras
-- [ ] Plano en planta SVG con **estructura fija de zonas** (baulera | baño | dormitorio |
-      estar/comedor | cocina) que se actualiza en tiempo real
-- [ ] Sugerencia automática de largo según cantidad de ocupantes (editable)
-- [ ] Reglas de disponibilidad por modelo (baño ampliado, opciones de cocina, personalización N5+)
-- [ ] Motor de validación de capacidad de camas por modelo (geometría real 2.52m / camas 0.80m)
-- [ ] Motor de precios (base del modelo + accesorios) con neto + IVA 21% + total, formato `$`
-- [ ] Pantalla de resumen: plano final + configuración + presupuesto desglosado + financiación
-- [ ] Exportar por WhatsApp (link `wa.me` con mensaje pre-armado)
-- [ ] Descargar resumen en PDF (jsPDF, plano vectorial, logo + contacto)
-- [ ] Persistencia del estado del wizard en `localStorage`
-- [ ] Responsive mobile-first (target Samsung ~6"), plano colapsable en mobile / sticky en desktop
-- [ ] Accesibilidad básica (labels, contraste, navegación por teclado) y animaciones suaves del SVG
+(Milestone v1.0 completo. Las requirements del próximo ciclo se definen con `/gsd-new-milestone`.
+Candidatos en evaluación — ver Out of Scope: integración CRM/GHL, render 3D, variantes de layout
+pre-armadas, precios editables por la fábrica.)
 
 ### Out of Scope
 
@@ -73,6 +74,14 @@ el ida y vuelta de audios y croquis por WhatsApp.
 - **El plano es el corazón del producto** — debe ser claro y esquemático, no
   arquitectónicamente perfecto (nota explícita del cliente).
 - **Objetivo inmediato:** presentar la demo a los dueños de la fábrica como prueba de concepto.
+
+### Estado actual (post v1.0)
+
+- **v1.0 MVP SHIPPED (2026-06-28)** — las 7 fases del roadmap completas y verificadas PASSED.
+- Codebase: ~3.835 LOC (JS/JSX/CSS), Vite + React 18 + Tailwind v3; deps de runtime: React + `jspdf` + `svg2pdf.js`.
+- 100 tests (`node:test`, sin deps de test); build verde; UAT E2E a 375px aprobado.
+- **Pendiente pre-go-live:** crear `.env.production` con `VITE_WA_NUMBER=5492302468754` (swap del WhatsApp de pruebas al real de Impacar) antes de la demo a los dueños.
+- Candidatos v2 (ver Out of Scope): integración CRM/GHL, render 3D, variantes de layout pre-armadas, precios editables por la fábrica.
 
 ## Datos reales (Lista 108 — Febrero 2026)
 
@@ -144,15 +153,17 @@ el ida y vuelta de audios y croquis por WhatsApp.
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Vite + React 18 + Tailwind v3 | Stack liviano, rápido de scaffoldear, sin backend | — Pending |
-| SVG nativo para el plano (no librería) | Performance en mobile, control total del dibujo | — Pending |
-| jsPDF con plano vectorial (no html2canvas) | PDF nítido y descargable, mejor para presentar | — Pending |
-| Estado en localStorage, sin backend | Es un MVP/demo client-side | — Pending |
-| Plano esquemático, no arquitectónico | Cliente prioriza claridad sobre precisión milimétrica | — Pending |
-| Datos reales Lista 108 (Feb-26) aislados en /data | Fuente real; precios 2-3x los placeholders | — Pending |
-| Estructura de zonas fija (baño entre baulera y dormitorio) | El catálogo real la fija; el Paso 3 pasa a equipamiento/tamaño | — Pending |
-| Geometría real 2.52m / camas 0.80m / pasillo 0.92m | Define el dibujo del dormitorio y la validación de capacidad | — Pending |
-| Presupuesto neto + IVA 21% + total c/IVA | Estándar B2B argentino, claridad para el cliente | — Pending |
+| Vite + React 18 + Tailwind v3 | Stack liviano, rápido de scaffoldear, sin backend | ✓ Good (v1.0) |
+| SVG nativo para el plano (no librería) | Performance en mobile, control total del dibujo | ✓ Good (v1.0) |
+| jsPDF + svg2pdf con plano vectorial (no html2canvas) | PDF nítido y descargable, mejor para presentar | ✓ Good (v1.0 — vector verificado al zoom) |
+| Estado en localStorage, sin backend | Es un MVP/demo client-side | ✓ Good (v1.0) |
+| Plano esquemático, no arquitectónico | Cliente prioriza claridad sobre precisión milimétrica | ✓ Good (v1.0) |
+| Datos reales Lista 108 (Feb-26) aislados en /data | Fuente real; precios 2-3x los placeholders | ✓ Good (v1.0 — anti-hardcodeo por gates grep) |
+| Estructura de zonas fija (baño entre baulera y dormitorio) | El catálogo real la fija; el Paso 3 pasa a equipamiento/tamaño | ✓ Good (v1.0) |
+| Geometría real 2.52m / camas 0.80m / pasillo 0.92m | Define el dibujo del dormitorio y la validación de capacidad | ✓ Good (v1.0) |
+| Presupuesto neto + IVA 21% + total c/IVA | Estándar B2B argentino, claridad para el cliente | ✓ Good (v1.0) |
+| Lógica pura testeada con `node:test` (sin deps de test) | Red de regresión barata y mantenible | ✓ Good (v1.0 — 100 tests) |
+| Nº de WhatsApp vía `VITE_WA_NUMBER` con default de pruebas | Swap a producción sin tocar código | ✓ Good (v1.0) |
 
 ## Evolution
 
@@ -172,4 +183,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-27 after data update (Lista 108, real models/prices/structure)*
+*Last updated: 2026-06-28 after v1.0 milestone (MVP shipped — 7 fases, 22 planes, 34/34 requirements)*

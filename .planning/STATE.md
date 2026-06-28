@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Milestone v1.0 complete (7/7 fases)
-last_updated: "2026-06-28T17:10:00.000Z"
-last_activity: 2026-06-28 -- Phase 7 complete (verified PASSED); milestone v1.0 COMPLETE
+stopped_at: Milestone v1.0 archived + tagged
+last_updated: "2026-06-28T17:40:00.000Z"
+last_activity: 2026-06-28 -- v1.0 milestone archived (milestones/) + git tag v1.0
 progress:
   total_phases: 7
   completed_phases: 7
@@ -18,18 +18,18 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-27)
+See: .planning/PROJECT.md (updated 2026-06-28)
 
 **Core value:** El cliente ve su casilla tomar forma visualmente (plano en planta en vivo) mientras la configura paso a paso, y termina con un resumen + presupuesto listo para enviar.
-**Current focus:** Milestone v1.0 COMPLETO — las 7 fases ejecutadas y verificadas PASSED.
+**Current focus:** v1.0 archivado. Próximo: definir el siguiente ciclo con `/gsd-new-milestone`.
 
 ## Current Position
 
-Phase: 7 (Pulido Mobile y Accesibilidad) — COMPLETE (verified PASSED)
-Plan: 3 of 3 complete
-Next: Milestone v1.0 cerrado. Opcional: /gsd-complete-milestone (archivar) o /gsd-new-milestone (v2).
-Status: Milestone v1.0 COMPLETE (7/7 fases, 22/22 planes)
-Last activity: 2026-06-28 -- Phase 7 complete (verified PASSED); milestone v1.0 COMPLETE
+Milestone: v1.0 MVP — ✅ ARCHIVED (shipped 2026-06-28, tag v1.0)
+Phases: 7/7 complete · Plans: 22/22 · Requirements: 34/34
+Next: /gsd-new-milestone (definir requirements del próximo ciclo). Pre-go-live: `.env.production` con `VITE_WA_NUMBER=5492302468754`.
+Status: Milestone v1.0 cerrado y archivado en .planning/milestones/
+Last activity: 2026-06-28 -- v1.0 milestone archived + git tag v1.0
 
 Progress: [██████████] 100% (7 de 7 fases completas — milestone v1.0 terminado)
 
