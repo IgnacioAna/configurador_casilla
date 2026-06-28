@@ -16,6 +16,12 @@ const GRUPOS = [
   { match: (i) => i.categoria === 'extras' && i.subgrupo === 'energia', titulo: 'Energía' },
 ]
 
+// Catch-all (WR-05): cualquier accesorio (≠ modelo) cuya categoria/subgrupo no caiga en GRUPOS
+// se agrupa en "Otros", para que las líneas del desglose SIEMPRE reconcilien con el total
+// (calcularPresupuesto cuenta el ítem aunque GRUPOS no lo contemple). Defiende contra futuras
+// ampliaciones del catálogo (p.ej. una categoria nueva) sin desincronizar el desglose visual.
+const sinGrupo = (i) => i.categoria !== 'modelo' && !GRUPOS.some((g) => g.match(i))
+
 export default function PresupuestoDesglosado({ estado }) {
   const { items, neto, iva, total } = detallePresupuesto(estado)
   const base = items.find((i) => i.categoria === 'modelo')
@@ -49,6 +55,23 @@ export default function PresupuestoDesglosado({ estado }) {
             </div>
           )
         })}
+
+        {/* Catch-all "Otros" (WR-05): ítems sin grupo, para que el desglose siempre cuadre con el total. */}
+        {(() => {
+          const otros = items.filter(sinGrupo)
+          if (otros.length === 0) return null
+          return (
+            <div className="space-y-1">
+              <p className="text-xs font-semibold text-impacar-campo">Otros</p>
+              {otros.map((i) => (
+                <div key={i.id} className="flex items-center justify-between pl-3">
+                  <span className="text-sm">{i.label}</span>
+                  <span className="text-sm">{formatPrecio(i.precioNeto)}</span>
+                </div>
+              ))}
+            </div>
+          )
+        })()}
       </div>
 
       {/* Divisor + las 3 líneas Neto / IVA 21% / Total c/IVA (markup VERBATIM de BarraPrecio). */}
