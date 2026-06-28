@@ -15,6 +15,19 @@ export function nombreArchivoPDF(estado) {
   return `presupuesto-impacar-${estado?.modeloId ?? 'sin-modelo'}.pdf`
 }
 
+// Guarda anti-desbordamiento (WR-03): el pie está anclado en ~285 mm; con muchos extras de nombre
+// largo el cursor de texto puede pasarlo y jsPDF escribiría fuera de la hoja (texto encimado/cortado).
+// Si la próxima línea cruzaría LIMITE_PIE, abre página nueva y reinicia el cursor en el margen
+// superior. Caso típico (config corta) → no agrega página: se mantiene en una sola hoja.
+const LIMITE_PIE = 278 // mm — margen de seguridad por debajo del pie (285) y su línea divisoria (279)
+function avanzarSiNecesario(doc, cursorY, margenSuperior = 20) {
+  if (cursorY >= LIMITE_PIE) {
+    doc.addPage()
+    return margenSuperior
+  }
+  return cursorY
+}
+
 // generarPDF(svgNode, estado): genera y descarga el PDF del resumen (EXPORT-02, D-11/D-12/D-13).
 // Browser-side: usa jsPDF + svg2pdf.js para embeber el plano como VECTOR (no html2canvas), 1 pagina A4.
 // Reglas (RESEARCH Pitfalls 1-4):
@@ -70,6 +83,7 @@ export async function generarPDF(svgNode, estado) {
     'Presupuesto orientativo, sujeto a confirmación del asesor comercial.',
     anchoUtil,
   )) {
+    cursorY = avanzarSiNecesario(doc, cursorY) // WR-03
     doc.text(linea, M, cursorY)
     cursorY += 5
   }
@@ -93,6 +107,7 @@ export async function generarPDF(svgNode, estado) {
   ]
   for (const fila of filasConfig) {
     for (const linea of doc.splitTextToSize(fila, anchoUtil)) {
+      cursorY = avanzarSiNecesario(doc, cursorY) // WR-03: salto de página antes de pisar el pie
       doc.text(linea, M, cursorY)
       cursorY += 5
     }
