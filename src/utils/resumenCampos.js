@@ -69,14 +69,15 @@ export function resumenCampos(estado) {
     .map((t) => `${t.n} ${t.singular}${t.n > 1 ? 's' : ''}`)
   const camasTexto = partesCamas.length > 0 ? partesCamas.join(', ') : SIN_SELECCION
 
-  // Cocina/heladera/mesa: derivar de extras[] (misma fuente que configDesdeEstado) y traducir a
-  // nombres reales de EXTRAS. Nada elegido → 'Sin selección'.
-  const nombreExtra = (id) => EXTRAS.find((e) => e.id === id)?.nombre
-  const partesCocina = []
-  if (extras.includes('cocina-horno')) partesCocina.push(nombreExtra('cocina-horno'))
-  if (extras.includes('heladera-220')) partesCocina.push(nombreExtra('heladera-220'))
-  else if (extras.includes('heladera-12v')) partesCocina.push(nombreExtra('heladera-12v'))
-  if (extras.includes('mesa-cano')) partesCocina.push(nombreExtra('mesa-cano'))
+  // Cocina/estar: derivar de extras[] (misma fuente que configDesdeEstado) traduciendo a nombres
+  // reales de TODOS los accesorios categoria 'cocina' de EXTRAS (anti-hardcodeo: incluye horno,
+  // heladeras, mesa-cano y banco-despensero — WR-01). Recorrer EXTRAS en su orden de catálogo y
+  // filtrar por extras.includes garantiza que solo entren ids válidos: un id desconocido en extras[]
+  // (p.ej. localStorage de una versión vieja) nunca produce 'undefined' en el texto (WR-02).
+  const partesCocina = EXTRAS
+    .filter((e) => e.categoria === 'cocina' && extras.includes(e.id))
+    .map((e) => e.nombre)
+    .filter(Boolean)
   const cocina = partesCocina.length > 0 ? partesCocina.join(', ') : SIN_SELECCION
 
   // Extras de confort/energia (categoria 'extras') → nombres reales (anti-hardcodeo).

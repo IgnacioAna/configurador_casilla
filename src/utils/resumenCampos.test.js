@@ -44,6 +44,18 @@ test('resumenCampos: heladera 12V se traduce a su nombre real cuando esta selecc
   assert.match(c.cocina, /12V/i)
 })
 
+test('resumenCampos: banco-despensero se refleja en cocina cuando esta seleccionado (WR-01)', () => {
+  const c = resumenCampos({ modeloId: 'N4', extras: ['banco-despensero'] })
+  assert.match(c.cocina, /banco/i)
+})
+
+test('resumenCampos: id de cocina desconocido NO inyecta "undefined" en el texto (WR-02)', () => {
+  // Un id inexistente (p.ej. localStorage de una versión vieja) no debe llegar como 'undefined'.
+  const c = resumenCampos({ modeloId: 'N4', extras: ['cocina-horno', 'id-inexistente-xyz'] })
+  assert.match(c.cocina, /horno/i)
+  assert.doesNotMatch(c.cocina, /undefined/i)
+})
+
 test('resumenCampos: estado vacio → cada campo "Sin selección" / "Modelo no disponible", NUNCA undefined', () => {
   const c = resumenCampos({ uso: null, ocupantes: null, modeloId: 'XX', dormitorio: { camas: [] }, extras: [] })
   assert.equal(c.modelo, 'Modelo no disponible')
