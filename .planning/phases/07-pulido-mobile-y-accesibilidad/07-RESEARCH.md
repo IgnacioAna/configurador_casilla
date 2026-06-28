@@ -401,7 +401,11 @@ strings en código, no estado runtime, y NO se tocan en esta fase.
 **Nota:** Las mediciones de contraste son cálculos verificados (no asumidos); lo único asumido es el fondo
 efectivo de las cards (A1) y la inexistencia de un control de zoom separado (A3), que el planner debe confirmar.
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+> RESOLVED: Q1 → OMITIR skip-link (ningún plan lo incluye, coherente con D-01). Q2 → "zoom" = el colapsable
+> existente; NO se agrega control nuevo (07-02 Task 2 con grep gate anti-zoom). Q3 → SÍ checkpoint visual
+> humano al cierre (implementado en 07-03 Task 2, autonomous: false).
 
 1. **¿Vale la pena un skip-link "saltar al contenido"?**
    - What we know: D-03 exige barrido end-to-end por teclado; el header del wizard/resumen es corto (logo +

@@ -143,6 +143,7 @@ Decimal phases appear between their surrounding integers in numeric order.
     - [ ] 07-02-PLAN.md — Anti-overflow a 375px (UX-01) + labels de grupo en los pasos (UX-02) en Landing/pasos/plano/resumen (Wave 2)
   - **Wave 3** *(gate de cierre — verificacion 100% manual por D-02)*
     - [ ] 07-03-PLAN.md — Smoke de regresion (npm test/build) + checkpoint human-verify del UAT manual a 375px/teclado/contraste/reduced-motion (Wave 3)
+  - **Cross-cutting constraints** (aparecen en ≥2 planes): verificación 100% MANUAL con DevTools, CERO deps nuevas (D-02); `npm test`/`npm run build` solo como guarda de regresión; identidad sobria/paleta LOCKED (solo se sube opacidad `/60`→`/70`, no se cambian tokens); trato de usted + gate anti-voseo; NO agregar features (sin control de zoom nuevo, sin redesign, sin barrido WCAG AA formal); no regresar atributos de seguridad existentes (`rel="noopener noreferrer"`).
 **UI hint**: yes
 
 ## Progress
@@ -158,4 +159,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 3/3 | Complete | 2026-06-27 |
 | 5. Pasos 4-6 y Motores | 5/5 | Complete | 2026-06-27 |
 | 6. Resumen y Exportación | 3/3 | Complete | 2026-06-27 |
-| 7. Pulido Mobile y Accesibilidad | 0/3 | Not started | - |
+| 7. Pulido Mobile y Accesibilidad | 0/3 | Planned | - |
