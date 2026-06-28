@@ -21,7 +21,7 @@ export default function Landing({ onComenzar }) {
           Comenzar
         </button>
 
-        <div className="mt-10 space-y-1 text-xs text-impacar-texto/70 sm:text-sm">
+        <div className="mt-10 space-y-1 break-words text-xs text-impacar-texto/70 sm:text-sm">
           <p>Industrias Impacar — Fabricación de casillas rurales desde General Pico, La Pampa</p>
           <p>Estructura de acero reforzado · Doble techo aislado · Energía solar · Entrega en todo el país</p>
         </div>
