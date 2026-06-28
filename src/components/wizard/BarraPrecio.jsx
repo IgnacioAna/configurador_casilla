@@ -12,16 +12,16 @@ export default function BarraPrecio({ estado }) {
       <p className="text-xs text-impacar-texto/70">Presupuesto estimado</p>
       <dl className="mt-2 space-y-1">
         <div className="flex items-center justify-between">
-          <dt className="text-sm">Neto</dt>
-          <dd className="text-sm">{formatPrecio(neto)}</dd>
+          <dt className="min-w-0 break-words text-sm">Neto</dt>
+          <dd className="shrink-0 whitespace-nowrap pl-2 text-sm">{formatPrecio(neto)}</dd>
         </div>
         <div className="flex items-center justify-between">
-          <dt className="text-sm text-impacar-texto/70">IVA 21%</dt>
-          <dd className="text-sm text-impacar-texto/70">{formatPrecio(iva)}</dd>
+          <dt className="min-w-0 break-words text-sm text-impacar-texto/70">IVA 21%</dt>
+          <dd className="shrink-0 whitespace-nowrap pl-2 text-sm text-impacar-texto/70">{formatPrecio(iva)}</dd>
         </div>
         <div className="flex items-center justify-between">
-          <dt className="text-sm font-semibold text-impacar-campo">Total c/IVA</dt>
-          <dd className="text-sm font-semibold text-impacar-campo">{formatPrecio(total)}</dd>
+          <dt className="min-w-0 break-words text-sm font-semibold text-impacar-campo">Total c/IVA</dt>
+          <dd className="shrink-0 whitespace-nowrap pl-2 text-sm font-semibold text-impacar-campo">{formatPrecio(total)}</dd>
         </div>
       </dl>
     </div>

@@ -30,16 +30,16 @@ export default function ConfigSecciones({ estado, onEditar }) {
           className="space-y-2 rounded border border-impacar-texto/10 bg-white/40 p-4"
         >
           <div className="flex items-center">
-            <h2 className="text-xl font-semibold">{s.titulo}</h2>
+            <h2 className="min-w-0 break-words text-xl font-semibold">{s.titulo}</h2>
             <button
               type="button"
               onClick={() => onEditar(s.paso)}
-              className="ml-auto min-h-[44px] text-sm font-medium text-impacar-campo underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-impacar-campo/40"
+              className="ml-auto min-h-[44px] shrink-0 pl-2 text-sm font-medium text-impacar-campo underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-impacar-campo/40"
             >
               Editar
             </button>
           </div>
-          <p className="text-sm">{s.valor}</p>
+          <p className="break-words text-sm">{s.valor}</p>
         </section>
       ))}
     </div>

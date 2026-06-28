@@ -10,8 +10,8 @@ export default function BloqueFinanciacion() {
       <ul className="mt-3 space-y-3">
         {FINANCIACION.map((o) => (
           <li key={o.id}>
-            <p className="text-sm font-semibold">{o.nombre}</p>
-            <p className="text-sm text-impacar-texto/70">{o.detalle}</p>
+            <p className="break-words text-sm font-semibold">{o.nombre}</p>
+            <p className="break-words text-sm text-impacar-texto/70">{o.detalle}</p>
           </li>
         ))}
       </ul>

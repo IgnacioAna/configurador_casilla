@@ -34,8 +34,8 @@ export default function PresupuestoDesglosado({ estado }) {
         {/* Línea base del modelo. */}
         {base && (
           <div className="flex items-center justify-between">
-            <span className="text-sm">{base.label}</span>
-            <span className="text-sm">{formatPrecio(base.precioNeto)}</span>
+            <span className="min-w-0 break-words text-sm">{base.label}</span>
+            <span className="shrink-0 whitespace-nowrap pl-2 text-sm">{formatPrecio(base.precioNeto)}</span>
           </div>
         )}
 
@@ -48,8 +48,8 @@ export default function PresupuestoDesglosado({ estado }) {
               <p className="text-xs font-semibold text-impacar-campo">{g.titulo}</p>
               {delGrupo.map((i) => (
                 <div key={i.id} className="flex items-center justify-between pl-3">
-                  <span className="text-sm">{i.label}</span>
-                  <span className="text-sm">{formatPrecio(i.precioNeto)}</span>
+                  <span className="min-w-0 break-words text-sm">{i.label}</span>
+                  <span className="shrink-0 whitespace-nowrap pl-2 text-sm">{formatPrecio(i.precioNeto)}</span>
                 </div>
               ))}
             </div>
@@ -65,8 +65,8 @@ export default function PresupuestoDesglosado({ estado }) {
               <p className="text-xs font-semibold text-impacar-campo">Otros</p>
               {otros.map((i) => (
                 <div key={i.id} className="flex items-center justify-between pl-3">
-                  <span className="text-sm">{i.label}</span>
-                  <span className="text-sm">{formatPrecio(i.precioNeto)}</span>
+                  <span className="min-w-0 break-words text-sm">{i.label}</span>
+                  <span className="shrink-0 whitespace-nowrap pl-2 text-sm">{formatPrecio(i.precioNeto)}</span>
                 </div>
               ))}
             </div>
@@ -77,16 +77,16 @@ export default function PresupuestoDesglosado({ estado }) {
       {/* Divisor + las 3 líneas Neto / IVA 21% / Total c/IVA (markup VERBATIM de BarraPrecio). */}
       <dl className="mt-3 space-y-1 border-t border-impacar-texto/10 pt-3">
         <div className="flex items-center justify-between">
-          <dt className="text-sm">Neto</dt>
-          <dd className="text-sm">{formatPrecio(neto)}</dd>
+          <dt className="min-w-0 break-words text-sm">Neto</dt>
+          <dd className="shrink-0 whitespace-nowrap pl-2 text-sm">{formatPrecio(neto)}</dd>
         </div>
         <div className="flex items-center justify-between">
-          <dt className="text-sm text-impacar-texto/70">IVA 21%</dt>
-          <dd className="text-sm text-impacar-texto/70">{formatPrecio(iva)}</dd>
+          <dt className="min-w-0 break-words text-sm text-impacar-texto/70">IVA 21%</dt>
+          <dd className="shrink-0 whitespace-nowrap pl-2 text-sm text-impacar-texto/70">{formatPrecio(iva)}</dd>
         </div>
         <div className="flex items-center justify-between">
-          <dt className="text-sm font-semibold text-impacar-campo">Total c/IVA</dt>
-          <dd className="text-sm font-semibold text-impacar-campo">{formatPrecio(total)}</dd>
+          <dt className="min-w-0 break-words text-sm font-semibold text-impacar-campo">Total c/IVA</dt>
+          <dd className="shrink-0 whitespace-nowrap pl-2 text-sm font-semibold text-impacar-campo">{formatPrecio(total)}</dd>
         </div>
       </dl>
 
