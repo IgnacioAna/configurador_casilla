@@ -136,7 +136,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Todo el wizard, el plano y el resumen son usables sin desbordes ni elementos cortados en un viewport de ~375px.
   2. Todos los inputs tienen labels asociados y el contraste de texto/fondo cumple un mínimo legible.
   3. El usuario puede completar el wizard de punta a punta usando solo el teclado (foco visible, orden lógico, controles operables).
-**Plans**: TBD
+**Plans**: 3 plans
+  - **Wave 1** *(cross-cutting global fixes — bajo riesgo, alto apalancamiento)*
+    - [ ] 07-01-PLAN.md — Foco al cambiar de vista/paso (D-03) + reduced-motion global (D-04) + contraste /60->/70 (D-01) + role=group heladera (D-01) (Wave 1)
+  - **Wave 2** *(auditoria por superficie; depende de Wave 1 por owners de archivo disjuntos)*
+    - [ ] 07-02-PLAN.md — Anti-overflow a 375px (UX-01) + labels de grupo en los pasos (UX-02) en Landing/pasos/plano/resumen (Wave 2)
+  - **Wave 3** *(gate de cierre — verificacion 100% manual por D-02)*
+    - [ ] 07-03-PLAN.md — Smoke de regresion (npm test/build) + checkpoint human-verify del UAT manual a 375px/teclado/contraste/reduced-motion (Wave 3)
 **UI hint**: yes
 
 ## Progress
@@ -152,4 +158,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 3/3 | Complete | 2026-06-27 |
 | 5. Pasos 4-6 y Motores | 5/5 | Complete | 2026-06-27 |
 | 6. Resumen y Exportación | 3/3 | Complete | 2026-06-27 |
-| 7. Pulido Mobile y Accesibilidad | 0/TBD | Not started | - |
+| 7. Pulido Mobile y Accesibilidad | 0/3 | Not started | - |
