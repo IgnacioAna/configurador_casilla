@@ -33,13 +33,15 @@ export default function PasoExtras({ estado, dispatch }) {
       </p>
 
       {/* Extras agrupados Confort/Energía (EXTRAS-01, Component Inventory 4) — data-driven por
-          metadato `subgrupo`, sin lista de ids hardcodeada (gate anti-hardcodeo, D-08). */}
+          metadato `subgrupo`, sin lista de ids hardcodeada (gate anti-hardcodeo, D-08). Cada
+          subgrupo lleva nombre accesible (role=group + aria-labelledby), Pattern 3 (d). */}
       {SUBGRUPOS.map((g) => {
         const items = EXTRAS.filter((e) => e.categoria === 'extras' && e.subgrupo === g.id)
+        const labelId = `label-extras-${g.id}`
         return (
           <div key={g.id} className="mt-6">
-            <p className="text-sm font-semibold text-impacar-campo">{g.titulo}</p>
-            <div className="mt-3 space-y-2">
+            <p className="text-sm font-semibold text-impacar-campo" id={labelId}>{g.titulo}</p>
+            <div role="group" aria-labelledby={labelId} className="mt-3 space-y-2">
               {items.map((e) => {
                 const marcado = extras.includes(e.id)
                 return (

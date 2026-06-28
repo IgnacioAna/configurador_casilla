@@ -62,12 +62,13 @@ export default function PasoDormitorio({ estado, dispatch }) {
   return (
     <div>
       <h2 className="text-xl font-semibold text-impacar-texto">Dormitorio</h2>
-      <p className="mt-2 text-sm text-impacar-texto/70">
+      <p className="mt-2 text-sm text-impacar-texto/70" id="label-camas">
         Arme el dormitorio combinando los tipos de cama.
       </p>
 
-      {/* Steppers C/S/M (DORM-01, Component Inventory 1) — una fila por tipo. */}
-      <div className="mt-6 space-y-2">
+      {/* Steppers C/S/M (DORM-01, Component Inventory 1) — una fila por tipo. Los steppers ya tienen
+          aria-label individual; acá se etiqueta el GRUPO (role=group + aria-labelledby), Pattern 3 (d). */}
+      <div role="group" aria-labelledby="label-camas" className="mt-6 space-y-2">
         {TIPOS.map((t) => {
           const n = contar(t.tipo)
           const topeMatrimonial = t.tipo === 'M' && contar('M') >= 1
@@ -131,8 +132,8 @@ export default function PasoDormitorio({ estado, dispatch }) {
           (categoria 'dormitorio'). El toggle va en extras[] (D-13). Sin footprint en el plano (D-09). */}
       {extrasDormitorio.length > 0 && (
         <>
-          <p className="mt-6 text-sm font-medium text-impacar-texto/70">Accesorios del dormitorio</p>
-          <div className="mt-3 space-y-2">
+          <p className="mt-6 text-sm font-medium text-impacar-texto/70" id="label-dorm-accesorios">Accesorios del dormitorio</p>
+          <div role="group" aria-labelledby="label-dorm-accesorios" className="mt-3 space-y-2">
             {extrasDormitorio.map((e) => {
               const marcado = extras.includes(e.id)
               return (

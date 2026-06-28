@@ -97,9 +97,11 @@ export default function PasoUso({ estado, dispatch }) {
     <div>
       <h2 className="text-xl font-semibold text-impacar-texto">Uso y ocupantes</h2>
 
-      {/* Bloque USO (USO-01) — 5 cards de selección única con ícono. */}
-      <p className="mt-2 text-sm text-impacar-texto/70">¿Para qué va a usar la casilla?</p>
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {/* Bloque USO (USO-01) — 5 cards de selección única con ícono. El grupo lleva nombre
+          accesible (role=group + aria-labelledby al <p>), Pattern 3 (d). Los botones ya usan
+          aria-pressed individual; acá se etiqueta el GRUPO. NO radiogroup. */}
+      <p className="mt-2 text-sm text-impacar-texto/70" id="label-uso">¿Para qué va a usar la casilla?</p>
+      <div role="group" aria-labelledby="label-uso" className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
         {USOS.map((u) => {
           const seleccionado = estado.uso === u.id
           return (
@@ -133,9 +135,10 @@ export default function PasoUso({ estado, dispatch }) {
         })}
       </div>
 
-      {/* Bloque OCUPANTES (USO-02) — chips segmentados, separados del bloque uso por mt-6. */}
-      <p className="mt-6 text-sm text-impacar-texto/70">¿Cuántas personas la van a habitar?</p>
-      <div className="mt-3 flex flex-wrap gap-2">
+      {/* Bloque OCUPANTES (USO-02) — chips segmentados, separados del bloque uso por mt-6.
+          Grupo etiquetado (role=group + aria-labelledby), Pattern 3 (d). */}
+      <p className="mt-6 text-sm text-impacar-texto/70" id="label-ocupantes">¿Cuántas personas la van a habitar?</p>
+      <div role="group" aria-labelledby="label-ocupantes" className="mt-3 flex flex-wrap gap-2">
         {OCUPANTES.map((n) => {
           const activo = estado.ocupantes === n
           return (

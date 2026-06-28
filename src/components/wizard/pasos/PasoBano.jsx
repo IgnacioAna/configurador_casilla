@@ -38,9 +38,10 @@ export default function PasoBano({ estado, dispatch }) {
         El baño va en su posición fija, entre la baulera y el dormitorio.
       </p>
 
-      {/* Equipamiento (BANO-01, Patrón C) — selección múltiple por checkboxes, data-driven. */}
-      <p className="mt-6 text-sm font-medium text-impacar-texto/70">Equipamiento del baño</p>
-      <div className="mt-3 space-y-2">
+      {/* Equipamiento (BANO-01, Patrón C) — selección múltiple por checkboxes, data-driven.
+          Grupo etiquetado (role=group + aria-labelledby), Pattern 3 (d). */}
+      <p className="mt-6 text-sm font-medium text-impacar-texto/70" id="label-bano-equip">Equipamiento del baño</p>
+      <div role="group" aria-labelledby="label-bano-equip" className="mt-3 space-y-2">
         {extrasBano.map((e) => {
           const marcado = estado.extras.includes(e.id)
           return (
@@ -65,9 +66,10 @@ export default function PasoBano({ estado, dispatch }) {
         })}
       </div>
 
-      {/* Tamaño del baño (BANO-02, Patrón B) — "Ampliado" disabled en N1/N2 con nota explicativa. */}
-      <p className="mt-6 text-sm font-medium text-impacar-texto/70">Tamaño del baño</p>
-      <div className="mt-3 flex flex-wrap gap-2">
+      {/* Tamaño del baño (BANO-02, Patrón B) — "Ampliado" disabled en N1/N2 con nota explicativa.
+          Grupo etiquetado (role=group + aria-labelledby), Pattern 3 (d). */}
+      <p className="mt-6 text-sm font-medium text-impacar-texto/70" id="label-bano-tamano">Tamaño del baño</p>
+      <div role="group" aria-labelledby="label-bano-tamano" className="mt-3 flex flex-wrap gap-2">
         <button
           type="button"
           aria-pressed={estado.bano.tamano === 'estandar'}

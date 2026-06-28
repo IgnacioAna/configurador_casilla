@@ -27,11 +27,12 @@ export default function PasoDimensiones({ estado, dispatch }) {
   return (
     <div>
       <h2 className="text-xl font-semibold text-impacar-texto">Dimensiones</h2>
-      <p className="mt-2 text-sm text-impacar-texto/70">Elija el modelo de su casilla</p>
+      <p className="mt-2 text-sm text-impacar-texto/70" id="label-modelo">Elija el modelo de su casilla</p>
 
       {/* Grid de 7 cards de modelo (DIM-01), data-driven desde MODELOS. Sin ícono (los íconos son
-          solo de uso). El badge "Sugerido" es independiente del estado seleccionado (Pitfall 4). */}
-      <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          solo de uso). El badge "Sugerido" es independiente del estado seleccionado (Pitfall 4).
+          Grupo etiquetado (role=group + aria-labelledby), Pattern 3 (d). */}
+      <div role="group" aria-labelledby="label-modelo" className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {MODELOS.map((m) => {
           const seleccionado = estado.modeloId === m.id
           // El badge marca la card sugerida según ocupantes; se protege con && para tolerar
