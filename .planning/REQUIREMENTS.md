@@ -95,17 +95,17 @@ Requirements para el MVP/demo. Cada uno mapea a fases del roadmap.
 
 ### Resumen
 
-- [ ] **RESUMEN-01**: El resumen muestra el plano final completo + la configuración elegida
+- [x] **RESUMEN-01**: El resumen muestra el plano final completo + la configuración elegida
       (uso, modelo, ocupantes, baño, dormitorio, cocina, extras).
-- [ ] **RESUMEN-02**: El resumen muestra el presupuesto desglosado (base + accesorios, neto +
+- [x] **RESUMEN-02**: El resumen muestra el presupuesto desglosado (base + accesorios, neto +
       IVA + total) con la nota de "orientativo, sujeto a confirmación".
-- [ ] **RESUMEN-03**: El resumen lista las opciones de financiación disponibles.
+- [x] **RESUMEN-03**: El resumen lista las opciones de financiación disponibles.
 
 ### Exportación
 
-- [ ] **EXPORT-01**: El usuario envía su configuración por WhatsApp vía link `wa.me` con el
+- [x] **EXPORT-01**: El usuario envía su configuración por WhatsApp vía link `wa.me` con el
       mensaje pre-armado (resumen + total).
-- [ ] **EXPORT-02**: El usuario descarga un PDF con el plano (vectorial), la configuración, el
+- [x] **EXPORT-02**: El usuario descarga un PDF con el plano (vectorial), la configuración, el
       precio, el logo IMPACAR y los datos de contacto.
 
 ### UX / Calidad
@@ -179,11 +179,11 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 | PLANO-03 | Phase 3 | Complete (verificado PASSED) |
 | PLANO-04 | Phase 2 | Complete |
 | PRECIO-01 | Phase 5 | Complete (verificado PASSED) |
-| RESUMEN-01 | Phase 6 | Pending |
-| RESUMEN-02 | Phase 6 | Pending |
-| RESUMEN-03 | Phase 6 | Pending |
-| EXPORT-01 | Phase 6 | Pending |
-| EXPORT-02 | Phase 6 | Pending |
+| RESUMEN-01 | Phase 6 | Complete (verificado PASSED) |
+| RESUMEN-02 | Phase 6 | Complete (verificado PASSED) |
+| RESUMEN-03 | Phase 6 | Complete (verificado PASSED) |
+| EXPORT-01 | Phase 6 | Complete (verificado PASSED) |
+| EXPORT-02 | Phase 6 | Complete (verificado PASSED) |
 | UX-01 | Phase 7 | Pending |
 | UX-02 | Phase 7 | Pending |
 | UX-03 | Phase 3 | Complete (verificado PASSED) |
@@ -199,4 +199,4 @@ Mapeo de requirements a fases. Completado en la creación del roadmap (2026-06-2
 
 ---
 *Requirements defined: 2026-06-27*
-*Last updated: 2026-06-27 — sincronización de tracking de Phase 5: DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01 y PRECIO-01 marcados Complete (estaban `[ ]`/Pending pese a que la fase se ejecutó y verificó PASSED — el paso "complete phase execution" del execute-phase no actualizó los checkboxes por usar namespaces de CLI ausentes; ver commit 768f165 y memoria gsd-cli-invocation). 27/34 v1 requirements completos: PLANO-01/02/03/04, SHELL-01/02/03/04, USO-01/02/03, DIM-01/02, BANO-01/02/03, UX-03/04, DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01, PRECIO-01. Pendientes (7): Phase 6 (RESUMEN-01/02/03, EXPORT-01/02), Phase 7 (UX-01/02). — Previo (02877f7): auditoría de milestone (/gsd-audit-milestone) sincronizó trazabilidad de Phase 3.*
+*Last updated: 2026-06-27 — sincronización de tracking de Phase 5: DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01 y PRECIO-01 marcados Complete (estaban `[ ]`/Pending pese a que la fase se ejecutó y verificó PASSED — el paso "complete phase execution" del execute-phase no actualizó los checkboxes por usar namespaces de CLI ausentes; ver commit 768f165 y memoria gsd-cli-invocation). 32/34 v1 requirements completos: PLANO-01/02/03/04, SHELL-01/02/03/04, USO-01/02/03, DIM-01/02, BANO-01/02/03, UX-03/04, DORM-01/02/03, COCINA-01/02/03/04, EXTRAS-01, PRECIO-01, RESUMEN-01/02/03, EXPORT-01/02 (Phase 6 ejecutada y verificada PASSED 2026-06-27). Pendientes (2): Phase 7 (UX-01/02). — Previo (02877f7): auditoría de milestone (/gsd-audit-milestone) sincronizó trazabilidad de Phase 3.*

@@ -27,7 +27,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Cáscara del Wizard y Persistencia** - Landing, navegación de 6 pasos, barra de progreso, localStorage y layout del plano
 - [x] **Phase 4: Pasos 1-3 (Uso, Dimensiones, Baño)** - Selección de uso/ocupantes, modelo sugerido y equipamiento de baño con reflejo en el plano
 - [x] **Phase 5: Pasos 4-6 y Motores (Dormitorio, Cocina, Extras + Precios)** - Camas validadas por geometría, cocina/estar, extras y presupuesto en vivo
-- [ ] **Phase 6: Resumen y Exportación** - Pantalla final con presupuesto desglosado, financiación, envío por WhatsApp y PDF vectorial
+- [x] **Phase 6: Resumen y Exportación** - Pantalla final con presupuesto desglosado, financiación, envío por WhatsApp y PDF vectorial
 - [ ] **Phase 7: Pulido Mobile y Accesibilidad** - Usabilidad en ~375px, labels, contraste y navegación por teclado
 
 ## Phase Details
@@ -121,10 +121,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. El usuario descarga un PDF con el plano vectorial, la configuración, el precio, el logo IMPACAR y los datos de contacto.
 **Plans**: 3 plans
   - **Wave 1** *(lógica pura + deps, interface-first; 06-02 ordenado tras 06-01 por dependencia de datos)*
-    - [ ] 06-01-PLAN.md — Lógica pura: detallePresupuesto (desglose) + resumenCampos (ids→nombres) + nombreArchivoPDF + deps jspdf/svg2pdf (Wave 1)
-    - [ ] 06-02-PLAN.md — Contacto único (wa.me + PDF) + exportWhatsApp (mensaje/link pre-armado) + verificación FINANCIACION (Wave 1, depende de 06-01)
+    - [x] 06-01-PLAN.md — Lógica pura: detallePresupuesto (desglose) + resumenCampos (ids→nombres) + nombreArchivoPDF + deps jspdf/svg2pdf (Wave 1)
+    - [x] 06-02-PLAN.md — Contacto único (wa.me + PDF) + exportWhatsApp (mensaje/link pre-armado) + verificación FINANCIACION (Wave 1, depende de 06-01)
   - **Wave 2** *(bloqueada hasta completar Wave 1)*
-    - [ ] 06-03-PLAN.md — Pantalla Resumen (plano + secciones con Editar + presupuesto desglosado + financiación + WhatsApp/PDF) + estado izado a App + checkpoint visual (Wave 2)
+    - [x] 06-03-PLAN.md — Pantalla Resumen (plano + secciones con Editar + presupuesto desglosado + financiación + WhatsApp/PDF) + estado izado a App + checkpoint visual (Wave 2)
   - **Cross-cutting constraints** (aparecen en ≥2 planes): una sola fuente de la suma (`detallePresupuesto` compone sobre `calcularPresupuesto`, total idéntico a BarraPrecio); `formatPrecio` para todo `$` (nunca formateo a mano); trato de usted + gate anti-voseo; degradación elegante ante estado adulterado (optional chaining + `Array.isArray`, nunca `$NaN`); plano vectorial con jsPDF+svg2pdf (NO html2canvas).
 **UI hint**: yes
 
@@ -151,5 +151,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Cáscara del Wizard y Persistencia | 3/3 | Complete | 2026-06-27 |
 | 4. Pasos 1-3 (Uso, Dimensiones, Baño) | 3/3 | Complete | 2026-06-27 |
 | 5. Pasos 4-6 y Motores | 5/5 | Complete | 2026-06-27 |
-| 6. Resumen y Exportación | 0/3 | Planned | - |
+| 6. Resumen y Exportación | 3/3 | Complete | 2026-06-27 |
 | 7. Pulido Mobile y Accesibilidad | 0/TBD | Not started | - |
