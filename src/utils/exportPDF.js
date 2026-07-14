@@ -1,10 +1,13 @@
 // exportPDF — utilidades de exportacion a PDF. EXPORT-02.
 //
-// Este modulo tiene DOS partes:
+// Este modulo tiene TRES partes:
 //  1) nombreArchivoPDF(estado): PARTE PURA (sin DOM) — el nombre del archivo descargado. Testeable
 //     con node:test. presupuesto-impacar-<modeloId>.pdf, o ...-sin-modelo.pdf cuando no hay modelo.
-//  2) generarPDF(svgNode, estado): browser-side (jsPDF + svg2pdf.js). Toma el nodo SVG vivo del plano
-//     del resumen y lo embebe como VECTOR en una pagina A4 (D-11/D-12). Validacion manual en dev server.
+//  2) construirDocPDF(svgNode, estado): browser-side (jsPDF + svg2pdf.js). Arma el documento completo
+//     (logo, plano vectorial, presupuesto, configuración, pie de contacto) y DEVUELVE el doc SIN
+//     guardar — reutilizable por generarPDF (descarga) y compartir.js (Blob/File para Web Share API).
+//  3) generarPDF(svgNode, estado): envoltorio delgado — construye el doc y dispara doc.save (descarga).
+//     Browser-side; validación manual en dev server.
 import { detallePresupuesto } from './motorPrecios.js'
 import { formatPrecio } from './formato.js'
 import { resumenCampos } from './resumenCampos.js'
@@ -28,16 +31,16 @@ function avanzarSiNecesario(doc, cursorY, margenSuperior = 20) {
   return cursorY
 }
 
-// generarPDF(svgNode, estado): genera y descarga el PDF del resumen (EXPORT-02, D-11/D-12/D-13).
-// Browser-side: usa jsPDF + svg2pdf.js para embeber el plano como VECTOR (no html2canvas), 1 pagina A4.
-// Reglas (RESEARCH Pitfalls 1-4):
+// construirDocPDF(svgNode, estado): arma el documento jsPDF del resumen (EXPORT-02, D-11/D-12/D-13)
+// y lo DEVUELVE sin guardar. Browser-side: usa jsPDF + svg2pdf.js para embeber el plano como VECTOR
+// (no html2canvas), 1 pagina A4. Reglas (RESEARCH Pitfalls 1-4):
 //  - import dinámico de jspdf/svg2pdf → la dep pesada NO infla el bundle inicial del wizard.
-//  - `await doc.svg(...)` ANTES de doc.save (doc.svg es async; guardar antes → PDF sin plano).
+//  - `await doc.svg(...)` ANTES de devolver el doc (doc.svg es async; salir antes → PDF sin plano).
 //  - svgNode = nodo DOM vivo (no string); el alto del plano se deriva del viewBox real (no deforma).
 //  - svgNode null (plano no montado) → se salta el bloque del plano sin crashear (T-06-09).
 //  - Helvetica (default jsPDF) — Inter NO se registra (Pitfall 4, decisión sobria/industrial).
 //  - Todas las cifras vía formatPrecio; contacto desde CONTACTO (D-13).
-export async function generarPDF(svgNode, estado) {
+export async function construirDocPDF(svgNode, estado) {
   const { jsPDF } = await import('jspdf') // import dinámico: dep pesada fuera del bundle inicial
   await import('svg2pdf.js') // side-effect: parchea doc.svg
 
@@ -131,5 +134,11 @@ export async function generarPDF(svgNode, estado) {
     pieY + 5,
   )
 
-  doc.save(nombreArchivoPDF(estado)) // dispara la descarga real en el navegador
+  return doc // el llamador decide: doc.save (descarga) o doc.output('blob') (Web Share API)
+}
+
+// generarPDF(svgNode, estado): envoltorio delgado — construye el doc y dispara la descarga real.
+export async function generarPDF(svgNode, estado) {
+  const doc = await construirDocPDF(svgNode, estado)
+  doc.save(nombreArchivoPDF(estado))
 }
