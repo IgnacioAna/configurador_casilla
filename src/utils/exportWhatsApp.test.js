@@ -67,6 +67,38 @@ test('mensajeWhatsApp con extras no-array no crashea', () => {
   assert.ok(!msg.includes('$NaN'))
 })
 
+// --- mensajeWhatsApp con { pdfAdjunto: true }: el PDF viaja adjunto (Web Share API) ---
+
+test('mensajeWhatsApp({ pdfAdjunto: true }) NO incluye la línea del PDF aparte', () => {
+  const msg = mensajeWhatsApp(ESTADO, { pdfAdjunto: true })
+  assert.ok(
+    !msg.includes('Le envío aparte el PDF'),
+    'con el PDF adjunto NO debe recordar el envío aparte',
+  )
+})
+
+test('mensajeWhatsApp({ pdfAdjunto: true }) mantiene modelo, total formateado y nota orientativa', () => {
+  const msg = mensajeWhatsApp(ESTADO, { pdfAdjunto: true })
+  assert.ok(msg.includes('N4'), 'debe incluir el nombre del modelo')
+  const totalEsperado = formatPrecio(detallePresupuesto(ESTADO).total)
+  assert.ok(msg.includes(totalEsperado), `debe incluir el total formateado ${totalEsperado}`)
+  assert.ok(msg.includes('Presupuesto orientativo, sujeto a confirmación.'), 'debe incluir la nota orientativa')
+})
+
+test('mensajeWhatsApp(null, { pdfAdjunto: true }) no crashea y no contiene $NaN', () => {
+  const msg = mensajeWhatsApp(null, { pdfAdjunto: true })
+  assert.ok(typeof msg === 'string' && msg.length > 0)
+  assert.ok(!msg.includes('$NaN'), 'nunca $NaN')
+})
+
+test('mensajeWhatsApp({ pdfAdjunto: true }): gate anti-voseo — trato de usted', () => {
+  const msg = mensajeWhatsApp(ESTADO, { pdfAdjunto: true })
+  const voseo = ['tenés', 'querés', 'podés', 'elegí', 'mirá', 'enviá', 'fijate', 'vos', 'tené ', 'hacé', 'mandá']
+  for (const token of voseo) {
+    assert.ok(!msg.toLowerCase().includes(token.toLowerCase()), `el mensaje NO debe contener voseo: "${token}"`)
+  }
+})
+
 // --- linkWhatsApp: número, encoding, longitud ---
 
 test('linkWhatsApp empieza con wa.me + el número de CONTACTO (nunca literal)', () => {
