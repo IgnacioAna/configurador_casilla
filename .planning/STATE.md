@@ -29,7 +29,7 @@ Milestone: v1.0 MVP — ✅ ARCHIVED (shipped 2026-06-28, tag v1.0)
 Phases: 7/7 complete · Plans: 22/22 · Requirements: 34/34
 Next: /gsd-new-milestone (definir requirements del próximo ciclo). Pre-go-live: `.env.production` con `VITE_WA_NUMBER=5492302468754`.
 Status: Milestone v1.0 cerrado y archivado en .planning/milestones/
-Last activity: 2026-06-28 -- v1.0 milestone archived + git tag v1.0
+Last activity: 2026-07-14 - Completed quick task 260714-pg2: Adjuntar PDF al envío por WhatsApp vía Web Share API con fallback
 
 Progress: [██████████] 100% (7 de 7 fases completas — milestone v1.0 terminado)
 
@@ -109,6 +109,12 @@ None yet.
 [Issues that affect future work]
 
 None yet.
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260714-pg2 | Adjuntar PDF al envío por WhatsApp vía Web Share API con fallback | 2026-07-14 | 827f55c | [260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w](./quick/260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w/) |
 
 ## Deferred Items
 
