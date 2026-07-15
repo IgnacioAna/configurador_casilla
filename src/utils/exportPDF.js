@@ -5,7 +5,8 @@
 //     con node:test. presupuesto-impacar-<modeloId>.pdf, o ...-sin-modelo.pdf cuando no hay modelo.
 //  2) construirDocPDF(svgNode, estado): browser-side (jsPDF + svg2pdf.js). Arma el documento completo
 //     (logo, plano vectorial, presupuesto, configuración, pie de contacto) y DEVUELVE el doc SIN
-//     guardar — reutilizable por generarPDF (descarga) y compartir.js (Blob/File para Web Share API).
+//     guardar — seam reutilizable (p. ej. doc.output('blob')) si en el futuro hace falta el PDF
+//     como archivo y no como descarga.
 //  3) generarPDF(svgNode, estado): envoltorio delgado — construye el doc y dispara doc.save (descarga).
 //     Browser-side; validación manual en dev server.
 import { detallePresupuesto } from './motorPrecios.js'

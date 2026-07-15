@@ -1,17 +1,23 @@
 import { useState } from 'react'
 import { generarPDF } from '../../utils/exportPDF.js'
-import { compartirPorWhatsApp } from '../../utils/compartir.js'
+import { linkWhatsApp } from '../../utils/exportWhatsApp.js'
 
 // AccionesExport (S6 — EXPORT-01/02). Dos botones:
-//  - WhatsApp = <button> async (primario, relleno verde impacar-campo — NO el verde de marca
-//    WhatsApp #25D366; UI-SPEC locked) que llama compartirPorWhatsApp: Web Share API con el PDF
-//    ADJUNTO cuando hay soporte, o fallback descarga + wa.me. El criterio T-06-07 (noopener,
-//    anti reverse-tabnabbing) se preserva dentro de compartir.js (window.open del fallback).
+//  - WhatsApp = <a href={linkWhatsApp(estado)} target="_blank" rel="noopener noreferrer"> (primario,
+//    relleno verde impacar-campo — NO el verde de marca WhatsApp #25D366; UI-SPEC locked). T-06-07:
+//    rel="noopener noreferrer" mitiga reverse tabnabbing. El onClick dispara ADEMÁS la descarga del
+//    PDF, para que el cliente lo tenga a mano y pueda adjuntarlo en el chat.
+//
+//    POR QUÉ <a> wa.me Y NO <button> + navigator.share (decisión 2026-07-14): la Web Share API sí
+//    adjunta el PDF, pero la hoja de compartir NO permite pre-seleccionar destinatario — el cliente
+//    elige a quién enviarlo y NO tiene a Impacar entre sus contactos (nunca habló con la fábrica).
+//    El link wa.me lleva el número ADENTRO: abre el chat correcto sin que el cliente lo conozca.
+//    Que el mensaje LLEGUE pesa más que el adjunto (el texto ya trae la config completa para
+//    cotizar; el plano se regenera desde ahí). Además un <a href> nativo NO lo bloquea el popup
+//    blocker — el window.open posterior a un await sí (verificado bloqueado en browser).
 //  - PDF = <button> outline que dispara generarPDF; queda disabled mientras genera (T-06-09: sin
 //    doble-click). El nodo SVG vivo se resuelve en el momento del click vía getSvgNode() (el ref
 //    se resuelve tras el montaje, no en el render).
-// Cross-disable: ambos flujos arman un doc jsPDF sobre el MISMO svgNode vivo → no corren a la vez
-// (T-Q2-03).
 // Debajo, link global "Volver a editar" (estilo del "Volver a empezar" del wizard).
 // Glyphs SVG inline (patrón IconoUso de PasoUso.jsx; sin librería de iconos).
 
@@ -57,22 +63,16 @@ function IconoDescarga() {
 export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
   const [generando, setGenerando] = useState(false)
   const [errorPDF, setErrorPDF] = useState(null)
-  const [compartiendo, setCompartiendo] = useState(false)
-  const [errorShare, setErrorShare] = useState(null)
 
-  const onCompartir = async () => {
-    setCompartiendo(true)
-    setErrorShare(null)
-    try {
-      // 'shared'/'cancelled'/'fallback' se ignoran — no requieren feedback; solo los errores
-      // propagados (AbortError NO llega hasta acá) disparan la alerta sobria.
-      await compartirPorWhatsApp({ svgNode: getSvgNode?.(), estado })
-    } catch (err) {
-      console.error('Error al compartir por WhatsApp:', err)
-      setErrorShare('No se pudo compartir. Intente nuevamente.')
-    } finally {
-      setCompartiendo(false)
-    }
+  // Al enviar por WhatsApp se dispara TAMBIÉN la descarga del PDF, para que el cliente lo tenga a
+  // mano y pueda adjuntarlo en el chat si quiere (el mensaje lo anuncia: "Le envío aparte el PDF").
+  // Best-effort: si el PDF falla, la navegación a wa.me igual ocurre (el <a> ya la maneja) — lo que
+  // NO puede fallar es que el mensaje llegue. Por eso el error del PDF acá va silencioso a consola:
+  // una alerta roja mientras el usuario ya se fue a WhatsApp sería ruido sin acción posible.
+  const onEnviarWhatsApp = () => {
+    generarPDF(getSvgNode?.(), estado).catch((err) => {
+      console.error('Error al generar el PDF adjuntable:', err)
+    })
   }
 
   const onDescargar = async () => {
@@ -93,18 +93,19 @@ export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
   return (
     <div>
       <div className="flex flex-col gap-3 sm:flex-row">
-        <button
-          type="button"
-          disabled={compartiendo || generando}
-          onClick={onCompartir}
-          className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-impacar-campo px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-impacar-campo/90 focus:outline-none focus:ring-2 focus:ring-impacar-campo/40 disabled:cursor-not-allowed disabled:opacity-40"
+        <a
+          href={linkWhatsApp(estado)}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onEnviarWhatsApp}
+          className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-impacar-campo px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-impacar-campo/90 focus:outline-none focus:ring-2 focus:ring-impacar-campo/40"
         >
           <IconoWhatsApp />
-          {compartiendo ? 'Preparando…' : 'Enviar por WhatsApp'}
-        </button>
+          Enviar por WhatsApp
+        </a>
         <button
           type="button"
-          disabled={generando || compartiendo}
+          disabled={generando}
           onClick={onDescargar}
           className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-impacar-campo px-5 py-2 text-sm font-semibold text-impacar-campo transition-colors hover:bg-impacar-campo/5 focus:outline-none focus:ring-2 focus:ring-impacar-campo/40 disabled:cursor-not-allowed disabled:opacity-40"
         >
@@ -113,11 +114,9 @@ export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
         </button>
       </div>
 
-      {errorShare && (
-        <p role="alert" className="mt-3 text-sm text-red-700">
-          {errorShare}
-        </p>
-      )}
+      <p className="mt-3 text-sm text-impacar-texto/60">
+        Al enviar se descarga también el PDF con el plano, por si desea adjuntarlo en el chat.
+      </p>
 
       {errorPDF && (
         <p role="alert" className="mt-3 text-sm text-red-700">
