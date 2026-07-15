@@ -97,6 +97,7 @@ Recent decisions affecting current work:
 - [04-03]: Chip "Ampliado" disabled data-driven con permiteBanoAmpliado(estado.modeloId) (disabled + aria-disabled); nota exacta "Disponible desde el modelo N3 (6,10 m) en adelante." visible solo cuando deshabilitado; tolera modeloId adulterado (mitiga T-04-07).
 - [04-03]: pasosRegistro.jsx con file ownership exclusivo del Plan 04-03 enchufa los 3 pasos reales (Componente real reemplaza StubPaso en uso/dimensiones/baño); 4-6 siguen StubPaso (Phase 5); cáscara del wizard intacta.
 - [04-03]: Checkpoint human-verify APROBADO con verificación visual real a ~375px (todos los criterios pasaron): navegación 1→2→3, sugerencia N3 para 4 ocupantes, badge Sugerido independiente del seleccionado, baño ampliado crece 162.8→222 (estar se recomprime, suma exacta), disabled+nota en N1, corrección Q4, persistencia F5, sin precios. npm test 33/33, npm run build OK.
+- [quick-260714-pg2]: **El envío por WhatsApp NO puede adjuntar el PDF — y no debe intentarlo.** La Web Share API adjunta archivos pero no permite pre-seleccionar destinatario; el cliente no tiene a Impacar en sus contactos, así que el mensaje no llegaría. El link wa.me lleva el número adentro (D-08) y es la ÚNICA vía que garantiza que la config llegue a la fábrica. El mensaje de texto es autosuficiente para cotizar (trae toda la config + total); el PDF es para el cliente y se descarga en el mismo click por si quiere adjuntarlo a mano. No reintroducir navigator.share como camino primario.
 
 ### Pending Todos
 
@@ -114,7 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
-| 260714-pg2 | Adjuntar PDF al envío por WhatsApp vía Web Share API con fallback | 2026-07-14 | 827f55c | [260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w](./quick/260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w/) |
+| 260714-pg2 | Adjuntar PDF al envío por WhatsApp (Web Share **revertido** → wa.me garantizado + descarga del PDF en el mismo click) | 2026-07-14 | 5837c4c | [260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w](./quick/260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w/) |
 
 ## Deferred Items
 

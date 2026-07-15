@@ -39,6 +39,21 @@ metrics:
 
 # Quick Task 260714-pg2: Adjuntar PDF al envío por WhatsApp vía Web Share API — Summary
 
+> ## ⚠️ REVERTIDO — leer antes que nada (2026-07-14, commit `5837c4c`)
+>
+> **El enfoque de Web Share API se descartó tras detectar un fallo de diseño de fondo.** La hoja de
+> compartir adjunta el PDF pero **no permite pre-seleccionar destinatario**: el cliente elige a quién
+> enviarlo, y **no tiene a Impacar entre sus contactos** (nunca habló con la fábrica). El mensaje,
+> por lo tanto, no llegaba — rompiendo el objetivo mismo de la herramienta.
+>
+> **Estado final:** botón WhatsApp = `<a href={linkWhatsApp(estado)}>` (wa.me lleva el número
+> adentro → el chat correcto se abre sin que el cliente lo conozca), con el PDF descargándose en
+> paralelo vía `onClick` para que pueda adjuntarlo a mano. `compartir.js` y el parámetro
+> `pdfAdjunto` fueron eliminados. Lo que sobrevive de este quick task: el refactor `construirDocPDF`
+> y la descarga del PDF integrada al click de envío (antes eran dos botones separados).
+>
+> El detalle de abajo describe la implementación original y se conserva como registro histórico.
+
 **One-liner:** PDF adjunto al share sheet vía Web Share API (gate canShare({files})) con fallback fiel descarga+wa.me, mensaje parametrizado por camino y botón WhatsApp async con cross-disable.
 
 ## What Was Done
@@ -97,6 +112,8 @@ None — la superficie nueva (navigator.share, window.open) está cubierta en el
 | 2 (RED) | ad213cb | test | Tests fallidos para pdfAdjunto |
 | 2 (GREEN) | 2da4453 | feat | mensajeWhatsApp parametrizado + compartir.js |
 | 3 | e11bbe4 | feat | Botón WhatsApp async con cross-disable |
+| — | 827f55c | fix | Abrir wa.me antes del await (anti popup-block) |
+| — | 5837c4c | fix | **Revert del enfoque Web Share → wa.me garantizado** (ver aviso al inicio) |
 
 ## Self-Check: PASSED
 
