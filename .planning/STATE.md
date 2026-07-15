@@ -29,7 +29,7 @@ Milestone: v1.0 MVP — ✅ ARCHIVED (shipped 2026-06-28, tag v1.0)
 Phases: 7/7 complete · Plans: 22/22 · Requirements: 34/34
 Next: /gsd-new-milestone (definir requirements del próximo ciclo). Pre-go-live: `.env.production` con `VITE_WA_NUMBER=5492302468754`.
 Status: Milestone v1.0 cerrado y archivado en .planning/milestones/
-Last activity: 2026-07-14 - Completed quick task 260714-pg2: Adjuntar PDF al envío por WhatsApp vía Web Share API con fallback
+Last activity: 2026-07-14 - Completed quick task 260714-u28: compartir enlace con la config en la URL + OG tags. Repo en GitHub (IgnacioAna/configurador_casilla, rama main). Pendiente: deploy en Vercel + finalizar og:url/og:image con el dominio real.
 
 Progress: [██████████] 100% (7 de 7 fases completas — milestone v1.0 terminado)
 
@@ -116,6 +116,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260714-pg2 | Adjuntar PDF al envío por WhatsApp (Web Share **revertido** → wa.me garantizado + descarga del PDF en el mismo click) | 2026-07-14 | 5837c4c | [260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w](./quick/260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w/) |
+| 260714-u28 | Compartir **enlace** con la config en la URL (abre el configurador vivo) + OG tags/tarjeta para WhatsApp | 2026-07-14 | 78ba884 | [260714-u28-compartir-enlace-con-la-config-en-la-url](./quick/260714-u28-compartir-enlace-con-la-config-en-la-url/) |
 
 ## Deferred Items
 
