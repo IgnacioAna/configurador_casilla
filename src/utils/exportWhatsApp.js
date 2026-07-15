@@ -3,15 +3,18 @@
 // Compone sobre detallePresupuesto (única fuente del total) y resumenCampos (labels legibles,
 // tolerante a estado adulterado). El número SIEMPRE viene de CONTACTO.whatsapp (D-08), NUNCA literal
 // acá — el link lo lleva adentro, así el cliente no necesita conocerlo. El texto va 100% en trato de
-// usted (gate anti-voseo) y termina recordando el PDF (D-10: wa.me no adjunta archivos; el PDF se
-// descarga en paralelo para que el cliente lo adjunte a mano). El mensaje es autosuficiente para
-// cotizar: trae la config completa. encodeURIComponent sobre TODO el text (V5 output encoding;
-// \n→%0A, & y acentos/ñ codificados — T-06-04). Conciso, sin desglose ítem-por-ítem con precios
-// (el detalle completo va en el PDF, Pitfall 6 / límite ~2000 URL).
+// usted (gate anti-voseo) y termina con un ENLACE que abre el configurador con la casilla del
+// cliente ya cargada (plano vivo + presupuesto) — reemplaza al "PDF que se pierde": la magia visual
+// se conserva porque el asesor abre el link y ve la config viva, no un archivo muerto ni texto
+// plano. El enlace lo arma enlaceConfigApp (configLink.js) con la config embebida en la URL.
+// encodeURIComponent sobre TODO el text (V5 output encoding; \n→%0A, & y acentos/ñ codificados —
+// T-06-04). Conciso, sin desglose ítem-por-ítem con precios (el detalle vive en el enlace / PDF,
+// Pitfall 6 / límite ~2000 URL).
 import { CONTACTO } from '../data/contacto.js'
 import { detallePresupuesto } from './motorPrecios.js'
 import { formatPrecio } from './formato.js'
 import { resumenCampos } from './resumenCampos.js'
+import { enlaceConfigApp } from './configLink.js'
 
 export function mensajeWhatsApp(estado) {
   const { total } = detallePresupuesto(estado) // única fuente del total (no re-sumar)
@@ -29,7 +32,8 @@ export function mensajeWhatsApp(estado) {
     `Total c/IVA: ${formatPrecio(total)}`,
     'Presupuesto orientativo, sujeto a confirmación.',
     '',
-    'Le envío aparte el PDF con el plano y el detalle.', // D-10: wa.me no adjunta archivos
+    'Vea el plano en planta y el detalle completo acá:',
+    enlaceConfigApp(estado), // link que abre el configurador con esta casilla ya cargada
   ].join('\n')
 }
 

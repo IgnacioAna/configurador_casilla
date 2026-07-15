@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from 'react'
 import Landing from './components/Landing.jsx'
 import ConfiguratorWizard from './components/ConfiguratorWizard.jsx'
 import Resumen from './components/Resumen.jsx'
-import { usePersistedConfig, STORAGE_KEY } from './hooks/usePersistedConfig.js'
+import { usePersistedConfig, STORAGE_KEY, limpiarTokenURL } from './hooks/usePersistedConfig.js'
+import { decodificarConfig } from './utils/configLink.js'
 
 // Ruteo de estado de una sola página (SPA): landing → wizard → resumen, sin cambiar la URL.
 //
@@ -12,12 +13,18 @@ import { usePersistedConfig, STORAGE_KEY } from './hooks/usePersistedConfig.js'
 // así "Editar" desde el resumen (IR_A_PASO) muta el MISMO estado que lee el wizard, y navegar al
 // resumen no resetea nada (D-02: el estado sigue vivo).
 
-// Si ya hay una configuración guardada, retomamos directo en el wizard (SHELL-03:
-// al recargar, el usuario retoma donde quedó). Si no, arranca en la landing.
-// vistaInicial NO conoce 'resumen' a propósito: un F5 en el resumen cae al wizard con el estado
-// intacto (el usuario retoma el configurador y vuelve a entrar al resumen desde el Paso 6).
+// Vista de arranque:
+//  - Link compartido (?c= válido en la URL) → 'resumen' directo: el asesor abre el link del cliente
+//    y cae en el resumen con el plano vivo + presupuesto. Es el corazón de "compartir el enlace".
+//  - Config guardada en localStorage → 'wizard' (SHELL-03: retoma donde quedó).
+//  - Nada → 'landing'.
+// Nota: salvo por el link compartido, vistaInicial NO abre 'resumen' — un F5 sin ?c= cae al wizard
+// con el estado intacto (el usuario retoma el configurador y vuelve a entrar al resumen desde el
+// Paso 6). El ?c= se limpia tras el montaje, así que ese F5 posterior ya no reabre el resumen.
 function vistaInicial() {
   try {
+    const token = new URLSearchParams(window.location.search).get('c')
+    if (token && decodificarConfig(token)) return 'resumen'
     return localStorage.getItem(STORAGE_KEY) ? 'wizard' : 'landing'
   } catch {
     return 'landing'
@@ -37,6 +44,12 @@ export default function App() {
   useEffect(() => {
     vistaRef.current?.focus()
   }, [vista])
+
+  // Tras sembrar el estado desde ?c= (link compartido), borrar el token de la URL: un F5 posterior
+  // debe usar el localStorage ya actualizado, no re-sembrar desde el token viejo pisando ediciones.
+  useEffect(() => {
+    limpiarTokenURL()
+  }, [])
 
   return (
     <div className="min-h-screen bg-impacar-fondo text-impacar-texto font-sans">

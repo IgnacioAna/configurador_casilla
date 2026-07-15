@@ -11,9 +11,27 @@
 //    almacenamiento no está disponible (modo privado/SSR), la app sigue en memoria sin romper.
 import { useEffect, useReducer } from 'react'
 import { estadoInicial, wizardReducer, ACCIONES, TOTAL_PASOS } from '../state/wizardReducer.js'
+import { decodificarConfig } from '../utils/configLink.js'
 
 // Key EXACTA del almacenamiento (constante única, sin variaciones).
 export const STORAGE_KEY = 'impacar_config_v1'
+
+// Enlace compartido: lee ?c=<token> de la URL y lo decodifica a un estado. Es la SEMILLA de una
+// config compartida por WhatsApp (el asesor abre el link y ve la casilla del cliente). El token es
+// input NO confiable → decodificarConfig ya valida contra el catálogo, y acá se vuelve a exigir
+// esEstadoValido antes de confiar. Tiene PRECEDENCIA sobre localStorage (un link recién abierto pisa
+// lo que hubiera guardado de antes). Tras sembrar, App borra el ?c= de la URL (ver limpiarTokenURL)
+// para que un F5 posterior use el localStorage ya actualizado y no re-siembre pisando las ediciones.
+function estadoDesdeURL() {
+  try {
+    const token = new URLSearchParams(window.location.search).get('c')
+    if (!token) return null
+    const estado = decodificarConfig(token)
+    return estado && esEstadoValido(estado) ? estado : null
+  } catch {
+    return null
+  }
+}
 
 // Valida que el estado restaurado tenga la forma mínima esperada del wizard.
 // Mitiga T-03-01 / T-04-01 / T-04-09: si está adulterado/corrupto O incompleto (le faltan claves
@@ -49,6 +67,9 @@ export function esEstadoValido(valor) {
 // Lazy initializer de useReducer: restaura el estado desde localStorage si hay una config válida
 // guardada; en cualquier caso de error (parse, validación, storage no disponible) cae a estadoInicial.
 function cargarEstado() {
+  // Precedencia: un ?c= válido en la URL (link compartido) gana sobre localStorage.
+  const desdeURL = estadoDesdeURL()
+  if (desdeURL) return desdeURL
   try {
     const guardado = localStorage.getItem(STORAGE_KEY)
     if (!guardado) return estadoInicial
@@ -57,6 +78,20 @@ function cargarEstado() {
   } catch {
     // localStorage no disponible (modo privado/SSR) o JSON corrupto: arrancar limpio.
     return estadoInicial
+  }
+}
+
+// Borra el ?c= de la URL tras sembrar el estado (una sola vez). Sin esto, un F5 re-sembraría desde
+// el token viejo y pisaría las ediciones que el asesor haya hecho después de abrir el link.
+export function limpiarTokenURL() {
+  try {
+    const url = new URL(window.location.href)
+    if (url.searchParams.has('c')) {
+      url.searchParams.delete('c')
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`)
+    }
+  } catch {
+    // history/URL no disponible (SSR): sin efecto, inocuo.
   }
 }
 

@@ -23,16 +23,17 @@ const ESTADO = {
 
 // --- mensajeWhatsApp: contenido ---
 
-test('mensajeWhatsApp incluye el modelo, el total formateado, la nota orientativa y el recordatorio del PDF', () => {
+test('mensajeWhatsApp incluye el modelo, el total formateado, la nota orientativa y el enlace vivo', () => {
   const msg = mensajeWhatsApp(ESTADO)
   assert.ok(msg.includes('N4'), 'debe incluir el nombre del modelo')
   const totalEsperado = formatPrecio(detallePresupuesto(ESTADO).total)
   assert.ok(msg.includes(totalEsperado), `debe incluir el total formateado ${totalEsperado}`)
   assert.ok(msg.includes('Presupuesto orientativo, sujeto a confirmación.'), 'debe incluir la nota orientativa')
   assert.ok(
-    msg.includes('Le envío aparte el PDF con el plano y el detalle.'),
-    'debe terminar recordando el PDF (D-10)',
+    msg.includes('Vea el plano en planta y el detalle completo acá:'),
+    'debe invitar a ver el plano',
   )
+  assert.ok(msg.includes('/?c=1-N4-'), 'debe terminar con el enlace que abre el configurador (token v1)')
 })
 
 test('mensajeWhatsApp: gate anti-voseo — el copy está en trato de usted (patrón Fase 3)', () => {

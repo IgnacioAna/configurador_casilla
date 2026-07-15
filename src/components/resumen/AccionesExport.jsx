@@ -5,16 +5,15 @@ import { linkWhatsApp } from '../../utils/exportWhatsApp.js'
 // AccionesExport (S6 — EXPORT-01/02). Dos botones:
 //  - WhatsApp = <a href={linkWhatsApp(estado)} target="_blank" rel="noopener noreferrer"> (primario,
 //    relleno verde impacar-campo — NO el verde de marca WhatsApp #25D366; UI-SPEC locked). T-06-07:
-//    rel="noopener noreferrer" mitiga reverse tabnabbing. El onClick dispara ADEMÁS la descarga del
-//    PDF, para que el cliente lo tenga a mano y pueda adjuntarlo en el chat.
+//    rel="noopener noreferrer" mitiga reverse tabnabbing.
 //
-//    POR QUÉ <a> wa.me Y NO <button> + navigator.share (decisión 2026-07-14): la Web Share API sí
-//    adjunta el PDF, pero la hoja de compartir NO permite pre-seleccionar destinatario — el cliente
-//    elige a quién enviarlo y NO tiene a Impacar entre sus contactos (nunca habló con la fábrica).
-//    El link wa.me lleva el número ADENTRO: abre el chat correcto sin que el cliente lo conozca.
-//    Que el mensaje LLEGUE pesa más que el adjunto (el texto ya trae la config completa para
-//    cotizar; el plano se regenera desde ahí). Además un <a href> nativo NO lo bloquea el popup
-//    blocker — el window.open posterior a un await sí (verificado bloqueado en browser).
+//    POR QUÉ <a> wa.me Y NO navigator.share (decisión 2026-07-14): (1) la hoja de compartir NO
+//    permite pre-seleccionar destinatario — el cliente no tiene a Impacar en sus contactos, así que
+//    el mensaje no llegaría; wa.me lleva el número ADENTRO y abre el chat correcto. (2) El mensaje
+//    ya no depende de adjuntar un PDF: termina con un ENLACE que abre el configurador con la casilla
+//    del cliente cargada (plano vivo + presupuesto), así que la magia visual se conserva sin
+//    archivo. (3) Un <a href> nativo no lo bloquea el popup blocker. El botón "Descargar PDF" sigue
+//    disponible aparte para quien quiera el archivo.
 //  - PDF = <button> outline que dispara generarPDF; queda disabled mientras genera (T-06-09: sin
 //    doble-click). El nodo SVG vivo se resuelve en el momento del click vía getSvgNode() (el ref
 //    se resuelve tras el montaje, no en el render).
@@ -64,17 +63,6 @@ export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
   const [generando, setGenerando] = useState(false)
   const [errorPDF, setErrorPDF] = useState(null)
 
-  // Al enviar por WhatsApp se dispara TAMBIÉN la descarga del PDF, para que el cliente lo tenga a
-  // mano y pueda adjuntarlo en el chat si quiere (el mensaje lo anuncia: "Le envío aparte el PDF").
-  // Best-effort: si el PDF falla, la navegación a wa.me igual ocurre (el <a> ya la maneja) — lo que
-  // NO puede fallar es que el mensaje llegue. Por eso el error del PDF acá va silencioso a consola:
-  // una alerta roja mientras el usuario ya se fue a WhatsApp sería ruido sin acción posible.
-  const onEnviarWhatsApp = () => {
-    generarPDF(getSvgNode?.(), estado).catch((err) => {
-      console.error('Error al generar el PDF adjuntable:', err)
-    })
-  }
-
   const onDescargar = async () => {
     setGenerando(true)
     setErrorPDF(null)
@@ -97,7 +85,6 @@ export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
           href={linkWhatsApp(estado)}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={onEnviarWhatsApp}
           className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-impacar-campo px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-impacar-campo/90 focus:outline-none focus:ring-2 focus:ring-impacar-campo/40"
         >
           <IconoWhatsApp />
@@ -113,10 +100,6 @@ export default function AccionesExport({ estado, getSvgNode, onVolverEditar }) {
           {generando ? 'Generando…' : 'Descargar PDF'}
         </button>
       </div>
-
-      <p className="mt-3 text-sm text-impacar-texto/60">
-        Al enviar se descarga también el PDF con el plano, por si desea adjuntarlo en el chat.
-      </p>
 
       {errorPDF && (
         <p role="alert" className="mt-3 text-sm text-red-700">
