@@ -63,8 +63,8 @@ test('resumenCampos: estado vacio → cada campo "Sin selección" / "Modelo no d
   assert.equal(c.uso, 'Sin selección')
   assert.equal(c.ocupantes, 'Sin selección')
   assert.equal(c.bano, 'Sin selección')
-  assert.equal(c.camas, 'Sin selección')
-  assert.equal(c.cocina, 'Sin selección')
+  assert.equal(c.camas, 'Sin camas seleccionadas')
+  assert.equal(c.cocina, 'Sin accesorios de cocina')
   assert.deepEqual(c.extras, [])
   // Ningun valor primitivo undefined / '' / 'null' / 'undefined'
   for (const [clave, valor] of Object.entries(c)) {
@@ -85,19 +85,19 @@ test('resumenCampos(null) no crashea y degrada a "Sin selección"', () => {
   const c = resumenCampos(null)
   assert.equal(c.modelo, 'Modelo no disponible')
   assert.equal(c.uso, 'Sin selección')
-  assert.equal(c.camas, 'Sin selección')
+  assert.equal(c.camas, 'Sin camas seleccionadas')
   assert.deepEqual(c.extras, [])
 })
 
-test('resumenCampos: extras no-array → no crashea, extras = [] y cocina "Sin selección"', () => {
+test('resumenCampos: extras no-array → no crashea, extras = [] y cocina "Sin accesorios de cocina"', () => {
   const c = resumenCampos({ modeloId: 'N4', extras: 'no-array' })
   assert.deepEqual(c.extras, [])
-  assert.equal(c.cocina, 'Sin selección')
+  assert.equal(c.cocina, 'Sin accesorios de cocina')
 })
 
-test('resumenCampos: camas no-array (estado adulterado) → "Sin selección" (no crashea)', () => {
+test('resumenCampos: camas no-array (estado adulterado) → "Sin camas seleccionadas" (no crashea)', () => {
   const c = resumenCampos({ modeloId: 'N4', dormitorio: { camas: 'no-array' }, extras: [] })
-  assert.equal(c.camas, 'Sin selección')
+  assert.equal(c.camas, 'Sin camas seleccionadas')
 })
 
 test('resumenCampos: no contiene valores undefined en ningun campo (estado parcial)', () => {

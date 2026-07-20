@@ -10,8 +10,8 @@
 //     modelo:    'Nx'           | 'Modelo no disponible'
 //     largo:     'X,Y m'        | 'Sin selección'
 //     bano:      'Estándar' | 'Ampliado' | 'Sin selección'
-//     camas:     texto legible  | 'Sin selección'
-//     cocina:    texto legible (horno/heladera/mesa) | 'Sin selección'
+//     camas:     texto legible  | 'Sin camas seleccionadas'
+//     cocina:    texto legible (horno/heladera/mesa) | 'Sin accesorios de cocina'
 //     extras:    Array<string>  (nombres de confort/energia; [] = el consumidor muestra 'Sin selección')
 //   }
 //
@@ -38,6 +38,10 @@ const TIPOS = [
 ]
 
 const SIN_SELECCION = 'Sin selección'
+// Fallbacks específicos: dormitorio y cocina son zonas fijas de la casilla; lo que falta son las
+// camas/accesorios, no el ambiente. 'Sin selección' se leería como error del sistema en el presupuesto.
+const SIN_CAMAS = 'Sin camas seleccionadas'
+const SIN_ACCESORIOS_COCINA = 'Sin accesorios de cocina'
 
 export function resumenCampos(estado) {
   const modelo = MODELOS.find((m) => m.id === estado?.modeloId)
@@ -67,7 +71,7 @@ export function resumenCampos(estado) {
     .map((t) => ({ ...t, n: camas.filter((c) => c?.tipo === t.tipo).length }))
     .filter((t) => t.n > 0)
     .map((t) => `${t.n} ${t.singular}${t.n > 1 ? 's' : ''}`)
-  const camasTexto = partesCamas.length > 0 ? partesCamas.join(', ') : SIN_SELECCION
+  const camasTexto = partesCamas.length > 0 ? partesCamas.join(', ') : SIN_CAMAS
 
   // Cocina/estar: derivar de extras[] (misma fuente que configDesdeEstado) traduciendo a nombres
   // reales de TODOS los accesorios categoria 'cocina' de EXTRAS (anti-hardcodeo: incluye horno,
@@ -78,7 +82,7 @@ export function resumenCampos(estado) {
     .filter((e) => e.categoria === 'cocina' && extras.includes(e.id))
     .map((e) => e.nombre)
     .filter(Boolean)
-  const cocina = partesCocina.length > 0 ? partesCocina.join(', ') : SIN_SELECCION
+  const cocina = partesCocina.length > 0 ? partesCocina.join(', ') : SIN_ACCESORIOS_COCINA
 
   // Extras de confort/energia (categoria 'extras') → nombres reales (anti-hardcodeo).
   const extrasNombres = EXTRAS
