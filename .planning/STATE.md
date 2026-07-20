@@ -31,7 +31,7 @@ Next: /gsd-new-milestone (definir requirements del próximo ciclo).
 **En producción:** https://configurador-casilla.vercel.app — deploy automático en cada push a `main`.
 **Pendiente para el go-live real:** el WhatsApp apunta al número de DEMO (5492954555113, el de Ignacio) a propósito, para que las pruebas no lleguen a la fábrica. Para el go-live, definir `VITE_WA_NUMBER=5492302468754` en Vercel → Settings → Environment Variables (no hace falta tocar código; ver `src/data/contacto.js`).
 Status: Milestone v1.0 cerrado y archivado en .planning/milestones/
-Last activity: 2026-07-20 - Completed quick task 260720-ifp: copy específico para camas/cocina en el resumen ('Sin camas seleccionadas' / 'Sin accesorios de cocina') + aviso cobre no bloqueante en Dormitorio cuando la config no incluye camas. Pre-demo: evita que un presupuesto sin camas se lea como error del sistema.
+Last activity: 2026-07-20 - Completed quick task 260720-oz0: sello 'Lista 108 · Febrero 2026' en resumen, PDF y WhatsApp + fecha de generación en el PDF (blinda la objeción de listas de precios cambiantes) + og.png real con identidad del proyecto (el desplegado era un PNG 100% transparente → preview blanca en WhatsApp). Pendiente: push a GitHub para que Vercel despliegue ambas quick tasks del día.
 
 Progress: [██████████] 100% (7 de 7 fases completas — milestone v1.0 terminado)
 
@@ -120,6 +120,7 @@ None yet.
 | 260714-pg2 | Adjuntar PDF al envío por WhatsApp (Web Share **revertido** → wa.me garantizado + descarga del PDF en el mismo click) | 2026-07-14 | 5837c4c | [260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w](./quick/260714-pg2-adjuntar-pdf-al-envio-por-whatsapp-via-w/) |
 | 260714-u28 | Compartir **enlace** con la config en la URL (abre el configurador vivo) + OG tags/tarjeta para WhatsApp | 2026-07-14 | 78ba884 | [260714-u28-compartir-enlace-con-la-config-en-la-url](./quick/260714-u28-compartir-enlace-con-la-config-en-la-url/) |
 | 260720-ifp | Copy específico en resumen (camas/cocina sin 'Sin selección' genérico) + aviso cobre no bloqueante cuando no hay camas | 2026-07-20 | 5ff4a20 | [260720-ifp-copy-especifico-sin-seleccion-aviso-sin-](./quick/260720-ifp-copy-especifico-sin-seleccion-aviso-sin-/) |
+| 260720-oz0 | Sello 'Lista 108 · Febrero 2026' en resumen/PDF/WhatsApp (constante LISTA_PRECIOS) + fecha de generación en PDF + og.png real (el anterior era 100% transparente; script generador en scripts/gen-og.ps1) | 2026-07-20 | 03f4825 | [260720-oz0-sello-lista-108-feb-2026-en-resumen-y-pd](./quick/260720-oz0-sello-lista-108-feb-2026-en-resumen-y-pd/) |
 
 ## Deferred Items
 
