@@ -11,6 +11,7 @@ import { detallePresupuesto } from './motorPrecios.js'
 import { formatPrecio } from './formato.js'
 import { CONTACTO } from '../data/contacto.js'
 import { EXTRAS } from '../data/extras.js'
+import { LISTA_PRECIOS } from '../data/geometry.js'
 
 const ESTADO = {
   modeloId: 'N4',
@@ -29,6 +30,7 @@ test('mensajeWhatsApp incluye el modelo, el total formateado, la nota orientativ
   const totalEsperado = formatPrecio(detallePresupuesto(ESTADO).total)
   assert.ok(msg.includes(totalEsperado), `debe incluir el total formateado ${totalEsperado}`)
   assert.ok(msg.includes('Presupuesto orientativo, sujeto a confirmación.'), 'debe incluir la nota orientativa')
+  assert.ok(msg.includes(LISTA_PRECIOS.nombre), `debe incluir el sello de lista (${LISTA_PRECIOS.nombre})`)
   assert.ok(
     msg.includes('Vea el plano en planta y el detalle completo acá:'),
     'debe invitar a ver el plano',

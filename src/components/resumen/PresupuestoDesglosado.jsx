@@ -1,5 +1,6 @@
 import { detallePresupuesto } from '../../utils/motorPrecios.js'
 import { formatPrecio } from '../../utils/formato.js'
+import { LISTA_PRECIOS } from '../../data/geometry.js'
 
 // PresupuestoDesglosado (S4 — RESUMEN-02, D-03/D-04/D-05). "BarraPrecio expandida": línea base del
 // modelo + accesorios AGRUPADOS por categoría + las 3 líneas Neto/IVA/Total c/IVA con el markup
@@ -92,6 +93,9 @@ export default function PresupuestoDesglosado({ estado }) {
 
       <p className="mt-2 text-xs text-impacar-texto/70">
         Presupuesto orientativo, sujeto a confirmación del asesor comercial.
+      </p>
+      <p className="mt-1 text-xs text-impacar-texto/60">
+        {`Precios ${LISTA_PRECIOS.nombre} · ${LISTA_PRECIOS.vigencia}, sujetos a actualización.`}
       </p>
     </div>
   )
