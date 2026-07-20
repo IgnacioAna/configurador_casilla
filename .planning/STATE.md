@@ -27,9 +27,11 @@ See: .planning/PROJECT.md (updated 2026-06-28)
 
 Milestone: v1.0 MVP — ✅ ARCHIVED (shipped 2026-06-28, tag v1.0)
 Phases: 7/7 complete · Plans: 22/22 · Requirements: 34/34
-Next: /gsd-new-milestone (definir requirements del próximo ciclo). Pre-go-live: `.env.production` con `VITE_WA_NUMBER=5492302468754`.
+Next: /gsd-new-milestone (definir requirements del próximo ciclo).
+**En producción:** https://configurador-casilla.vercel.app — deploy automático en cada push a `main`.
+**Pendiente para el go-live real:** el WhatsApp apunta al número de DEMO (5492954555113, el de Ignacio) a propósito, para que las pruebas no lleguen a la fábrica. Para el go-live, definir `VITE_WA_NUMBER=5492302468754` en Vercel → Settings → Environment Variables (no hace falta tocar código; ver `src/data/contacto.js`).
 Status: Milestone v1.0 cerrado y archivado en .planning/milestones/
-Last activity: 2026-07-14 - Completed quick task 260714-u28: compartir enlace con la config en la URL + OG tags. Repo en GitHub (IgnacioAna/configurador_casilla, rama main). Pendiente: deploy en Vercel + finalizar og:url/og:image con el dominio real.
+Last activity: 2026-07-14 - **DESPLEGADO EN PRODUCCIÓN**: https://configurador-casilla.vercel.app (repo IgnacioAna/configurador_casilla, rama main). Verificado en vivo: landing, link ?c= reconstruye la config, mensaje de WhatsApp con enlace, og.png 200. El dominio coincidió con el placeholder de los OG tags → no hizo falta ajustarlos.
 
 Progress: [██████████] 100% (7 de 7 fases completas — milestone v1.0 terminado)
 
