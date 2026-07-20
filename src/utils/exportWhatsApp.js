@@ -15,6 +15,7 @@ import { detallePresupuesto } from './motorPrecios.js'
 import { formatPrecio } from './formato.js'
 import { resumenCampos } from './resumenCampos.js'
 import { enlaceConfigApp } from './configLink.js'
+import { LISTA_PRECIOS } from '../data/geometry.js'
 
 export function mensajeWhatsApp(estado) {
   const { total } = detallePresupuesto(estado) // única fuente del total (no re-sumar)
@@ -31,6 +32,7 @@ export function mensajeWhatsApp(estado) {
     '',
     `Total c/IVA: ${formatPrecio(total)}`,
     'Presupuesto orientativo, sujeto a confirmación.',
+    `Precios ${LISTA_PRECIOS.nombre} · ${LISTA_PRECIOS.vigencia}.`,
     '',
     'Vea el plano en planta y el detalle completo acá:',
     enlaceConfigApp(estado), // link que abre el configurador con esta casilla ya cargada

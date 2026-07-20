@@ -10,3 +10,7 @@ export const GEOMETRIA = {
 }
 
 export const IVA = 0.21 // 21%
+
+// Lista de precios vigente (netos hardcodeados en models.js/extras.js). Fuente única del sello:
+// resumen, PDF y WhatsApp leen de acá para evitar que un documento viejo circule sin fecha.
+export const LISTA_PRECIOS = { nombre: 'Lista 108', vigencia: 'Febrero 2026' }

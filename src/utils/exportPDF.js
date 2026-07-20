@@ -13,6 +13,7 @@ import { detallePresupuesto } from './motorPrecios.js'
 import { formatPrecio } from './formato.js'
 import { resumenCampos } from './resumenCampos.js'
 import { CONTACTO } from '../data/contacto.js'
+import { LISTA_PRECIOS } from '../data/geometry.js'
 
 // Parte pura — testeable. El modeloId es un id de catalogo publico (N1-N7), sin PII (T-06-03 accept).
 export function nombreArchivoPDF(estado) {
@@ -92,6 +93,20 @@ export async function construirDocPDF(svgNode, estado) {
     cursorY += 5
   }
   cursorY += 4
+
+  // Sello de lista de precios + fecha de generación (es-AR), misma tipografía tenue. Ancla de qué
+  // lista/fecha son los precios: mitiga que un PDF viejo circule sin aviso de actualización.
+  doc.setFontSize(8)
+  doc.setTextColor(90, 90, 90)
+  const sello = `Precios ${LISTA_PRECIOS.nombre} · ${LISTA_PRECIOS.vigencia}, sujetos a actualización.`
+  const fechaGen = `Generado el ${new Date().toLocaleDateString('es-AR')}`
+  for (const linea of [sello, fechaGen]) {
+    cursorY = avanzarSiNecesario(doc, cursorY) // WR-03
+    doc.text(linea, M, cursorY)
+    cursorY += 5
+  }
+  doc.setTextColor(26, 26, 26) // restaurar color de texto por defecto
+  cursorY += 2
 
   // 4) Configuración condensada (labels legibles vía resumenCampos).
   const c = resumenCampos(estado)
