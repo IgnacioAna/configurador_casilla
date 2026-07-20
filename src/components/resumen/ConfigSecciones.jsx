@@ -11,13 +11,22 @@ import { resumenCampos } from '../../utils/resumenCampos.js'
 export default function ConfigSecciones({ estado, onEditar }) {
   const c = resumenCampos(estado)
 
+  // ¿Hay al menos una cama? Tolera estado adulterado de localStorage (mismo patrón que resumenCampos).
+  const sinCamas = !(Array.isArray(estado?.dormitorio?.camas) && estado.dormitorio.camas.length > 0)
+
   // Data-driven: cada sección con su índice de paso (para IR_A_PASO) y su valor legible.
   // Valores faltantes ya vienen como 'Sin selección' desde resumenCampos (nunca blanco/undefined).
   const secciones = [
     { titulo: 'Uso y ocupantes', paso: 0, valor: `${c.uso} · ${c.ocupantes}` },
     { titulo: 'Modelo', paso: 1, valor: `${c.modelo} — ${c.largo}` },
     { titulo: 'Baño', paso: 2, valor: c.bano },
-    { titulo: 'Dormitorio', paso: 3, valor: c.camas },
+    {
+      titulo: 'Dormitorio',
+      paso: 3,
+      valor: c.camas,
+      // Aviso no bloqueante: informa que faltan camas, no deshabilita nada (exportar sigue activo).
+      aviso: sinCamas ? 'Esta configuración no incluye camas. Puede agregarlas desde "Editar".' : null,
+    },
     { titulo: 'Cocina y estar', paso: 4, valor: c.cocina },
     { titulo: 'Extras', paso: 5, valor: c.extras.length ? c.extras.join(', ') : 'Sin selección' },
   ]
@@ -40,6 +49,11 @@ export default function ConfigSecciones({ estado, onEditar }) {
             </button>
           </div>
           <p className="break-words text-sm">{s.valor}</p>
+          {s.aviso && (
+            <div className="mt-2 rounded border border-impacar-cobre p-3 text-sm text-impacar-cobre">
+              {s.aviso}
+            </div>
+          )}
         </section>
       ))}
     </div>
